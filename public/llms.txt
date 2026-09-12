@@ -1,0 +1,42 @@
+# Al-Irshaad Islamic Institute (معھد الإرشاد الإسلامي)
+
+> Al-Irshaad Islamic Institute is a premier online Islamic educational platform providing authentic 1-on-1 and small group Qur'an recitation, applied Tajweed, 3-cycle Hifdh memorization, comprehensive Islamic studies, and Arabic language instruction for children, teens, and adults in Nigeria and across the global diaspora (UK, US, Canada, Europe, Middle East).
+
+## Key Information
+- **Name**: Al-Irshaad Islamic Institute (معھد الإرشاد الإسلامي)
+- **Primary Website**: https://al-irshaad-islamic-institute.vercel.app/
+- **Admissions & WhatsApp**: +234 808 381 8671
+- **Email**: alirshaadislamicinstitute@gmail.com
+- **Core Format**: Live 1-on-1 and small group online sessions via Zoom/Google Meet with certified Huffaz and Islamic scholars.
+- **Target Audience**: Muslim children (ages 4+), teenagers, university students, working professionals, adult learners, and diaspora families.
+- **Supported Timezones**: All global timezones (GMT, WAT, EST, CST, PST, BST, GST).
+
+## Educational Pathways & Programs
+1. **Nuurul Bayaan (Beginners 4+)** (`/programs/nuurul-bayaan`):
+   - Foundation in Arabic phonetics, letter recognition, articulation points (Makharij), and early word synthesis.
+2. **Qur'an Recitation with Applied Tajweed** (`/programs/quran-recitation`):
+   - Systematic verse-by-verse recitation fluency, Noon Saakinah, Meem Saakinah, Mudood (prolongations), Waqf (stopping rules).
+3. **Qur'an Memorization (Hifdh Program)** (`/programs/hifdh`):
+   - Structured 3-Cycle systematic retention methodology (New Lesson, Recent Revision, Far Revision) with certified Haafidh mentors.
+4. **Fundamentals of Islamic Studies** (`/programs/islamic-studies`):
+   - 3 Age-appropriate tracks:
+     - Level 1: Foundations (Ages 5–10) - Pillars of Islam & Iman, basic Fiqh of Taharah & Salah, Prophets stories, daily manners.
+     - Level 2: Fiqh & Seerah (Ages 11–15) - Practical purification, prayer, fasting, comprehensive life of the Prophet ﷺ, Hadith selection.
+     - Level 3: Classical Sciences & Aqeedah (Youth & Adults) - Pure Islamic theology, Usul al-Fiqh, Islamic worldview, and contemporary challenges.
+5. **Arabic Language & Daily Adhkaar** (`/programs/arabic-adhkaar`):
+   - Quranic Arabic comprehension, conversational basics, and daily fortress of the Muslim morning/evening supplications.
+
+## Faculty & Scholarly Standards
+- Instructors are certified Huffaz with verified Sanad (chains of narration), scholarly training, and background vetting.
+- Dedicated female instructors (Ustadhat) available for female students and young children.
+- Monthly parent progress reports and recorded student assessments.
+
+## Direct Links
+- [Home Page](https://al-irshaad-islamic-institute.vercel.app/)
+- [All Programs](https://al-irshaad-islamic-institute.vercel.app/programs)
+- [Meet Our Teachers](https://al-irshaad-islamic-institute.vercel.app/teachers)
+- [How It Works](https://al-irshaad-islamic-institute.vercel.app/how-it-works)
+- [For Parents & Safeguarding](https://al-irshaad-islamic-institute.vercel.app/for-parents)
+- [Admissions & Enrollment](https://al-irshaad-islamic-institute.vercel.app/enroll)
+- [Frequently Asked Questions](https://al-irshaad-islamic-institute.vercel.app/faqs)
+- [Contact Desk](https://al-irshaad-islamic-institute.vercel.app/contact)
