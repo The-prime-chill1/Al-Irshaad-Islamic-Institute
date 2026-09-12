@@ -60,7 +60,7 @@ export default function HeroSection() {
         <div className="hero-badge animate-hero-fadeup-1">
           <span className="hero-badge-dot"></span>
           <span className="hero-badge-sparkle">✦</span>
-          <span>Online Islamic Education • Kids • Teens • Adults • Global Diaspora</span>
+          <span>Online International Islamic School • Norwalk, CT • Worldwide Classrooms</span>
         </div>
 
         {/* Bismillah Calligraphy in Radiant Gold */}
@@ -70,7 +70,7 @@ export default function HeroSection() {
 
         {/* Grand Headline matching the reference style */}
         <h1 className="hero-title animate-hero-fadeup-3">
-          Global Online <span className="hero-title-accent">Islamic Learning</span>
+          Online International <span className="hero-title-accent">Islamic School</span>
         </h1>
 
         {/* Hadith Quote: Clean, Elegant, High-Legibility Typography (No Bulky Box) */}
@@ -537,7 +537,17 @@ export default function HeroSection() {
           }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 640px) {
+          .hero-cinema-wrapper {
+            padding-top: 3.5rem;
+            padding-bottom: 3.5rem;
+          }
+          .hero-badge {
+            font-size: 0.76rem;
+            padding: 0.35rem 0.9rem;
+            line-height: 1.35;
+            margin-bottom: 1rem;
+          }
           .hero-trust-bar {
             grid-template-columns: 1fr;
             gap: 0.85rem;
@@ -550,3 +560,4 @@ export default function HeroSection() {
     </section>
   );
 }
+

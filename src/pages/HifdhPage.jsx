@@ -154,7 +154,7 @@ export default function HifdhPage() {
             />
 
             <div className="grid-2">
-              {data.features.map((feat, idx) => (
+              {(data.features || []).map((feat, idx) => (
                 <div key={idx} className="card-premium" style={{ padding: '2.25rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
                     <span style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'var(--primary-dark)', color: 'var(--accent-gold-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontFamily: 'var(--font-heading)' }}>

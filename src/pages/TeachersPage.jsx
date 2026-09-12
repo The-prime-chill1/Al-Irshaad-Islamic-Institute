@@ -11,16 +11,16 @@ export default function TeachersPage() {
       <section style={{ background: 'linear-gradient(180deg, #031122 0%, #071C34 50%, #005DB8 100%)', color: '#FFFFFF', padding: '5rem 0 4rem 0', textAlign: 'center' }}>
         <div className="container">
           <span className="section-subtitle-badge light" style={{ marginBottom: '1rem' }}>
-            ✦ Academic Faculty ✦
+            ✦ Institute Lead Tutor ✦
           </span>
           <div style={{ fontFamily: 'var(--font-arabic)', fontSize: '2.2rem', color: 'var(--accent-gold-light)', marginBottom: '0.5rem', direction: 'rtl' }}>
             عُلَمَاءُ أُمَّتِي كَأَنْبِيَاءِ بَنِي إِسْرَائِيل
           </div>
           <h1 style={{ color: '#FFFFFF', fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', marginBottom: '1rem' }}>
-            Meet Our Dedicated Teachers
+            Meet Your Lead Tutor: Ustadh Nasir
           </h1>
           <p style={{ color: 'var(--text-on-dark-muted)', maxWidth: '780px', margin: '0 auto', fontSize: '1.15rem' }}>
-            Our faculty combines verified Sanad (chains of recitation), university degrees in Shari'ah and Islamic Studies, and a passionate dedication to student Tarbiyah.
+            Learn under Ustadh Nasir — certified Qur'an and Islamic studies instructor dedicated to patient, 1-on-1 personalized Tarbiyah and flexible schedule assignment.
           </p>
         </div>
       </section>
@@ -31,17 +31,17 @@ export default function TeachersPage() {
           
           <SectionHeader 
             badge="Instructional Excellence"
-            title="Knowledgeable, Patient, & Certified Mentors"
-            description="Every teacher at Al-Irshaad is selected for mastery in Tajweed, authentic methodology, and gentle communication suited for both young children and adult professionals."
+            title="Knowledgeable, Patient, & Dedicated Mentorship"
+            description="Ustadh Nasir personally assesses every student, guides each lesson 1-on-1, and coordinates your recurring class timetable to match your exact availability."
           />
 
           {/* Institutional Note */}
-          <div style={{ padding: '1rem 1.5rem', background: 'var(--bg-cream)', borderRadius: '10px', border: '1px solid var(--border-medium)', marginBottom: '3rem', fontSize: '0.85rem', color: 'var(--text-muted)', textAlign: 'center' }}>
-            <span style={{ color: 'var(--accent-gold-dark)', fontWeight: 700 }}>Institutional Notice: </span>
+          <div style={{ padding: '1rem 1.5rem', background: 'var(--bg-cream)', borderRadius: '10px', border: '1.5px solid var(--border-medium)', marginBottom: '3rem', fontSize: '0.9rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
+            <span style={{ color: 'var(--accent-gold-dark)', fontWeight: 700 }}>Schedule Notice: </span>
             {teachersData.note}
           </div>
 
-          <div className="grid-3" style={{ marginBottom: '4rem' }}>
+          <div style={{ maxWidth: '640px', margin: '0 auto 4rem auto' }}>
             {teachersData.teachers.map((t) => (
               <TeacherCard key={t.id} teacher={t} />
             ))}

@@ -95,7 +95,7 @@ export default function IslamicStudiesPage() {
             />
 
             <div className="grid-3">
-              {data.features.map((feat, idx) => (
+              {(data.features || []).map((feat, idx) => (
                 <div key={idx} className="card-premium" style={{ padding: '1.75rem', background: 'var(--bg-cream)', borderRadius: '14px', border: '1px solid var(--border-light)' }}>
                   <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'var(--primary-dark)', color: 'var(--accent-gold-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
                     <IconCheck size={18} color="var(--accent-gold-light)" />

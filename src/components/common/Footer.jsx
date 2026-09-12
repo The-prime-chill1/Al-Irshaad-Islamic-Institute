@@ -26,14 +26,16 @@ export default function Footer() {
           <div className="footer-links-group">
             {/* 2. Quick Navigation */}
             <div className="footer-col">
-              <h4 className="footer-heading">Navigation</h4>
+              <h4 className="footer-heading">Explore & Apply</h4>
               <ul className="footer-links">
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/about">About Institute</Link></li>
-                <li><Link to="/programs">All Programs</Link></li>
-                <li><Link to="/teachers">Meet Teachers</Link></li>
-                <li><Link to="/how-it-works">How It Works</Link></li>
-                <li><Link to="/for-parents">For Parents</Link></li>
+                <li><Link to="/programs">Academic Programs</Link></li>
+                <li><Link to="/enroll">Admissions & Enrollment</Link></li>
+                <li><Link to="/programs#pricing">Course Tuition & Plans</Link></li>
+                <li><Link to="/teachers">Faculty & Huffaz</Link></li>
+                <li><Link to="/how-it-works">How Online Classes Work</Link></li>
+                <li><Link to="/contact">Contact Admissions</Link></li>
               </ul>
             </div>
 

@@ -44,12 +44,34 @@ export const visionMissionData = {
   },
   mission: {
     title: "OUR MISSION",
-    text: "At Al-Irshaad Islamic Institute, our mission is to make authentic Qur'anic and Islamic education accessible for every Muslim, most especially the Nigerian Muslim community in diaspora through quality online learning."
+    text: "At Al-Irshaad Islamic institute, our mission is to make authentic Qur'anic and Islamic education accessible for every Muslim, most especially the Nigerian Muslim community in diaspora through quality online learning."
   },
+  commitments: [
+    {
+      title: "Teaching the Qur'an with Excellence",
+      desc: "Providing expert instructions in Recitation and Memorization with Tajweed through personalized live classes."
+    },
+    {
+      title: "Nurturing Authentic Islamic Knowledge",
+      desc: "Offering a comprehensive Islamic Studies curriculum — Aqeedah, Fiqh, Seerah, Hadeeth and Islamic manners — rooted in the Qur'an and Sunnah upon sound understanding."
+    },
+    {
+      title: "Building Character (Tarbiyah)",
+      desc: "Going beyond lessons to instill love for Allah and His Messenger ﷺ, good manners, and practical application of Islam in daily life."
+    },
+    {
+      title: "Empowering Families",
+      desc: "Supporting parents with progress tracking, flexible schedules and qualified male and female tutors for kids and adults."
+    },
+    {
+      title: "Using Technology for Good",
+      desc: "Leveraging modern online tools to deliver traditional sacred knowledge with ease, consistency and excellence."
+    }
+  ],
   coreValues: [
-    { title: "Authentic Scholarship", desc: "Rooted in the Qur'an, Sunnah, and classical methodology." },
-    { title: "Personalized Guidance", desc: "Dedicated attention to every individual student's growth." },
-    { title: "Holistic Tarbiyah", desc: "Fostering character, manners (Adab), and practical practice alongside theory." },
-    { title: "Global Accessibility", desc: "Removing geographic barriers to authentic Islamic knowledge." }
+    { title: "Teaching with Excellence", desc: "Expert 1-on-1 instruction in Recitation and Hifdh with Tajweed." },
+    { title: "Authentic Knowledge", desc: "Comprehensive Islamic studies rooted in the Qur'an and Sunnah." },
+    { title: "Character & Tarbiyah", desc: "Instilling love for Allah, the Prophet ﷺ, and noble character." },
+    { title: "Empowering Families", desc: "Flexible schedules, progress reports, and certified male/female tutors." }
   ]
 };

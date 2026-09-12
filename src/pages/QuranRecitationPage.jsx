@@ -149,7 +149,7 @@ export default function QuranRecitationPage() {
             />
 
             <div className="grid-3">
-              {data.topics.map((top, idx) => (
+              {(data.whatYouWillLearn || []).map((top, idx) => (
                 <div key={idx} className="card-premium" style={{ padding: '2rem' }}>
                   <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--primary-dark)', color: 'var(--accent-gold-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontFamily: 'var(--font-heading)', marginBottom: '1.25rem' }}>
                     0{idx + 1}

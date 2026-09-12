@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-import SectionHeader from '../components/common/SectionHeader';
+import React, { useState, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import HadithRibbon from '../components/common/HadithRibbon';
 import { contactData } from '../data/contactData';
+import { studentDatabase } from '../services/studentDatabase';
+import { getCountryByName, countriesData, getFlagEmoji } from '../data/countriesData';
+import SearchableCountrySelect from '../components/common/SearchableCountrySelect';
+import SearchableCitySelect from '../components/common/SearchableCitySelect';
+import { IconCheckCircle, IconMail, IconPhone, IconWhatsApp, IconArrowRight, IconUser, IconClock, IconFileText } from '../components/common/Icons';
 
 export default function EnrollPage() {
+  const [searchParams] = useSearchParams();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -16,6 +22,7 @@ export default function EnrollPage() {
     gender: 'Male',
     guardianName: '', // For kids
     country: 'Nigeria',
+    countryCode: '+234',
     city: '',
     whatsappNumber: '',
     email: '',
@@ -26,8 +33,8 @@ export default function EnrollPage() {
 
     // Step 3: Class & Schedule Preferences
     classPreference: '1-on-1 (Private)',
-    preferredSchedule: 'Evening',
-    preferredDays: '5 Days / Week',
+    preferredSchedule: 'Evening (5:00 PM - 7:00 PM)',
+    preferredDays: '3 Days / Week',
 
     // Step 4: Background & Goals
     previousQuranEducation: 'None / Complete Beginner',
@@ -37,6 +44,34 @@ export default function EnrollPage() {
     learningGoal: ''
   });
 
+  useEffect(() => {
+    const courseParam = searchParams.get('course');
+    const planParam = searchParams.get('plan');
+
+    const courseMap = {
+      'nuurul-bayaan': 'Nuurul Bayaan',
+      'quran-recitation': "Qur'an Recitation with Tajweed",
+      'hifdh': "Qur'an Memorization (Hifdh)",
+      'islamic-studies-fundamentals': 'Fundamentals of Islamic Studies',
+      'advanced-islamic-studies': 'Advanced Islamic Studies',
+      'arabic-adhkaar': 'Arabic & Adhkaar'
+    };
+
+    const planMap = {
+      'starter': '2 Days / Week',
+      'standard': '3 Days / Week',
+      'intensive': '5 Days / Week'
+    };
+
+    if (courseParam && courseMap[courseParam]) {
+      setFormData(prev => ({
+        ...prev,
+        program: courseMap[courseParam],
+        preferredDays: planParam && planMap[planParam] ? planMap[planParam] : prev.preferredDays
+      }));
+    }
+  }, [searchParams]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -44,8 +79,8 @@ export default function EnrollPage() {
 
   const nextStep = () => {
     if (currentStep === 1) {
-      if (!formData.fullName.trim() || !formData.whatsappNumber.trim()) {
-        alert('Please fill in your Full Name and WhatsApp Number to proceed.');
+      if (!formData.fullName.trim() || !formData.whatsappNumber.trim() || !formData.dateOfBirth) {
+        alert('Please fill in Student Full Name, WhatsApp Number, and Date of Birth to proceed.');
         return;
       }
     }
@@ -58,27 +93,111 @@ export default function EnrollPage() {
     window.scrollTo({ top: 300, behavior: 'smooth' });
   };
 
+  // Helper for full phone number with country code
+  const getFullPhone = () => {
+    const raw = (formData.whatsappNumber || '').trim();
+    if (!raw) return '';
+    if (raw.startsWith('+')) return raw;
+    return `${formData.countryCode || '+234'} ${raw}`.trim();
+  };
+
+  // Generate structured message dossier
+  const formatDossierText = (appId) => {
+    return `Assalamu Alaikum Al-Irshaad Islamic Institute Admissions,
+
+NEW STUDENT ENROLLMENT APPLICATION
+--------------------------------------------------
+Application Tracking ID: ${appId}
+Date Submitted: ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+
+1. STUDENT DETAILS:
+- Full Name: ${formData.fullName}
+- Gender: ${formData.gender}
+- Date of Birth: ${formData.dateOfBirth || 'Not specified'}
+- Parent / Guardian: ${formData.guardianName || 'Self / Adult Student'}
+- WhatsApp / Phone: ${getFullPhone()}
+- Email: ${formData.email || 'Not provided'}
+- Country & City: ${formData.city ? `${formData.city}, ` : ''}${formData.country}
+
+2. PROGRAM & SCHEDULE:
+- Selected Program: ${formData.program}
+- Learning Level: ${formData.learningLevel}
+- Format Preference: ${formData.classPreference}
+- Preferred Time: ${formData.preferredSchedule}
+- Weekly Commitment: ${formData.preferredDays}
+
+3. BACKGROUND & GOALS:
+- Qur'an Background: ${formData.previousQuranEducation}
+- Islamic Studies: ${formData.previousIslamicStudies}
+- Arabic Proficiency: ${formData.arabicKnowledge}
+- Reading Ability: ${formData.currentReadingLevel}
+- Primary Learning Goal: ${formData.learningGoal || 'Consistent Qur\'an mastery and authentic Islamic knowledge.'}
+
+--------------------------------------------------
+Please review this application and schedule the placement assessment. Jazakumullahu Khayran.`;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const generatedId = `ALIR-APP-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    setApplicationId(generatedId);
+
+    const fullPhoneNumber = getFullPhone();
+
+    try {
+      // 1. Save directly into Admin Database with all required dossier fields
+      studentDatabase.saveEnrollment({
+        ...formData,
+        whatsappNumber: fullPhoneNumber,
+        id: generatedId,
+        enrolledDate: new Date().toISOString(),
+        status: 'Pending Admission'
+      });
+    } catch (err) {
+      console.error('Local save error:', err);
+    }
+
+    const messageText = formatDossierText(generatedId);
+    const whatsappUrl = `https://wa.me/${contactData.whatsapp}?text=${encodeURIComponent(messageText)}`;
+
+    // Optional background submission to Admissions email endpoint
+    try {
+      fetch('https://formspree.io/f/xbjvlqnk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          applicationId: generatedId,
+          recipientEmail: contactData.emailAdmissions,
+          ...formData,
+          whatsappNumber: fullPhoneNumber,
+          formattedDossier: messageText
+        })
+      }).catch(() => {});
+    } catch (e) {}
+
     setTimeout(() => {
-      const generatedId = `AL-IRSHAAD-${Math.floor(100000 + Math.random() * 900000)}`;
-      setApplicationId(generatedId);
       setIsSubmitting(false);
       setIsSubmitted(true);
-      window.scrollTo({ top: 200, behavior: 'smooth' });
-    }, 1200);
+      window.scrollTo({ top: 150, behavior: 'smooth' });
+
+      // Automatically launch WhatsApp with prefilled dossier
+      try {
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      } catch (e) {
+        console.log('Direct popup blocked, button is available.');
+      }
+    }, 800);
   };
 
-  // WhatsApp pre-filled text with application details
-  const whatsappAppUrl = `https://wa.me/2349035160069?text=${encodeURIComponent(
-    `Assalamu Alaikum Al-Irshaad Admissions,\n\nI have submitted an enrollment application on your website.\n\nApplication ID: ${applicationId}\nStudent Name: ${formData.fullName}\nProgram: ${formData.program}\nLevel: ${formData.learningLevel}\nClass Preference: ${formData.classPreference}\nSchedule: ${formData.preferredSchedule}\nCountry: ${formData.country}\n\nPlease confirm next steps for my assessment.`
-  )}`;
+  const dossierText = formatDossierText(applicationId || 'ALIR-APP-2026-1001');
+  const whatsappUrl = `https://wa.me/${contactData.whatsapp}?text=${encodeURIComponent(dossierText)}`;
+  const emailMailtoUrl = `mailto:${contactData.emailAdmissions},lamidiabdulhameedolawale@gmail.com?subject=${encodeURIComponent(`New Student Enrollment Application - ${formData.fullName} [${applicationId || 'ALIR-APP'}]`)}&body=${encodeURIComponent(dossierText)}`;
 
   return (
     <div>
-      {/* Header Banner */}
+      {/* Page Header */}
       <section style={{ background: 'linear-gradient(180deg, #031122 0%, #071C34 50%, #005DB8 100%)', color: '#FFFFFF', padding: '4.5rem 0 3.5rem 0', textAlign: 'center' }}>
         <div className="container">
           <span className="section-subtitle-badge light" style={{ marginBottom: '1rem' }}>
@@ -88,7 +207,7 @@ export default function EnrollPage() {
             Student Enrollment Application
           </h1>
           <p style={{ color: 'var(--text-on-dark-muted)', maxWidth: '750px', margin: '0 auto', fontSize: '1.15rem' }}>
-            Take the first step toward lifelong Qur'anic and Islamic mastery. Complete the application below to begin your placement assessment.
+            Begin your journey of Qur'anic and Islamic mastery. Complete the form below to transmit your application directly to the Admissions Committee.
           </p>
         </div>
       </section>
@@ -120,7 +239,7 @@ export default function EnrollPage() {
                     currentStep === 2 ? 'Program Selection' :
                     currentStep === 3 ? 'Schedule & Preferences' :
                     currentStep === 4 ? 'Experience & Goals' :
-                    'Review & Submit'
+                    'Review & Transmit'
                   }</span>
                   <span style={{ color: 'var(--accent-gold-dark)' }}>{currentStep * 20}% Complete</span>
                 </div>
@@ -130,7 +249,7 @@ export default function EnrollPage() {
                     style={{
                       height: '100%',
                       width: `${currentStep * 20}%`,
-                      background: 'linear-gradient(90deg, var(--primary), var(--accent-gold))',
+                      background: 'linear-gradient(90deg, var(--accent-gold) 0%, var(--primary) 100%)',
                       borderRadius: '9999px',
                       transition: 'width 0.4s ease'
                     }}
@@ -138,394 +257,458 @@ export default function EnrollPage() {
                 </div>
               </div>
 
+              {/* Form Content */}
               <form onSubmit={handleSubmit}>
                 
                 {/* STEP 1: Student Information */}
                 {currentStep === 1 && (
-                  <div>
-                    <h3 style={{ fontSize: '1.45rem', color: 'var(--primary)', marginBottom: '0.5rem' }}>
-                      Step 1: Student Personal Information
+                  <div className="animate-fade-in">
+                    <h3 style={{ fontFamily: 'var(--font-serif)', color: 'var(--primary)', marginBottom: '0.5rem', fontSize: '1.5rem' }}>
+                      Step 1: Student & Guardian Profile
                     </h3>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>
-                      Please provide accurate contact details so our admissions advisor can reach you.
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', marginBottom: '1.75rem' }}>
+                      Please provide your contact details so the Admissions Office can confirm your assessment.
                     </p>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                          Full Name of Student *
+                        <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                          Student Full Name *
                         </label>
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           name="fullName"
                           required
+                          placeholder="e.g. Fatima Zahra / Ibrahim Musa"
                           value={formData.fullName}
                           onChange={handleChange}
-                          placeholder="e.g. Ibrahim Yusuf"
-                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '8px', border: '1px solid var(--border-medium)', background: 'var(--bg-ivory)' }}
+                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem' }}
                         />
                       </div>
 
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                          Date of Birth *
+                        <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                          Gender *
                         </label>
-                        <input 
-                          type="date" 
-                          name="dateOfBirth"
-                          value={formData.dateOfBirth}
+                        <select
+                          name="gender"
+                          value={formData.gender}
                           onChange={handleChange}
-                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '8px', border: '1px solid var(--border-medium)', background: 'var(--bg-ivory)' }}
+                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem', background: '#fff' }}
+                        >
+                          <option value="Male">Male (Brothers / Boys Section)</option>
+                          <option value="Female">Female (Sisters / Girls Section)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
+                      {/* Searchable Country Selector with Flag */}
+                      <div>
+                        <SearchableCountrySelect
+                          value={formData.country}
+                          label="Country of Residence *"
+                          onChange={(selectedCountry) => {
+                            setFormData(prev => ({
+                              ...prev,
+                              country: selectedCountry.name,
+                              countryCode: selectedCountry.dialCode,
+                              city: selectedCountry.cities[0] || ''
+                            }));
+                          }}
+                        />
+                      </div>
+
+                      {/* Searchable City Selector */}
+                      <div>
+                        <SearchableCitySelect
+                          cities={(getCountryByName(formData.country) || {}).cities || []}
+                          value={formData.city}
+                          customValue={formData.city}
+                          label="City / Municipality *"
+                          onChange={(selectedCity) => {
+                            setFormData(prev => ({
+                              ...prev,
+                              city: selectedCity === 'CUSTOM_OTHER' ? '' : selectedCity
+                            }));
+                          }}
+                          onCustomChange={(customVal) => {
+                            setFormData(prev => ({
+                              ...prev,
+                              city: customVal
+                            }));
+                          }}
                         />
                       </div>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
+                      {/* WhatsApp / Phone with Country Code */}
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                          Gender *
+                        <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                          WhatsApp / Phone Number *
                         </label>
-                        <select 
-                          name="gender"
-                          value={formData.gender}
+                        <div style={{ display: 'flex', gap: '0.4rem' }}>
+                          <select
+                            value={formData.countryCode}
+                            onChange={(e) => {
+                              const found = countriesData.find(c => c.dialCode === e.target.value);
+                              setFormData(prev => ({
+                                ...prev,
+                                countryCode: e.target.value,
+                                country: found ? found.name : prev.country,
+                                city: found && found.cities.length > 0 ? found.cities[0] : prev.city
+                              }));
+                            }}
+                            style={{
+                              width: '125px',
+                              padding: '0.75rem 0.45rem',
+                              borderRadius: '10px',
+                              border: '1.5px solid var(--border-medium)',
+                              background: '#F8FAFC',
+                              fontWeight: '700',
+                              fontSize: '0.85rem'
+                            }}
+                          >
+                            {countriesData.map((c) => (
+                              <option key={c.name} value={c.dialCode}>
+                                {getFlagEmoji(c.iso)} {c.dialCode} ({c.name})
+                              </option>
+                            ))}
+                          </select>
+                          <input
+                            type="tel"
+                            name="whatsappNumber"
+                            required
+                            placeholder="e.g. 903 516 0069"
+                            value={formData.whatsappNumber}
+                            onChange={handleChange}
+                            style={{ flex: 1, padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem' }}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                          Email Address
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          placeholder="student@example.com"
+                          value={formData.email}
                           onChange={handleChange}
-                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '8px', border: '1px solid var(--border-medium)', background: 'var(--bg-ivory)' }}
+                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem' }}
+                        />
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
+                      <div>
+                        <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                          Parent / Guardian Name (For Children)
+                        </label>
+                        <input
+                          type="text"
+                          name="guardianName"
+                          placeholder="Leave blank if enrolling as an adult"
+                          value={formData.guardianName}
+                          onChange={handleChange}
+                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem' }}
+                        />
+                      </div>
+
+                      <div>
+                        <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                          Date of Birth *
+                        </label>
+                        <input
+                          type="date"
+                          name="dateOfBirth"
+                          required
+                          value={formData.dateOfBirth}
+                          onChange={handleChange}
+                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* STEP 2: Program Selection */}
+                {currentStep === 2 && (
+                  <div className="animate-fade-in">
+                    <h3 style={{ fontFamily: 'var(--font-serif)', color: 'var(--primary)', marginBottom: '0.5rem', fontSize: '1.5rem' }}>
+                      Step 2: Choose Your Academic Program
+                    </h3>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', marginBottom: '1.75rem' }}>
+                      Select the primary course you wish to study at Al-Irshaad Islamic Institute.
+                    </p>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+                      {[
+                        { title: 'Nuurul Bayaan', desc: 'Arabic reading foundations for absolute beginners' },
+                        { title: 'Qur\'an Recitation & Tajweed', desc: 'Applied pronunciation, rules, and fluent recitation' },
+                        { title: 'Hifdh Memorization', desc: 'Systematic memorization with 3-tier retention' },
+                        { title: 'Islamic Studies (Deeniyat)', desc: 'Aqeedah, Fiqh, Seerah, Hadith, and Akhlaaq' },
+                        { title: 'Arabic Language & Adhkaar', desc: 'Spoken Arabic, vocabulary, and daily prophetic supplications' }
+                      ].map((prog) => {
+                        const isSelected = formData.program === prog.title;
+                        return (
+                          <div
+                            key={prog.title}
+                            onClick={() => setFormData(prev => ({ ...prev, program: prog.title }))}
+                            style={{
+                              padding: '1.25rem',
+                              borderRadius: '14px',
+                              border: isSelected ? '2px solid var(--accent-gold-dark)' : '1.5px solid var(--border-medium)',
+                              backgroundColor: isSelected ? 'var(--primary-ultralight)' : '#FFFFFF',
+                              cursor: 'pointer',
+                              transition: 'all 0.2s ease',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              justifyContent: 'space-between'
+                            }}
+                          >
+                            <div>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                                <strong style={{ color: isSelected ? 'var(--primary)' : 'var(--text-main)', fontSize: '1.05rem' }}>{prog.title}</strong>
+                                <span style={{
+                                  width: '18px',
+                                  height: '18px',
+                                  borderRadius: '50%',
+                                  border: isSelected ? '5px solid var(--accent-gold-dark)' : '2px solid #CBD5E1',
+                                  display: 'inline-block'
+                                }} />
+                              </div>
+                              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: 0 }}>{prog.desc}</p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                        Current Learning Level *
+                      </label>
+                      <select
+                        name="learningLevel"
+                        value={formData.learningLevel}
+                        onChange={handleChange}
+                        style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem', background: '#fff' }}
+                      >
+                        <option value="Beginner">Beginner (Starting from scratch / basic letters)</option>
+                        <option value="Intermediate">Intermediate (Can read slowly, needs Tajweed guidance)</option>
+                        <option value="Advanced">Advanced (Fluent reader, aiming for full memorization / mastery)</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                {/* STEP 3: Schedule & Class Preferences */}
+                {currentStep === 3 && (
+                  <div className="animate-fade-in">
+                    <h3 style={{ fontFamily: 'var(--font-serif)', color: 'var(--primary)', marginBottom: '0.5rem', fontSize: '1.5rem' }}>
+                      Step 3: Schedule & Class Preferences
+                    </h3>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', marginBottom: '1.75rem' }}>
+                      Customize your weekly session format and preferred time windows.
+                    </p>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
+                      <div>
+                        <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                          Class Format *
+                        </label>
+                        <select
+                          name="classPreference"
+                          value={formData.classPreference}
+                          onChange={handleChange}
+                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem', background: '#fff' }}
                         >
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
+                          <option value="1-on-1 (Private)">1-on-1 Dedicated Private Tutoring (Recommended)</option>
+                          <option value="Family / Sibling Shared">Family / Sibling Shared Session</option>
+                          <option value="Small Group (Max 4)">Small Interactive Group Cohort</option>
                         </select>
                       </div>
 
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                          Parent / Guardian Name (If student is under 18)
+                        <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                          Weekly Frequency *
                         </label>
-                        <input 
-                          type="text" 
-                          name="guardianName"
-                          value={formData.guardianName}
+                        <select
+                          name="preferredDays"
+                          value={formData.preferredDays}
                           onChange={handleChange}
-                          placeholder="e.g. Dr. & Mrs. Yusuf"
-                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '8px', border: '1px solid var(--border-medium)', background: 'var(--bg-ivory)' }}
-                        />
+                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem', background: '#fff' }}
+                        >
+                          <option value="5 Days / Week">5 Days / Week (Accelerated Progress)</option>
+                          <option value="3 Days / Week">3 Days / Week (Standard Pace)</option>
+                          <option value="2 Days / Week (Weekend Only)">2 Days / Week (Weekend Focus)</option>
+                        </select>
                       </div>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
-                      <div>
-                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                          Country of Residence *
-                        </label>
-                        <input 
-                          type="text" 
-                          name="country"
-                          required
-                          value={formData.country}
-                          onChange={handleChange}
-                          placeholder="e.g. Nigeria, United Kingdom, USA, Canada"
-                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '8px', border: '1px solid var(--border-medium)', background: 'var(--bg-ivory)' }}
-                        />
-                      </div>
-
-                      <div>
-                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                          City / State
-                        </label>
-                        <input 
-                          type="text" 
-                          name="city"
-                          value={formData.city}
-                          onChange={handleChange}
-                          placeholder="e.g. London, Abuja, Toronto, Dallas"
-                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '8px', border: '1px solid var(--border-medium)', background: 'var(--bg-ivory)' }}
-                        />
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
-                      <div>
-                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                          WhatsApp Number (with Country Code) *
-                        </label>
-                        <input 
-                          type="tel" 
-                          name="whatsappNumber"
-                          required
-                          value={formData.whatsappNumber}
-                          onChange={handleChange}
-                          placeholder="e.g. +44 7123 456789 or +234 801 234 5678"
-                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '8px', border: '1px solid var(--border-medium)', background: 'var(--bg-ivory)' }}
-                        />
-                      </div>
-
-                      <div>
-                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                          Email Address
-                        </label>
-                        <input 
-                          type="email" 
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          placeholder="e.g. student@gmail.com"
-                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '8px', border: '1px solid var(--border-medium)', background: 'var(--bg-ivory)' }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* STEP 2: Program & Level */}
-                {currentStep === 2 && (
-                  <div>
-                    <h3 style={{ fontSize: '1.45rem', color: 'var(--primary)', marginBottom: '0.5rem' }}>
-                      Step 2: Program & Learning Level
-                    </h3>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>
-                      Select the primary course and your self-assessed starting proficiency.
-                    </p>
-
-                    <div style={{ marginBottom: '1.75rem' }}>
-                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                        Desired Learning Program *
+                    <div>
+                      <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                        Preferred Time of Day *
                       </label>
-                      <select 
-                        name="program"
-                        value={formData.program}
+                      <select
+                        name="preferredSchedule"
+                        value={formData.preferredSchedule}
                         onChange={handleChange}
-                        style={{ width: '100%', padding: '0.9rem 1rem', borderRadius: '8px', border: '1px solid var(--border-medium)', background: 'var(--bg-ivory)', fontWeight: 600, color: 'var(--primary)' }}
+                        style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem', background: '#fff' }}
                       >
-                        <option value="Nuurul Bayaan">Nuurul Bayaan (Foundational Arabic & Qur'an Reading)</option>
-                        <option value="Qur'an Recitation with Tajweed">Qur'an Recitation with Tajweed (Fluency Track)</option>
-                        <option value="Qur'an Memorization — Hifdh">Qur'an Memorization — Hifdh (3-Cycle Method)</option>
-                        <option value="Fundamentals of Islamic Studies">Fundamentals of Islamic Studies (Ages 5–20)</option>
-                        <option value="Advanced Islamic Studies">Advanced Islamic Studies (Classical Sciences)</option>
-                        <option value="Arabic Language for English Speakers">Arabic Language for English Speakers</option>
-                        <option value="Adhkaar Memorization">Adhkaar Memorization (Daily Prophetic Supplications)</option>
+                        <option value="Morning (7:00 AM - 11:00 AM)">Morning (7:00 AM - 11:00 AM)</option>
+                        <option value="Afternoon (12:00 PM - 4:00 PM)">Afternoon (12:00 PM - 4:00 PM)</option>
+                        <option value="Evening (5:00 PM - 7:00 PM)">Evening (5:00 PM - 7:00 PM)</option>
+                        <option value="Night (7:00 PM - 10:00 PM)">Night (7:00 PM - 10:00 PM)</option>
+                        <option value="Flexible / Negotiable">Flexible / To be confirmed with Ustadh Nasir</option>
                       </select>
                     </div>
 
-                    <div style={{ marginBottom: '2rem' }}>
-                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
-                        Current Estimated Level *
-                      </label>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
-                        {['Beginner', 'Intermediate', 'Advanced'].map((lvl) => (
-                          <label 
-                            key={lvl}
-                            style={{
-                              padding: '1.25rem 1rem',
-                              borderRadius: '10px',
-                              border: formData.learningLevel === lvl ? '2px solid var(--primary)' : '1px solid var(--border-medium)',
-                              background: formData.learningLevel === lvl ? 'var(--primary-ultralight)' : 'var(--bg-ivory)',
-                              cursor: 'pointer',
-                              textAlign: 'center',
-                              fontWeight: 700,
-                              color: formData.learningLevel === lvl ? 'var(--primary)' : 'var(--text-secondary)'
-                            }}
-                          >
-                            <input 
-                              type="radio" 
-                              name="learningLevel" 
-                              value={lvl}
-                              checked={formData.learningLevel === lvl}
-                              onChange={handleChange}
-                              style={{ display: 'none' }}
-                            />
-                            {lvl}
-                          </label>
-                        ))}
-                      </div>
+                    <div style={{ marginTop: '1.25rem', background: '#FAF8F5', border: '1.5px solid #E2E8F0', borderRadius: '12px', padding: '1rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                      <span style={{ fontSize: '1.4rem' }}>🗓️</span>
+                      <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', lineHeight: 1.5 }}>
+                        <strong>Dedicated Tutoring by Ustadh Nasir:</strong> Ustadh Nasir personally reviews your submitted time preferences and will assign and confirm your exact recurring lesson timetable directly with you during placement.
+                      </p>
                     </div>
                   </div>
                 )}
 
-                {/* STEP 3: Class Preference & Schedule */}
-                {currentStep === 3 && (
-                  <div>
-                    <h3 style={{ fontSize: '1.45rem', color: 'var(--primary)', marginBottom: '0.5rem' }}>
-                      Step 3: Class Format & Schedule Preferences
-                    </h3>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>
-                      Tell us your preferred learning format and the times that best suit your routine.
-                    </p>
-
-                    <div style={{ marginBottom: '1.75rem' }}>
-                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
-                        Class Preference *
-                      </label>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
-                        {[
-                          { id: '1-on-1 (Private)', title: '1-on-1 (Private Instruction)', desc: 'Dedicated teacher solely focused on you or your child.' },
-                          { id: 'Small Group', title: 'Small Group (2–4 Students)', desc: 'Interactive peer learning at similar age/level.' }
-                        ].map((opt) => (
-                          <label 
-                            key={opt.id}
-                            style={{
-                              padding: '1.25rem',
-                              borderRadius: '12px',
-                              border: formData.classPreference === opt.id ? '2px solid var(--primary)' : '1px solid var(--border-medium)',
-                              background: formData.classPreference === opt.id ? 'var(--primary-ultralight)' : 'var(--bg-ivory)',
-                              cursor: 'pointer'
-                            }}
-                          >
-                            <input 
-                              type="radio" 
-                              name="classPreference" 
-                              value={opt.id}
-                              checked={formData.classPreference === opt.id}
-                              onChange={handleChange}
-                              style={{ display: 'none' }}
-                            />
-                            <strong style={{ display: 'block', color: 'var(--primary)', marginBottom: '0.25rem' }}>{opt.title}</strong>
-                            <span style={{ fontSize: '0.825rem', color: 'var(--text-secondary)' }}>{opt.desc}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div style={{ marginBottom: '2rem' }}>
-                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
-                        Preferred Time of Day *
-                      </label>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem' }}>
-                        {['Morning', 'Afternoon', 'Evening', 'Weekend Slots'].map((time) => (
-                          <label 
-                            key={time}
-                            style={{
-                              padding: '0.85rem',
-                              borderRadius: '8px',
-                              border: formData.preferredSchedule === time ? '2px solid var(--primary)' : '1px solid var(--border-medium)',
-                              background: formData.preferredSchedule === time ? 'var(--primary-ultralight)' : 'var(--bg-ivory)',
-                              cursor: 'pointer',
-                              textAlign: 'center',
-                              fontSize: '0.9rem',
-                              fontWeight: 600,
-                              color: formData.preferredSchedule === time ? 'var(--primary)' : 'var(--text-secondary)'
-                            }}
-                          >
-                            <input 
-                              type="radio" 
-                              name="preferredSchedule" 
-                              value={time}
-                              checked={formData.preferredSchedule === time}
-                              onChange={handleChange}
-                              style={{ display: 'none' }}
-                            />
-                            {time}
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* STEP 4: Experience & Goals */}
+                {/* STEP 4: Educational Background & Goals */}
                 {currentStep === 4 && (
-                  <div>
-                    <h3 style={{ fontSize: '1.45rem', color: 'var(--primary)', marginBottom: '0.5rem' }}>
-                      Step 4: Previous Experience & Learning Goals
+                  <div className="animate-fade-in">
+                    <h3 style={{ fontFamily: 'var(--font-serif)', color: 'var(--primary)', marginBottom: '0.5rem', fontSize: '1.5rem' }}>
+                      Step 4: Background & Goals
                     </h3>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>
-                      Help us understand your background so we can match you with the ideal teacher.
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', marginBottom: '1.75rem' }}>
+                      Help our academic team design your personalized placement roadmap.
                     </p>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
+                        <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
                           Previous Qur'an Education
                         </label>
-                        <input 
-                          type="text" 
+                        <select
                           name="previousQuranEducation"
                           value={formData.previousQuranEducation}
                           onChange={handleChange}
-                          placeholder="e.g. Completed Nuurul Bayaan / Self-taught / None"
-                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '8px', border: '1px solid var(--border-medium)', background: 'var(--bg-ivory)' }}
-                        />
+                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem', background: '#fff' }}
+                        >
+                          <option value="None / Complete Beginner">None / Complete Beginner</option>
+                          <option value="Completed Qaida / Nuurul Bayaan">Completed Qaida / Nuurul Bayaan</option>
+                          <option value="Can recite with some Tajweed">Can recite with some Tajweed</option>
+                          <option value="Memorized several Juz">Memorized several Juz</option>
+                        </select>
                       </div>
 
                       <div>
-                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                          Current Qur'an Reading Level
+                        <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                          Arabic Knowledge Level
                         </label>
-                        <input 
-                          type="text" 
-                          name="currentReadingLevel"
-                          value={formData.currentReadingLevel}
+                        <select
+                          name="arabicKnowledge"
+                          value={formData.arabicKnowledge}
                           onChange={handleChange}
-                          placeholder="e.g. Can read slowly with mistakes / Fluent without Tajweed"
-                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '8px', border: '1px solid var(--border-medium)', background: 'var(--bg-ivory)' }}
-                        />
+                          style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem', background: '#fff' }}
+                        >
+                          <option value="No prior Arabic background">No prior Arabic background</option>
+                          <option value="Can recognize Arabic letters">Can recognize Arabic letters</option>
+                          <option value="Basic vocabulary and reading">Basic vocabulary and reading</option>
+                          <option value="Intermediate spoken Arabic">Intermediate spoken Arabic</option>
+                        </select>
                       </div>
                     </div>
 
-                    <div style={{ marginBottom: '2rem' }}>
-                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
-                        Personal Learning Goal / What would you like to achieve?
+                    <div style={{ marginBottom: '1.25rem' }}>
+                      <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                        What is your primary learning goal?
                       </label>
-                      <textarea 
+                      <textarea
                         name="learningGoal"
-                        rows="4"
+                        rows={3}
+                        placeholder="e.g. I want to recite the Qur'an fluently with proper Tajweed, understand daily supplications, and build strong character."
                         value={formData.learningGoal}
                         onChange={handleChange}
-                        placeholder="e.g. I want my son to memorize Juz' Amma and master Tajweed before he turns 10 / I want to be able to recite Surah Al-Baqarah fluently..."
-                        style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '8px', border: '1px solid var(--border-medium)', background: 'var(--bg-ivory)', resize: 'vertical' }}
+                        style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem', resize: 'vertical' }}
                       />
                     </div>
                   </div>
                 )}
 
-                {/* STEP 5: Review & Submit */}
+                {/* STEP 5: Review & Transmit */}
                 {currentStep === 5 && (
-                  <div>
-                    <h3 style={{ fontSize: '1.45rem', color: 'var(--primary)', marginBottom: '0.5rem' }}>
-                      Step 5: Review Your Application
+                  <div className="animate-fade-in">
+                    <h3 style={{ fontFamily: 'var(--font-serif)', color: 'var(--primary)', marginBottom: '0.5rem', fontSize: '1.5rem' }}>
+                      Step 5: Review & Transmit Application
                     </h3>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>
-                      Please review your application summary before final submission.
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', marginBottom: '1.5rem' }}>
+                      Please verify your details. Upon submission, your full application dossier will be sent directly to the Admissions Desk via WhatsApp and Email.
                     </p>
 
-                    <div style={{ background: 'var(--bg-cream)', borderRadius: '16px', border: '1px solid var(--border-light)', padding: '1.75rem', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '0.85rem', fontSize: '0.925rem' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-light)', paddingBottom: '0.5rem' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>Student Name:</span>
-                        <strong style={{ color: 'var(--primary)' }}>{formData.fullName || '—'}</strong>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-light)', paddingBottom: '0.5rem' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>WhatsApp Contact:</span>
-                        <strong style={{ color: 'var(--primary)' }}>{formData.whatsappNumber || '—'}</strong>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-light)', paddingBottom: '0.5rem' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>Country:</span>
-                        <strong style={{ color: 'var(--primary)' }}>{formData.country || '—'}</strong>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-light)', paddingBottom: '0.5rem' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>Program Selected:</span>
-                        <strong style={{ color: 'var(--accent-gold-dark)' }}>{formData.program}</strong>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-light)', paddingBottom: '0.5rem' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>Learning Level:</span>
-                        <strong style={{ color: 'var(--primary)' }}>{formData.learningLevel}</strong>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>Class Preference & Schedule:</span>
-                        <strong style={{ color: 'var(--primary)' }}>{formData.classPreference} • {formData.preferredSchedule}</strong>
+                    <div style={{ background: 'var(--bg-cream)', padding: '1.5rem', borderRadius: '16px', border: '1px solid var(--border-medium)', marginBottom: '1.5rem' }}>
+                      <h4 style={{ color: 'var(--primary)', marginBottom: '1rem', borderBottom: '1px solid var(--border-medium)', paddingBottom: '0.5rem' }}>
+                        Application Summary
+                      </h4>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', fontSize: '0.92rem' }}>
+                        <div>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.8rem' }}>Student Name</span>
+                          <strong>{formData.fullName || 'Not provided'}</strong>
+                        </div>
+                        <div>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.8rem' }}>WhatsApp / Phone</span>
+                          <strong>{getFullPhone() || 'Not provided'}</strong>
+                        </div>
+                        <div>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.8rem' }}>Program Selected</span>
+                          <strong style={{ color: 'var(--primary)' }}>{formData.program}</strong>
+                        </div>
+                        <div>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.8rem' }}>Class Format</span>
+                          <strong>{formData.classPreference}</strong>
+                        </div>
+                        <div>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.8rem' }}>Preferred Schedule</span>
+                          <strong>{formData.preferredSchedule}</strong>
+                        </div>
+                        <div>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.8rem' }}>Date of Birth</span>
+                          <strong>{formData.dateOfBirth || 'Not provided'}</strong>
+                        </div>
+                        <div>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.8rem' }}>Date Registered</span>
+                          <strong style={{ color: '#005DB8' }}>{new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</strong>
+                        </div>
+                        <div>
+                          <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.8rem' }}>Location</span>
+                          <strong>{formData.city ? `${formData.city}, ` : ''}{formData.country}</strong>
+                        </div>
                       </div>
                     </div>
 
-                    <div style={{ padding: '1rem', background: 'rgba(197, 168, 105, 0.1)', borderRadius: '10px', border: '1px solid rgba(197, 168, 105, 0.3)', marginBottom: '2rem', fontSize: '0.825rem', color: 'var(--text-secondary)' }}>
-                      <strong>Note:</strong> Submitting this application registers your interest with the Al-Irshaad Admissions Office. An academic coordinator will contact you directly to confirm your schedule and conduct your initial placement assessment.
+                    <div style={{ background: 'rgba(0, 93, 184, 0.05)', padding: '1.25rem', borderRadius: '12px', border: '1px solid rgba(0, 93, 184, 0.2)', marginBottom: '1.75rem', fontSize: '0.88rem', color: '#1E293B' }}>
+                      <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                        <IconCheckCircle size={20} color="#005DB8" style={{ marginTop: '2px', flexShrink: 0 }} />
+                        <div>
+                          <strong>Dual Direct Transmission:</strong> Submitting will instantly transmit this complete application dossier to the <strong>Al-Irshaad Admissions Desk on WhatsApp (+234 903 516 0069)</strong> and generate an official email record.
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )}
 
-                {/* Form Buttons Navigation */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-light)' }}>
+                {/* Form Navigation Controls */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-medium)' }}>
                   {currentStep > 1 ? (
                     <button 
                       type="button" 
                       onClick={prevStep}
                       className="btn btn-outline"
+                      style={{ padding: '0.75rem 1.5rem' }}
                     >
                       ← Back
                     </button>
@@ -535,18 +718,21 @@ export default function EnrollPage() {
                     <button 
                       type="button" 
                       onClick={nextStep}
-                      className="btn btn-gold"
+                      className="btn btn-primary"
+                      style={{ padding: '0.85rem 2rem' }}
                     >
-                      Continue to Step {currentStep + 1} →
+                      <span>Continue Next Step</span>
+                      <IconArrowRight size={16} color="#FFFFFF" />
                     </button>
                   ) : (
                     <button 
                       type="submit" 
                       disabled={isSubmitting}
-                      className="btn btn-primary btn-lg"
-                      style={{ minWidth: '220px' }}
+                      className="btn btn-gold btn-lg"
+                      style={{ minWidth: '260px', padding: '1rem 2rem', fontWeight: 700 }}
                     >
-                      {isSubmitting ? 'Submitting Application...' : 'Submit Enrollment Application'}
+                      <IconWhatsApp size={20} color="#031122" />
+                      <span>{isSubmitting ? 'Transmitting Application...' : 'Transmit Application to Admissions'}</span>
                     </button>
                   )}
                 </div>
@@ -568,10 +754,10 @@ export default function EnrollPage() {
             >
               <div 
                 style={{
-                  width: '72px',
-                  height: '72px',
+                  width: '76px',
+                  height: '76px',
                   borderRadius: '50%',
-                  background: 'var(--primary-ultralight)',
+                  background: 'rgba(0, 93, 184, 0.08)',
                   color: 'var(--primary)',
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -579,54 +765,64 @@ export default function EnrollPage() {
                   marginBottom: '1.5rem'
                 }}
               >
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
+                <IconCheckCircle size={42} color="var(--primary)" />
               </div>
 
-              <span className="badge-gold" style={{ marginBottom: '1rem' }}>
+              <span className="badge-gold" style={{ marginBottom: '1rem', display: 'inline-block' }}>
                 Application Received Successfully
               </span>
 
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', color: 'var(--primary)', marginBottom: '1rem' }}>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', color: 'var(--primary)', marginBottom: '0.75rem' }}>
                 Assalamu Alaikum, {formData.fullName}!
               </h2>
 
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '650px', margin: '0 auto 1.75rem auto', lineHeight: '1.7' }}>
-                Your enrollment application for <strong>{formData.program}</strong> has been registered with the Al-Irshaad Islamic Institute Admissions Desk.
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '650px', margin: '0 auto 1.5rem auto', lineHeight: '1.7' }}>
+                Your enrollment application for <strong>{formData.program}</strong> has been transmitted to the Al-Irshaad Islamic Institute Admissions Desk.
               </p>
 
               {/* Reference ID Pill */}
-              <div style={{ display: 'inline-block', padding: '0.85rem 2rem', background: 'var(--bg-cream)', borderRadius: '12px', border: '1px solid var(--border-medium)', marginBottom: '2.5rem' }}>
+              <div style={{ display: 'inline-block', padding: '0.85rem 2rem', background: 'var(--bg-cream)', borderRadius: '12px', border: '1px solid var(--border-medium)', marginBottom: '2rem' }}>
                 <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Your Application Tracking ID</span>
                 <strong style={{ fontSize: '1.4rem', color: 'var(--primary)', fontFamily: 'var(--font-heading)' }}>{applicationId}</strong>
               </div>
 
-              {/* Direct WhatsApp Follow-up Action */}
-              <div style={{ padding: '2rem', background: 'linear-gradient(135deg, #031122, #071C34)', borderRadius: '16px', color: '#FFFFFF', maxWidth: '650px', margin: '0 auto 2rem auto', textAlign: 'center' }}>
-                <h4 style={{ color: 'var(--accent-gold-light)', fontSize: '1.2rem', marginBottom: '0.5rem' }}>
-                  Fast-Track Your Admissions on WhatsApp
-                </h4>
-                <p style={{ color: 'var(--text-on-dark-muted)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
-                  Click below to send your application details directly to our admissions team at <strong>{contactData.phone}</strong> for instant confirmation.
-                </p>
-
+              {/* Dual Action Buttons */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '520px', margin: '0 auto 2.5rem auto' }}>
                 <a 
-                  href={whatsappAppUrl} 
+                  href={whatsappUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="btn btn-gold btn-lg"
-                  style={{ width: '100%', maxWidth: '380px', margin: '0 auto' }}
+                  style={{ width: '100%', padding: '1rem', fontSize: '1.05rem', fontWeight: '700', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                  </svg>
-                  <span>Transmit Application via WhatsApp</span>
+                  <IconWhatsApp size={22} color="#031122" />
+                  <span>Open & Transmit on WhatsApp ({contactData.phoneFormatted})</span>
+                </a>
+
+                <a 
+                  href={emailMailtoUrl} 
+                  className="btn btn-outline btn-lg"
+                  style={{ width: '100%', padding: '0.9rem', fontSize: '0.95rem', fontWeight: '700', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', background: '#FFFFFF' }}
+                >
+                  <IconMail size={18} color="var(--primary)" />
+                  <span>Send Direct Email Copy to Admissions Desk</span>
                 </a>
               </div>
 
+              {/* Next Steps Card */}
+              <div style={{ background: 'var(--bg-cream)', borderRadius: '16px', padding: '1.5rem', textAlign: 'left', maxWidth: '600px', margin: '0 auto 2rem auto', border: '1px solid var(--border-medium)' }}>
+                <h4 style={{ color: 'var(--primary)', marginBottom: '0.75rem', fontSize: '1.05rem' }}>
+                  What Happens Next?
+                </h4>
+                <ul style={{ margin: 0, paddingLeft: '1.25rem', color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.8' }}>
+                  <li>Our Admissions Coordinator will review your background and time preferences.</li>
+                  <li>We will contact you via WhatsApp / Phone to confirm your scheduled placement assessment.</li>
+                  <li>You will be assigned a certified Ustadh / Ustadha suited to your learning pace.</li>
+                </ul>
+              </div>
+
               <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-                Questions? Direct Line: <a href={`tel:${contactData.phone}`} style={{ color: 'var(--primary)', fontWeight: 700 }}>{contactData.phone}</a>
+                Direct Admissions Line: <a href={`tel:${contactData.phone}`} style={{ color: 'var(--primary)', fontWeight: 700 }}>{contactData.phone}</a>
               </div>
 
             </div>

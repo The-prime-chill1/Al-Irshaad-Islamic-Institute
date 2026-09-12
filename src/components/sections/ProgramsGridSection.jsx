@@ -10,9 +10,10 @@ export default function ProgramsGridSection() {
   const filterTabs = [
     { id: 'all', label: 'All Curricula' },
     { id: 'quran-tajweed', label: "Qur'an & Tajweed" },
-    { id: 'islamic-studies-fundamentals', label: "Islamic Studies (Age-Based)" },
-    { id: 'islamic-studies-intermediate', label: "Classical Sciences" },
-    { id: 'arabic-adhkaar', label: "Arabic & Adhkaar" }
+    { id: 'islamic-studies-fundamentals', label: "Fundamentals of Islamic Studies" },
+    { id: 'advanced-islamic-studies', label: "Advance Islamic Studies" },
+    { id: 'adhkaar-memorization', label: "Adhkaar Memorization" },
+    { id: 'arabic-language', label: "Arabic for English Speakers" }
   ];
 
   const filteredCategories = selectedFilter === 'all'
@@ -160,11 +161,20 @@ export default function ProgramsGridSection() {
             }}
           >
             <span style={{ fontSize: '1.05rem', fontWeight: 600 }}>
-              Need assistance determining the right program or level for yourself or child?
+              Ready to calculate tuition for your selected course?
             </span>
-            <Link to="/contact" className="btn btn-primary btn-sm" style={{ padding: '0.75rem 1.5rem' }}>
-              Book an Academic Assessment
-            </Link>
+            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+              <a 
+                href="#course-pricing-calculator" 
+                className="btn btn-gold btn-sm" 
+                style={{ padding: '0.75rem 1.5rem', fontWeight: 700 }}
+              >
+                Calculate Course Tuition ↓
+              </a>
+              <Link to="/contact" className="btn btn-outline btn-sm" style={{ padding: '0.75rem 1.5rem', color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.35)' }}>
+                Speak with Admissions
+              </Link>
+            </div>
           </div>
         </div>
 

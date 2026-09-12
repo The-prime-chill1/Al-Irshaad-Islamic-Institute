@@ -109,7 +109,7 @@ export default function ForParentsPage() {
             </div>
 
             <div className="grid-3">
-              {testimonialsData.slice(0, 3).map((t, idx) => (
+              {(testimonialsData.testimonials || []).slice(0, 3).map((t, idx) => (
                 <TestimonialCard key={t.id || idx} testimonial={t} />
               ))}
             </div>

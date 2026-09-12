@@ -3,9 +3,9 @@ export const programsData = {
     {
       id: "quran-tajweed",
       number: "01",
-      title: "Qur'an Recitation & Memorization with Tajweed",
+      title: "Qur'an Recitation and Memorization with Tajweed",
       shortTitle: "Qur'an & Tajweed",
-      description: "Build a strong foundation in Qur'anic reading, develop fluent recitation with Tajweed and progress toward memorizing the Holy Qur'an.",
+      description: "Build a strong foundation in Qur'anic reading, develop fluent recitation with Tajweed, and progress toward memorizing the Holy Qur'an.",
       icon: "book-open",
       ctaText: "Explore Qur'an Programs",
       programs: [
@@ -14,14 +14,14 @@ export const programsData = {
           title: "Nuurul Bayaan",
           subtitle: "Foundation in Qur'anic Reading & Arabic Pronunciation",
           level: "Beginners Level",
-          ageGroup: "Kids aged 4+ and Adults",
+          ageGroup: "Kids (ages 4+) and Adult Beginners",
           duration: "3–6 months",
           classes: "5 days per week",
           session: "45–60 minutes",
           prerequisite: "None (Zero Arabic background needed)",
           route: "/programs/nuurul-bayaan",
           badge: "Foundation Track",
-          shortDesc: "The perfect step-by-step foundation course using the renowned Nuurul Bayaan methodology with strong focus on proper Makharij from day one."
+          shortDesc: "Step-by-step foundation course using the proven Nuurul Bayaan methodology with strong focus on proper Makharij from day one."
         },
         {
           id: "quran-recitation",
@@ -35,11 +35,11 @@ export const programsData = {
           prerequisite: "Ability to read Arabic / Completion of Nuurul Bayaan",
           route: "/programs/quran-recitation",
           badge: "Fluency Track",
-          shortDesc: "Listen and recite verse-by-verse under dedicated teachers, mastering practical Tajweed rules, Waqf & Ibtida', and confident beautiful recitation."
+          shortDesc: "Verse-by-verse patient listening and correction, mastering applied Tajweed rules, Waqf & Ibtida', and confident beautiful recitation."
         },
         {
           id: "hifdh",
-          title: "Qur'an Memorization — Hifdh",
+          title: "Qur'an Memorization (Hifdh) with Tajweed",
           subtitle: "Complete Qur'an Memorization with 3-Cycle Retention",
           level: "Advanced Memorization",
           ageGroup: "Committed Kids, Youth & Adults",
@@ -56,29 +56,29 @@ export const programsData = {
     {
       id: "islamic-studies-fundamentals",
       number: "02",
-      title: "Fundamentals of Islamic Studies",
-      shortTitle: "Islamic Studies (Age-Based)",
-      description: "Build essential Islamic knowledge and learn how to practice Islam with understanding, confidence and beautiful character.",
+      title: "The Fundamentals of Islamic Studies",
+      shortTitle: "Fundamentals of Islamic Studies",
+      description: "Build essential Islamic knowledge and learn how to practice Islam with understanding, confidence, and beautiful character.",
       icon: "compass",
       ctaText: "Explore Islamic Studies",
       route: "/programs/islamic-studies",
       programs: [
         {
           id: "fundamentals-level-1",
-          title: "Fundamentals — Level 1",
+          title: "Fundamentals — Level 1 (Beginner)",
           subtitle: "Ages 5–10 Foundation",
           focus: "Iman, Salah, Wudu & Basic Islamic Knowledge",
           duration: "3–6 months per level",
           classes: "3 days per week",
           session: "45–60 minutes",
-          prerequisite: "None",
+          prerequisite: "None — Open to all",
           route: "/programs/islamic-studies",
           badge: "Ages 5–10",
           shortDesc: "Engaging, interactive lessons instilling the love of Allah, Prophet Muhammad ﷺ, daily prayers, and fundamental Islamic manners."
         },
         {
           id: "fundamentals-level-2",
-          title: "Fundamentals — Level 2",
+          title: "Fundamentals — Level 2 (Intermediate)",
           subtitle: "Ages 11–15 Intermediate",
           focus: "Detailed Fiqh, Seerah & Stories of the Prophets",
           duration: "3–6 months per level",
@@ -91,8 +91,8 @@ export const programsData = {
         },
         {
           id: "fundamentals-level-3",
-          title: "Fundamentals — Level 3",
-          subtitle: "Ages 16–20 Youth & Adults",
+          title: "Fundamentals — Level 3 (Advanced)",
+          subtitle: "Ages 16–20 & Adults",
           focus: "Aqeedah in Depth, Fasting, Zakah, Hajj & Hadith Studies",
           duration: "3–6 months per level",
           classes: "3 days per week",
@@ -100,23 +100,23 @@ export const programsData = {
           prerequisite: "None",
           route: "/programs/islamic-studies",
           badge: "Ages 16–20 & Adults",
-          shortDesc: "In-depth theological foundations, pillars of worship, 40 Hadith studies, and navigating modern ethical questions through an authentic Islamic worldview."
+          shortDesc: "In-depth theological foundations, pillars of worship, Hadith studies, and navigating modern ethical questions through an authentic Islamic worldview."
         }
       ]
     },
     {
       id: "advanced-islamic-studies",
       number: "03",
-      title: "Advanced Islamic Studies",
-      shortTitle: "Advanced Studies",
-      description: "A deeper journey into Islamic knowledge for students ready to progress beyond the fundamentals.",
+      title: "Advance Level in Islamic Studies",
+      shortTitle: "Advance Islamic Studies",
+      description: "A deeper journey into classical Islamic sciences for students ready to progress beyond the fundamentals.",
       icon: "feather",
       ctaText: "Explore Advanced Studies",
       route: "/programs/advanced-islamic-studies",
       programs: [
         {
           id: "advanced-studies-course",
-          title: "Advanced Islamic Studies",
+          title: "Advance Level in Islamic Studies",
           subtitle: "Higher Classical Islamic Sciences",
           focus: "Advanced Aqeedah, Usul al-Fiqh, Ulum al-Qur'an & Hadith Terminology",
           duration: "6–12 months",
@@ -130,13 +130,38 @@ export const programsData = {
       ]
     },
     {
-      id: "arabic-adhkaar",
+      id: "adhkaar-memorization",
       number: "04",
-      title: "Arabic Language & Adhkaar",
-      shortTitle: "Arabic & Adhkaar",
-      description: "Essential linguistic understanding and daily spiritual fortification through authentic prophetic remembrances.",
+      title: "Adhkaar Memorization",
+      shortTitle: "Adhkaar Memorization",
+      description: "Daily spiritual fortification through authentic prophetic remembrances with correct pronunciation and understanding.",
       icon: "sparkles",
-      ctaText: "Explore Arabic & Adhkaar",
+      ctaText: "Explore Adhkaar",
+      route: "/programs/arabic-adhkaar",
+      programs: [
+        {
+          id: "adhkaar-course",
+          title: "Adhkaar Memorization",
+          subtitle: "Daily Prophetic Remembrances",
+          focus: "Morning & Evening Adhkaar, Prayers Duas & Fortress of the Muslim",
+          duration: "2–3 months",
+          classes: "2–3 days per week",
+          session: "30–45 minutes",
+          prerequisite: "None",
+          route: "/programs/arabic-adhkaar",
+          badge: "Spiritual Track",
+          shortDesc: "Memorize authentic daily prophetic supplications with correct pronunciation, meanings, and practical daily habit formation."
+        }
+      ]
+    },
+    {
+      id: "arabic-language",
+      number: "05",
+      title: "Arabic Language for English Speakers",
+      shortTitle: "Arabic for English Speakers",
+      description: "Tailored for diaspora Muslims and international learners to understand the language of the Holy Qur'an directly.",
+      icon: "sparkles",
+      ctaText: "Explore Arabic",
       route: "/programs/arabic-adhkaar",
       programs: [
         {
@@ -150,20 +175,7 @@ export const programsData = {
           prerequisite: "Ability to read Arabic script",
           route: "/programs/arabic-adhkaar",
           badge: "Language Track",
-          shortDesc: "Tailored for diaspora Muslims and international learners to understand the language of the Holy Qur'an directly."
-        },
-        {
-          id: "adhkaar-memorization",
-          title: "Adhkaar Memorization",
-          subtitle: "Daily Prophetic Remembrances",
-          focus: "Morning & Evening Adhkaar, Prayers Duas & Fortress of the Muslim",
-          duration: "2–3 months",
-          classes: "2–3 days per week",
-          session: "30–45 minutes",
-          prerequisite: "None",
-          route: "/programs/arabic-adhkaar",
-          badge: "Spiritual Track",
-          shortDesc: "Memorize authentic daily prophetic supplications with correct pronunciation, meanings, and practical daily habit formation."
+          shortDesc: "Learn essential vocabulary, grammar rules, and sentence structures to understand Qur'anic Arabic in simplified expressions."
         }
       ]
     }
@@ -171,54 +183,53 @@ export const programsData = {
 
   nuurulBayaanDetails: {
     title: "Foundation in Qur'anic Reading & Arabic Pronunciation",
-    subtitle: "Nuurul Bayaan — Beginners Level",
-    description: "The Nuurul Bayaan program is our step-by-step foundation course designed for kids aged 4+ and adult beginners with no prior Arabic background. It is the perfect starting point before Qur'an recitation.\n\nUsing the Nuurul Bayaan methodology, students learn to read Arabic correctly from the very basics, with a strong focus on proper pronunciation (Makharij) from day one.",
+    subtitle: "Nuurul Bayaan — Beginners Level (Kids & Adults)",
+    description: "The Nuurul Bayaan program is our step-by-step foundation course designed for kids (ages 4+) and adult beginners with no prior Arabic background. It is the perfect starting point before Qur'an recitation.\n\nUsing the proven Nuurul Bayaan methodology, students learn to read Arabic correctly from the very basics, with a strong focus on proper pronunciation (Makharij) from day one.",
     whatYouWillLearn: [
-      { title: "Arabic Alphabet Mastery", desc: "Recognize, name, and articulate all 28 Arabic letters in isolated, initial, medial, and final forms." },
-      { title: "Harakat & Short Vowels", desc: "Master Fat-hah, Kasrah, and Dammah with accurate vocal timing and zero distortion." },
-      { title: "Sukoon & Tanween", desc: "Confidently recite resting letters (Sukoon) and double-vowel nunations (Tanween)." },
-      { title: "Madd & Leen", desc: "Understand vowel elongation rules and subtle soft diphthongs (Waaw and Yaa)." },
-      { title: "Shaddah & Advanced Joining", desc: "Read doubled consonants (Tashdeed) and smoothly join multi-syllable Qur'anic words." },
-      { title: "Qur'anic Vocabulary Practice", desc: "Direct reading exercises from authentic Qur'anic verses preparing for full recitation." }
+      { title: "Arabic Alphabet Mastery", desc: "Recognition, pronunciation, and writing of all Arabic letters." },
+      { title: "Harakat & Vowels", desc: "Fatha, Damma, Kasra, and how they change letter sounds." },
+      { title: "Sukoon & Tanween", desc: "Building fluency in joining letters and words." },
+      { title: "Madd & Leen", desc: "Rules of elongation for beautiful recitation." },
+      { title: "Shaddah & Advanced Joining", desc: "Reading complete words and sentences smoothly." },
+      { title: "Qur'anic Vocabulary Practice", desc: "Applying rules directly on verses from the Qur'an." }
     ],
     features: [
-      { title: "1-on-1 Live Classes", desc: "Dedicated teacher listening to every single phoneme in real time." },
-      { title: "Tajweed from the Start", desc: "Learn correct articulation points (Makharij) before bad habits form." },
-      { title: "Interactive Learning for Kids", desc: "Engaging visual aids, gentle encouragement, and joyful pacing." },
-      { title: "Patient Approach for Adults", desc: "Dignified, comfortable, and personalized private sessions." },
-      { title: "Smooth Transition", desc: "Direct pathway to fluent Qur'an recitation upon graduation." }
+      { title: "1-on-1 Live Classes", desc: "Personalized attention at the student's own pace." },
+      { title: "Tajweed from the Start", desc: "Correct Makharij (articulation points) taught early to avoid mistakes later." },
+      { title: "Interactive & Fun for Kids", desc: "Visual aids, repetition, and positive encouragement." },
+      { title: "For Adults Too", desc: "Special patient approach for new Muslims and adult beginners." },
+      { title: "Smooth Transition", desc: "Upon completion, student moves confidently to Fluent Qur'an Recitation." }
     ],
     details: {
-      duration: "3–6 months",
+      duration: "3–6 months (depending on age, consistency, and practice)",
       classes: "5 days per week",
-      session: "45–60 minutes",
+      session: "45–60 minutes per session",
       prerequisite: "None",
-      students: "Kids aged 4+ and adults",
+      students: "Kids (ages 4+) and Adult Beginners",
       goal: "By the end of this program, the student will be able to read the Holy Qur'an independently with correct pronunciation, In Sha Allah."
     }
   },
 
   quranRecitationDetails: {
     title: "Qur'an Recitation with Tajweed",
-    subtitle: "Fluent Verse-by-Verse Recitation & Rules Mastery",
-    description: "This program is for students who have completed Nuurul Bayaan or can already read Arabic and want to recite the Holy Qur'an fluently with correct Tajweed.\n\nOur teachers listen to students verse-by-verse, correcting pronunciation, articulation points (Makharij) and Tajweed rules in a patient and encouraging way.",
+    subtitle: "Verse-by-Verse Fluency & Articulation Mastery",
+    description: "This program is for students who have completed Nuurul Bayaan (or can already read Arabic) and want to recite the Holy Qur'an fluently with correct Tajweed.\n\nOur qualified teachers listen to each student verse-by-verse, correcting pronunciation, articulation points (Makharij), and Tajweed rules in a patient and encouraging way.",
     whatYouWillLearn: [
-      { title: "Fluent Recitation of Entire Qur'an", desc: "Build smooth, rhythmic reading capability across all 30 Juz' with teacher correction." },
+      { title: "Fluent Recitation of Entire Qur'an", desc: "Verse-by-verse recitation with teacher correction across all 30 Juz'." },
       { title: "Noon Sakinah & Tanween Rules", desc: "Izhaar, Idghaam (with/without Ghunnah), Iqlab, and Ikhfa' practiced to automaticity." },
-      { title: "Meem Sakinah Rules", desc: "Izhaar Shafawi, Idghaam Shafawi, and Ikhfa' Shafawi rules." },
-      { title: "Rules of Madd (Elongation)", desc: "Natural Madd (Asli) and derived Madd (Far'i) including Muttasil, Munfasil, and Lazim." },
-      { title: "Waqf & Ibtida' (Stopping & Starting)", desc: "Understanding pause symbols, safe stopping points, and preserving holy meaning." },
-      { title: "Makharij & Sifaat of Letters", desc: "Deepening theoretical and practical mastery of throat, tongue, and lip articulation points." },
-      { title: "Confident & Beautiful Recitation", desc: "Harmonizing rhythm, tone, and reverent pace in accordance with prophetic sunnah." }
+      { title: "Meem Sakinah & Madd Rules", desc: "Izhaar Shafawi, Idghaam Shafawi, Ikhfa' Shafawi, and Madd rules." },
+      { title: "Waqf & Ibtida' (Stopping & Starting)", desc: "Understanding pause symbols, safe stopping points, and preserving meaning." },
+      { title: "Correct Makharij & Sifaat", desc: "Precise articulation points and characteristics of letters." },
+      { title: "Beautiful & Confident Recitation", desc: "Recite beautifully and confidently like a Qari." }
     ],
     features: [
-      { title: "1-on-1 Live Correction", desc: "No verse goes unreviewed; instant real-time correction." },
-      { title: "Personalized Learning Pace", desc: "Progress comfortably based on your individual schedule and capacity." },
-      { title: "Regular Revision Cycles", desc: "Weekly revision of covered surahs to consolidate fluency." },
-      { title: "Fluency & Tajweed Checks", desc: "Periodic evaluations to track pronunciation accuracy." }
+      { title: "1-on-1 Live Correction", desc: "Live correction and practice directly with your instructor." },
+      { title: "Personalized Pace", desc: "No rush, no pressure — tailored to your individual schedule." },
+      { title: "Regular Revision Cycles", desc: "Regular revision and fluency checks to ensure long-term retention." },
+      { title: "Flexible Timings", desc: "Matched to your convenient timezone 24/7." }
     ],
     details: {
-      duration: "6–12 months",
+      duration: "6–12 months (depending on level and schedule)",
       classes: "3–5 days per week",
       session: "45–60 minutes",
       prerequisite: "Ability to read Arabic / Completion of Nuurul Bayaan",
@@ -230,7 +241,7 @@ export const programsData = {
   hifdhDetails: {
     title: "Qur'an Memorization (Hifdh) with Tajweed",
     subtitle: "A Sacred Journey of Complete Memorization & Retention",
-    description: "Our Memorization Program is a structured, personalized journey to memorize the entire Holy Qur'an with perfect Tajweed and long-term retention.\n\nEach student receives a customized memorization plan based on their age, memory and available daily study time.",
+    description: "Our Memorization Program is a structured, personalized journey to memorize the entire Holy Qur'an with perfect Tajweed and long-term retention.\n\nEach student gets a customized memorization plan based on their age, memory, and daily time, with a perfect balance of new lesson, recent revision and old revision.",
     threeCycleMethod: [
       {
         cycle: "01",
@@ -244,7 +255,7 @@ export const programsData = {
         name: "MURAAJAH",
         arabic: "مُرَاجَعَة",
         title: "Recent Revision",
-        desc: "Systematic daily revision of the last seven days' lessons (Sabqi) to lock new portions into intermediate memory."
+        desc: "Systematic daily revision of the last 7 days' lessons (Sabqi) to lock new portions into intermediate memory."
       },
       {
         cycle: "03",
@@ -256,103 +267,89 @@ export const programsData = {
     ],
     whatYouWillLearn: [
       { title: "Complete Memorization of the Holy Qur'an", desc: "Systematic progression through all 114 Surahs and 30 Juz'." },
-      { title: "Memorization with Applied Tajweed", desc: "Preserving exact Tajweed rules during memorized recitation." },
-      { title: "Correct Pronunciation & Makharij", desc: "Uncompromising clarity on every letter and Harakah." },
+      { title: "Memorization with Tajweed", desc: "Preserving exact Tajweed rules and correct pronunciation during recitation." },
       { title: "Strong Memory & Recall Techniques", desc: "Proven visual and acoustic recall strategies for long-term retention." },
-      { title: "Long-term Revision System", desc: "Building a lifelong daily habit of Qur'an maintenance." }
+      { title: "Lifelong Revision System", desc: "Revision system to never forget what you memorized." }
     ],
     features: [
-      { title: "Dedicated Haafidh/Haafidhah Mentor", desc: "Learn directly from certified Huffaz with years of teaching experience." },
-      { title: "Daily Listening and Correction", desc: "Consistent daily accountability and individualized feedback." },
-      { title: "Motivation and Spiritual Guidance", desc: "Continuous encouragement to keep the sacred intention pure." },
-      { title: "Monthly Progress Reports for Parents", desc: "Detailed tracking of pages memorized, revision scores, and attendance." },
-      { title: "Hifz Competitions & Encouragement", desc: "Internal challenges to boost enthusiasm and excellence." },
-      { title: "Ijazah Certification", desc: "Formal Sanad and certificate upon verified completion of the Holy Qur'an." }
+      { title: "Dedicated Haafidh/Haafidhah Mentor", desc: "Your personal Haafidh/Haafidhah mentor for individual coaching." },
+      { title: "Daily Listening & Correction", desc: "Daily listening, correction, and motivation." },
+      { title: "Monthly Progress Reports for Parents", desc: "Detailed tracking of pages memorized and revision consistency." },
+      { title: "Hifz Competitions & Encouragement", desc: "Positive encouragement and internal milestones." },
+      { title: "Ijazah Certification", desc: "Formal Ijazah certification upon completion." }
     ],
     details: {
-      duration: "2–4 years",
-      pace: "½ page to 1 page per day",
+      duration: "2–4 years (depending on pace: ½ page to 1 page per day)",
       classes: "5 days per week recommended",
       session: "45–60 minutes",
       prerequisite: "Fluent Qur'an Recitation with Tajweed",
-      goal: "To produce Huffaz who not only memorize, but recite with Tajweed, understand and live by the Qur'an."
+      goal: "To produce Huffaz who not only memorize, but recite with Tajweed, understand, and live by the Qur'an."
     }
   },
 
   islamicStudiesDetails: {
-    title: "Fundamentals of Islamic Studies",
+    title: "The Fundamentals of Islamic Studies",
     subtitle: "Belief, Practice, Character & Tarbiyah for Every Age",
-    description: "This essential program is designed for children, teens, adults and new Muslims who want to learn and practice Islam with correct knowledge and confidence.\n\nIt complements Qur'an classes perfectly. Students don't simply learn information. They learn how to live Islam daily with love and understanding.",
+    description: "This essential program is designed for kids (ages 5+), teens, adults, and new Muslims who want to learn and practice Islam with correct knowledge and confidence. It complements Qur'an classes perfectly.\n\nTaught in a simple, engaging, and age-appropriate way, students don't just learn information, they learn how to live Islam daily with love and understanding.",
     ageTracks: [
       {
-        level: "LEVEL 1",
+        level: "LEVEL 1 (BEGINNER)",
         ageGroup: "Ages 5–10",
-        title: "Foundations of Iman & Worship",
-        focus: ["Iman in Allah & His Angels", "Practical Salah & Daily Steps", "Step-by-Step Wudu Practice", "Basic Islamic Manners & Adab"],
+        title: "Iman, Salah, Wudu & Basic Islamic Knowledge",
+        focus: ["Pillars of Iman & Tawheed", "Step-by-Step Wudu Practice", "How to Pray Salah with Meanings", "Basic Islamic Manners & Adab"],
         color: "emerald"
       },
       {
-        level: "LEVEL 2",
+        level: "LEVEL 2 (INTERMEDIATE)",
         ageGroup: "Ages 11–15",
-        title: "Fiqh, Seerah & Prophetic Guidance",
-        focus: ["Detailed Fiqh of Taharah & Salah", "Life of Prophet Muhammad ﷺ (Seerah)", "Stories of the Noble Prophets", "Islamic Moral Ethics & Identity"],
+        title: "Detailed Fiqh, Seerah & Stories of Prophets",
+        focus: ["Detailed Fiqh of Taharah & Salah", "Life of Prophet Muhammad ﷺ (Seerah)", "Stories of the Noble Prophets & Companions", "Islamic Moral Ethics & Identity"],
         color: "gold"
       },
       {
-        level: "LEVEL 3",
+        level: "LEVEL 3 (ADVANCED)",
         ageGroup: "Ages 16–20 & Adults",
-        title: "In-Depth Aqeedah, Worship & Hadith",
-        focus: ["Aqeedah in Depth & Tawheed", "Fiqh of Sawm (Fasting), Zakah & Hajj", "Comprehensive Hadith Studies", "Navigating Modern Challenges"],
+        title: "Aqeedah in Depth, Fasting, Zakah, Hajj & Hadith",
+        focus: ["Aqeedah in Depth & Tawheed", "Fiqh of Sawm (Fasting), Zakah & Hajj", "40 Hadith Studies & Applications", "Navigating Modern Challenges"],
         color: "charcoal"
       }
     ],
     curriculumSections: [
       {
-        title: "Aqeedah — Islamic Beliefs",
+        title: "1. Aqeedah (Islamic Beliefs)",
         topics: [
-          "Six Pillars of Iman",
-          "Tawheed (Ruboobiyyah, Uloohiyyah, Asma wa Sifat)",
-          "Love for Allah and His Messenger ﷺ",
-          "Belief in Angels and Divine Books",
-          "Belief in all Prophets and Messengers",
-          "Day of Judgment & The Hereafter",
-          "Belief in Divine Decree (Qadr)"
+          "Pillars of Iman, Tawheed, and love for Allah & His Messenger ﷺ",
+          "Belief in Angels, Books, Prophets, Day of Judgment & Divine Decree (Qadr)"
         ]
       },
       {
-        title: "Fiqh of Worship",
+        title: "2. Fiqh of Worship (Practical Islam)",
         topics: [
-          "Taharah (Purity, Cleanliness, Najasah removal)",
-          "Wudu (Obligatory steps, Sunnahs, Invalidation)",
-          "Salah (Pillars, Conditions, Sunnahs, Nullifiers)",
-          "Sawm (Fasting rules, Ramadan virtues, Etiquettes)",
-          "Zakah (Obligation, Calculation, Beneficiaries)",
-          "Hajj & Umrah (Rites, Significance, Spiritual lessons)"
+          "Taharah (purification) & Wudu step-by-step",
+          "Salah: How to pray correctly with meanings and etiquettes",
+          "Sawm (fasting), Zakah, and Hajj made simple and practical"
         ]
       },
       {
-        title: "Seerah & Stories of the Prophets",
+        title: "3. Seerah & Stories of the Prophets",
         topics: [
-          "Life of Prophet Muhammad ﷺ (Makkah & Madinah periods)",
-          "Stories of the Prophets from Adam (AS) to Isa (AS)",
-          "Stories of the Noble Companions (Sahabah)",
-          "Character Building (Sidq, Amanah, Sabr, Birr al-Walidayn)",
-          "Living Islam in School, Work, and Modern Society"
+          "Inspiring life of Prophet Muhammad ﷺ (Makkah & Madinah periods)",
+          "Stories of the Prophets and Companions for character building"
         ]
       }
     ],
     features: [
-      { title: "Age-Wise Curriculum", desc: "Carefully tailored content suited to the cognitive stage of each student." },
-      { title: "1-on-1 & Small Group Learning", desc: "Choose between focused private coaching or collaborative peer learning." },
-      { title: "Interactive Quizzes & Activities", desc: "Reinforce learning through visual decks, quizzes, and engaging worksheets." },
-      { title: "Real-Life Practical Application", desc: "Focus on how to implement every lesson immediately in daily routine." },
-      { title: "Tarbiyah-Focused Teaching", desc: "Nurturing genuine love for Allah and moral uprightness in every session." }
+      { title: "Age-Wise Curriculum", desc: "Separate engaging tracks for Kids (5 - 17) and Adults." },
+      { title: "1-on-1 or Small Group", desc: "Choose personalized attention or interactive group learning." },
+      { title: "Practical & Interactive", desc: "Quizzes, stories, activities, and real-life application." },
+      { title: "Tarbiyah Focused", desc: "We nurture Iman, love for Islam, and good character not just lessons." }
     ],
     details: {
-      duration: "3–6 months per level",
-      classes: "3 days per week",
+      duration: "Ongoing (3–6 months per level)",
+      classes: "3 days per week (can be combined with Qur'an classes)",
       session: "45–60 minutes",
-      prerequisite: "None"
+      prerequisite: "None — open to all",
+      goal: "To raise confident Muslims who know their Lord, worship correctly, love the Prophet ﷺ, and embody beautiful Islamic character."
     }
   }
 };

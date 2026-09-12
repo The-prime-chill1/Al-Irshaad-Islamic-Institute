@@ -364,12 +364,14 @@ button, input, select, textarea {
 }
 
 /* Mobile Navigation Drawer */
+/* Mobile Navigation Drawer Base */
 .mobile-drawer {
   position: fixed;
   inset: 0;
-  background: rgba(3, 17, 34, 0.75);
+  background: rgba(3, 17, 34, 0.7);
   backdrop-filter: blur(8px);
-  z-index: 200;
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-normal);
@@ -378,25 +380,6 @@ button, input, select, textarea {
 .mobile-drawer.open {
   opacity: 1;
   pointer-events: auto;
-}
-
-.mobile-drawer-content {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 85%;
-  max-width: 360px;
-  background: #FFFFFF;
-  padding: 2rem 1.5rem;
-  overflow-y: auto;
-  transform: translateX(100%);
-  transition: transform var(--transition-normal);
-  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.25);
-}
-
-.mobile-drawer.open .mobile-drawer-content {
-  transform: translateX(0);
 }
 
 /* Animations */

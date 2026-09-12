@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import ScrollToTop from './components/common/ScrollToTop';
@@ -22,6 +22,10 @@ import FaqPage from './pages/FaqPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsPage from './pages/TermsPage';
 import NotFoundPage from './pages/NotFoundPage';
+import StudentAuthPage from './pages/StudentAuthPage';
+import StudentDashboardPage from './pages/StudentDashboardPage';
+import AdminAuthPage from './pages/AdminAuthPage';
+import AdminDashboardPage from './pages/AdminDashboardPage';
 
 import ClickSpark from './components/effects/ClickSpark';
 
@@ -48,9 +52,20 @@ export default function App() {
           <Route path="/teachers" element={<TeachersPage />} />
           <Route path="/enroll" element={<EnrollPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/pricing" element={<Navigate to="/programs#pricing" replace />} />
           <Route path="/faqs" element={<FaqPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/terms-and-conditions" element={<TermsPage />} />
+          
+          {/* Legacy Student Routes redirected to Enroll */}
+          <Route path="/student/login" element={<Navigate to="/enroll" replace />} />
+          <Route path="/student/register" element={<Navigate to="/enroll" replace />} />
+          <Route path="/student/dashboard" element={<Navigate to="/enroll" replace />} />
+
+          {/* Admin Database & Auth */}
+          <Route path="/admin/login" element={<AdminAuthPage />} />
+          <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

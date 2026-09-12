@@ -48,11 +48,11 @@ export default function AboutPage() {
               </h2>
               
               <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '1.25rem' }}>
-                <strong>Al-Irshaad Islamic Institute</strong> was established to bridge the gap between traditional Islamic scholarly education and the busy modern lives of Muslims globally. We provide rigorous, patient, and personalized instruction in Qur'an reading, Tajweed, Hifdh, Arabic language, and classical Islamic studies.
+                <strong>Al-Irshaad Islamic Institute</strong> is a premier <strong>online international Islamic school</strong> established to bridge the gap between traditional Islamic scholarly education and the busy modern lives of Muslims globally. We provide rigorous, patient, and personalized 1-on-1 virtual instruction in Qur'an reading, Tajweed, Hifdh, Arabic language, and classical Islamic studies.
               </p>
 
               <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '1.75rem' }}>
-                We place a special emphasis on supporting the <strong>Nigerian Muslim community living in the diaspora</strong> — ensuring that families, children, and youth residing overseas retain strong ties to authentic Islamic heritage, melodious Qur'anic recitation, and grounded moral values.
+                Headquartered in Norwalk, Connecticut with certified international faculty, we proudly serve students, children, youth, and diaspora families worldwide — offering 24/7 flexible timezone-matched classes so every learner can excel in authentic Islamic knowledge from anywhere in the world.
               </p>
 
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
