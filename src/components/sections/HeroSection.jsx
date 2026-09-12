@@ -26,7 +26,7 @@ export default function HeroSection() {
       <div 
         className="hero-cinema-bg"
         style={{
-          backgroundImage: `url(${images.heroMosque})`
+          backgroundImage: `url(${images.heroMosque}), url(${images.heroMosqueFallback})`
         }}
         aria-hidden="true"
       />

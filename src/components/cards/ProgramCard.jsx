@@ -13,13 +13,16 @@ export default function ProgramCard({ program, categoryNumber }) {
       case 'hifdh':
         return images.hifdh;
       case 'fundamentals-level-1':
+        return images.islamicStudiesLevel1;
       case 'fundamentals-level-2':
+        return images.islamicStudiesLevel2;
       case 'fundamentals-level-3':
+        return images.islamicStudiesLevel3;
       case 'intermediate-fiqh':
       case 'intermediate-hadith':
       case 'intermediate-seerah':
       case 'intermediate-aqeedah':
-        return images.islamicStudies;
+        return images.advancedIslamicStudies;
       case 'arabic-language':
       case 'adhkaar':
         return images.arabicLanguage;

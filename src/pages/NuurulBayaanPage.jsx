@@ -5,6 +5,7 @@ import CtaBannerSection from '../components/sections/CtaBannerSection';
 import { programsData } from '../data/programsData';
 import { contactData } from '../data/contactData';
 import { IconAward, IconCheck } from '../components/common/Icons';
+import { images } from '../data/imageAssets';
 
 export default function NuurulBayaanPage() {
   const data = programsData.nuurulBayaanDetails;

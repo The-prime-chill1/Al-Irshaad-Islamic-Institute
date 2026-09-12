@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { IconCheckCircle } from '../common/Icons';
+import { images } from '../../data/imageAssets';
 
 export default function StudySetupSection() {
-  const computerSetupImage = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80";
+  const computerSetupImage = images.studySetup;
 
   return (
     <section 

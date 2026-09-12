@@ -1,25 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { images } from '../../data/imageAssets';
 
 export default function WhatWeDoSection() {
   const cards = [
     {
       title: "Qur'an & Tajweed Programs",
-      image: "https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=800&q=80",
+      image: images.quranRecitation,
       description: "From foundation Nuurul Bayaan for beginners (aged 4+) to fluent verse-by-verse recitation with practical Tajweed rules under patient teachers.",
       link: "/programs/nuurul-bayaan",
       cta: "Explore Qur'an Tracks"
     },
     {
       title: "Hifdh Memorization (3-Cycle)",
-      image: "https://images.unsplash.com/photo-1590076215667-875d4ef2d7ee?auto=format&fit=crop&w=800&q=80",
+      image: images.hifdh,
       description: "A structured, personalized pathway to commit the Holy Qur'an to heart using our 3-Cycle Retention method (Talqeen, Muraajah, Manzil) with certified Haafidh mentors.",
       link: "/programs/hifdh",
       cta: "Explore Hifdh Track"
     },
     {
       title: "Islamic Studies & Arabic",
-      image: "https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=800&q=80",
+      image: images.islamicStudies,
       description: "Age-tailored curricula (Levels 1, 2 & 3) covering Aqeedah, Fiqh, Seerah, Arabic vocabulary, and daily Adhkaar to practice Islam with understanding and beautiful character.",
       link: "/programs/islamic-studies",
       cta: "Explore Islamic Studies"

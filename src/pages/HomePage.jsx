@@ -52,17 +52,17 @@ export default function HomePage() {
       {/* 10. How Online Learning Works (6 Steps) */}
       <HowItWorksSection />
 
-      {/* 11. Meet Our Teachers Preview */}
+      {/* 11. Meet Our Lead Tutor Preview */}
       <section className="section-padding" style={{ backgroundColor: 'var(--bg-ivory)' }}>
         <div className="container">
           <SectionHeader 
             badge="Scholarly Mentorship"
             arabicTitle="مُعَلِّمُونَا الأَفَاضِل"
-            title="Learn Under Dedicated Teachers"
-            description="Our instructors bring deep knowledge, patience, and verified credentials to every 1-on-1 and small-group session."
+            title="Learn Under Dedicated Mentorship"
+            description="Ustadh Nasir brings deep knowledge, patience, and verified credentials to every 1-on-1 personalized lesson, coordinating your schedule to match your availability."
           />
 
-          <div className="grid-3" style={{ marginBottom: '2.5rem' }}>
+          <div style={{ maxWidth: '640px', margin: '0 auto 2.5rem auto' }}>
             {teachersData.teachers.map((t) => (
               <TeacherCard key={t.id} teacher={t} />
             ))}
@@ -70,7 +70,7 @@ export default function HomePage() {
 
           <div style={{ textAlign: 'center' }}>
             <Link to="/teachers" className="btn btn-outline btn-sm">
-              View Full Faculty Roster & Details
+              View Faculty Credentials & Scheduling Details →
             </Link>
           </div>
         </div>

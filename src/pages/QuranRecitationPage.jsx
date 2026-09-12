@@ -124,7 +124,7 @@ export default function QuranRecitationPage() {
               }}
             >
               <img 
-                src={images.quranOpen} 
+                src={images.quranRecitation} 
                 alt="Holy Quran Tajweed Recitation"
                 style={{ width: '100%', height: '360px', objectFit: 'cover' }}
               />

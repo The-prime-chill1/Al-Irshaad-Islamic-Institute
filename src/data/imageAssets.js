@@ -1,30 +1,44 @@
-// Curated high quality Islamic education & learning photos matching the Al-Irshaad aesthetic
-export const images = {
-  // Hero & Mosque Showcase (Majestic Islamic Architecture with illuminated minarets and golden domes)
-  heroMosque: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?auto=format&fit=crop&w=1920&q=85",
-  heroMosqueFallback: "https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1920&q=85",
-  heroQuran: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1600&q=85",
-  quranOpen: "https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=1200&q=85",
-  
-  // Mosque Interior & Heritage
-  mosqueInterior: "https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1200&q=85",
+// Direct high-resolution imports of User-Provided Authentic Islamic Educational Imagery
+import imgStudySetup from 'C:/Users/Hp/.gemini/antigravity-ide/brain/ca88e187-f506-40c1-9190-4097923ed257/.user_uploaded/media_1789249822676.png';
+import imgQuranRedGold from 'C:/Users/Hp/.gemini/antigravity-ide/brain/ca88e187-f506-40c1-9190-4097923ed257/.user_uploaded/media_1789249866036.png';
+import imgQuranReadingPage from 'C:/Users/Hp/.gemini/antigravity-ide/brain/ca88e187-f506-40c1-9190-4097923ed257/.user_uploaded/media_1789249887732.png';
+import imgQuranRehalCarpet from 'C:/Users/Hp/.gemini/antigravity-ide/brain/ca88e187-f506-40c1-9190-4097923ed257/.user_uploaded/media_1789249904164.png';
+import imgQuranTasbihStand from 'C:/Users/Hp/.gemini/antigravity-ide/brain/ca88e187-f506-40c1-9190-4097923ed257/.user_uploaded/media_1789249939764.png';
+import imgQuranLightTree from 'C:/Users/Hp/.gemini/antigravity-ide/brain/ca88e187-f506-40c1-9190-4097923ed257/.user_uploaded/media_1789250152772.png';
+import imgQuranSunbeams from 'C:/Users/Hp/.gemini/antigravity-ide/brain/ca88e187-f506-40c1-9190-4097923ed257/.user_uploaded/media_1789250170809.png';
+import imgQuranIncenseSmoke from 'C:/Users/Hp/.gemini/antigravity-ide/brain/ca88e187-f506-40c1-9190-4097923ed257/.user_uploaded/media_1789250197781.png';
+import imgHeroMosque from 'C:/Users/Hp/.gemini/antigravity-ide/brain/ca88e187-f506-40c1-9190-4097923ed257/.user_uploaded/media_1789250384113.png';
 
-  // Children & Online Learners
+export const images = {
+  // 1. Hero & Mosque Showcase (Original Islamic Center of America with golden dome & two minarets)
+  heroMosque: imgHeroMosque,
+  heroMosqueFallback: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Islamic_Center_of_America.jpg",
+  heroQuran: imgQuranRedGold,
+  quranOpen: imgQuranSunbeams,
+  
+  // 2. Mosque Interior & Heritage Sanctuary
+  mosqueInterior: imgQuranLightTree,
+
+  // 3. Children & Online Learners
   boyOnlineStudent: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=800&q=80",
   girlOnlineStudent: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80",
-  childReadingQuran: "https://images.unsplash.com/photo-1584281722573-b26a6c2faea6?auto=format&fit=crop&w=800&q=80",
+  childReadingQuran: imgQuranReadingPage,
   diasporaFamily: "https://images.unsplash.com/photo-1609234656388-0ff363383899?auto=format&fit=crop&w=800&q=80",
   
-  // Curricula & Courses
-  nuurulBayaan: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
-  quranRecitation: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=800&q=80",
-  hifdh: "https://images.unsplash.com/photo-1590076215667-875d4ef2d7ee?auto=format&fit=crop&w=800&q=80",
-  islamicStudies: "https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=800&q=80",
-  arabicLanguage: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80",
-  calligraphyGold: "https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1000&q=80",
-  studySetup: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80",
+  // 4. Curricula & Courses (Mapped directly to User's Uploaded Sacred Photos)
+  nuurulBayaan: imgQuranReadingPage,
+  quranRecitation: imgQuranRedGold,
+  hifdh: imgQuranRehalCarpet,
+  islamicStudies: imgQuranTasbihStand,
+  islamicStudiesLevel1: imgQuranTasbihStand,
+  islamicStudiesLevel2: imgQuranIncenseSmoke,
+  islamicStudiesLevel3: imgQuranLightTree,
+  advancedIslamicStudies: imgQuranLightTree,
+  arabicLanguage: imgQuranSunbeams,
+  calligraphyGold: imgQuranIncenseSmoke,
+  studySetup: imgStudySetup,
   
-  // Tutors
+  // 5. Tutors
   teacherUstadh: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
   teacherUstadha: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"
 };
