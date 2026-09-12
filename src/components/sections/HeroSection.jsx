@@ -26,7 +26,7 @@ export default function HeroSection() {
       <div 
         className="hero-cinema-bg"
         style={{
-          backgroundImage: `url(${images.heroMosque}), url(${images.heroMosqueFallback})`
+          backgroundImage: `url(${images.heroMosque})`
         }}
         aria-hidden="true"
       />
@@ -199,6 +199,8 @@ export default function HeroSection() {
           animation: kenBurnsSmooth 32s cubic-bezier(0.25, 1, 0.5, 1) infinite alternate;
           pointer-events: none;
           z-index: 1;
+          will-change: transform;
+          transform: translateZ(0);
         }
 
         @keyframes kenBurnsSmooth {

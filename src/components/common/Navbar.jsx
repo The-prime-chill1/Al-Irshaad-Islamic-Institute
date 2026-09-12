@@ -193,6 +193,12 @@ export default function Navbar() {
               </li>
 
               <li>
+                <Link to="/programs#pricing" className={`nav-link ${location.pathname === '/programs' && location.hash === '#pricing' ? 'active' : ''}`}>
+                  <span>Tuition & Pricing</span>
+                </Link>
+              </li>
+
+              <li>
                 <Link to="/how-it-works" className={`nav-link ${isActive('/how-it-works') ? 'active' : ''}`}>
                   <span>How It Works</span>
                 </Link>
@@ -362,6 +368,9 @@ export default function Navbar() {
               )}
             </div>
 
+            <Link to="/programs#pricing" className={`drawer-link ${location.pathname === '/programs' && location.hash === '#pricing' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
+              Tuition & Course Pricing
+            </Link>
             <Link to="/how-it-works" className={`drawer-link ${isActive('/how-it-works') ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
               How Online Classes Work
             </Link>

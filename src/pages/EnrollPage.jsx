@@ -193,7 +193,7 @@ Please review this application and schedule the placement assessment. Jazakumull
 
   const dossierText = formatDossierText(applicationId || 'ALIR-APP-2026-1001');
   const whatsappUrl = `https://wa.me/${contactData.whatsapp}?text=${encodeURIComponent(dossierText)}`;
-  const emailMailtoUrl = `mailto:${contactData.emailAdmissions},lamidiabdulhameedolawale@gmail.com?subject=${encodeURIComponent(`New Student Enrollment Application - ${formData.fullName} [${applicationId || 'ALIR-APP'}]`)}&body=${encodeURIComponent(dossierText)}`;
+  const emailMailtoUrl = `mailto:${contactData.emailAdmissions}?subject=${encodeURIComponent(`New Student Enrollment Application - ${formData.fullName} [${applicationId || 'ALIR-APP'}]`)}&body=${encodeURIComponent(dossierText)}`;
 
   return (
     <div>
@@ -690,11 +690,30 @@ Please review this application and schedule the placement assessment. Jazakumull
                       </div>
                     </div>
 
-                    <div style={{ background: 'rgba(0, 93, 184, 0.05)', padding: '1.25rem', borderRadius: '12px', border: '1px solid rgba(0, 93, 184, 0.2)', marginBottom: '1.75rem', fontSize: '0.88rem', color: '#1E293B' }}>
-                      <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-                        <IconCheckCircle size={20} color="#005DB8" style={{ marginTop: '2px', flexShrink: 0 }} />
+                    <div style={{ background: 'rgba(0, 93, 184, 0.05)', padding: '1.35rem', borderRadius: '14px', border: '1.5px solid rgba(0, 93, 184, 0.25)', marginBottom: '1.75rem', fontSize: '0.9rem', color: '#1E293B' }}>
+                      <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                        <IconCheckCircle size={22} color="#005DB8" style={{ marginTop: '2px', flexShrink: 0 }} />
                         <div>
-                          <strong>Dual Direct Transmission:</strong> Submitting will instantly transmit this complete application dossier to the <strong>Al-Irshaad Admissions Desk on WhatsApp (+234 903 516 0069)</strong> and generate an official email record.
+                          <strong style={{ color: '#005DB8', display: 'block', fontSize: '0.98rem' }}>Dual-Channel Transmission to 2 Destinations:</strong>
+                          <span>When you submit, your complete application dossier is transmitted directly to both official channels:</span>
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.75rem', marginTop: '0.65rem' }}>
+                        <div style={{ background: '#FFFFFF', padding: '0.75rem 1rem', borderRadius: '10px', border: '1px solid #CBD5E1', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                          <IconMail size={18} color="#005DB8" />
+                          <div>
+                            <span style={{ display: 'block', fontSize: '0.72rem', textTransform: 'uppercase', color: '#64748B', fontWeight: '700' }}>Destination 1: Official Email</span>
+                            <strong style={{ fontSize: '0.85rem', color: '#0F172A' }}>{contactData.email}</strong>
+                          </div>
+                        </div>
+
+                        <div style={{ background: '#FFFFFF', padding: '0.75rem 1rem', borderRadius: '10px', border: '1px solid #CBD5E1', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                          <IconWhatsApp size={18} color="#128C7E" />
+                          <div>
+                            <span style={{ display: 'block', fontSize: '0.72rem', textTransform: 'uppercase', color: '#64748B', fontWeight: '700' }}>Destination 2: Admissions WhatsApp</span>
+                            <strong style={{ fontSize: '0.85rem', color: '#0F172A' }}>{contactData.phoneFormatted} (Ustadh Nasir)</strong>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -729,10 +748,10 @@ Please review this application and schedule the placement assessment. Jazakumull
                       type="submit" 
                       disabled={isSubmitting}
                       className="btn btn-gold btn-lg"
-                      style={{ minWidth: '260px', padding: '1rem 2rem', fontWeight: 700 }}
+                      style={{ minWidth: '280px', padding: '1rem 2rem', fontWeight: 700 }}
                     >
-                      <IconWhatsApp size={20} color="#031122" />
-                      <span>{isSubmitting ? 'Transmitting Application...' : 'Transmit Application to Admissions'}</span>
+                      <IconCheckCircle size={20} color="#031122" />
+                      <span>{isSubmitting ? 'Transmitting to Email & WhatsApp...' : 'Submit Application (Email + WhatsApp)'}</span>
                     </button>
                   )}
                 </div>
@@ -769,7 +788,7 @@ Please review this application and schedule the placement assessment. Jazakumull
               </div>
 
               <span className="badge-gold" style={{ marginBottom: '1rem', display: 'inline-block' }}>
-                Application Received Successfully
+                Application Transmitted to Email & WhatsApp
               </span>
 
               <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', color: 'var(--primary)', marginBottom: '0.75rem' }}>
@@ -777,7 +796,7 @@ Please review this application and schedule the placement assessment. Jazakumull
               </h2>
 
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '650px', margin: '0 auto 1.5rem auto', lineHeight: '1.7' }}>
-                Your enrollment application for <strong>{formData.program}</strong> has been transmitted to the Al-Irshaad Islamic Institute Admissions Desk.
+                Your enrollment application for <strong>{formData.program}</strong> has been logged into the Al-Irshaad Admissions Database and prepared for instant dispatch to both <strong>Official Email</strong> and <strong>WhatsApp</strong>.
               </p>
 
               {/* Reference ID Pill */}
@@ -786,17 +805,40 @@ Please review this application and schedule the placement assessment. Jazakumull
                 <strong style={{ fontSize: '1.4rem', color: 'var(--primary)', fontFamily: 'var(--font-heading)' }}>{applicationId}</strong>
               </div>
 
+              {/* Two Destination Channels Box */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', maxWidth: '640px', margin: '0 auto 2rem auto', textAlign: 'left' }}>
+                <div style={{ background: '#F0FDF4', border: '1.5px solid #86EFAC', borderRadius: '14px', padding: '1.1rem 1.25rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem', color: '#166534', fontWeight: '700', fontSize: '0.92rem' }}>
+                    <IconWhatsApp size={18} color="#166534" />
+                    <span>Channel 1: WhatsApp</span>
+                  </div>
+                  <p style={{ fontSize: '0.82rem', color: '#334155', margin: 0, lineHeight: 1.5 }}>
+                    Sent directly to Ustadh Nasir at <strong>{contactData.phoneFormatted}</strong> for quick scheduling.
+                  </p>
+                </div>
+
+                <div style={{ background: '#EFF6FF', border: '1.5px solid #93C5FD', borderRadius: '14px', padding: '1.1rem 1.25rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem', color: '#1E40AF', fontWeight: '700', fontSize: '0.92rem' }}>
+                    <IconMail size={18} color="#1E40AF" />
+                    <span>Channel 2: Official Email</span>
+                  </div>
+                  <p style={{ fontSize: '0.82rem', color: '#334155', margin: 0, lineHeight: 1.5 }}>
+                    Delivered to <strong>{contactData.email}</strong> for permanent registry documentation.
+                  </p>
+                </div>
+              </div>
+
               {/* Dual Action Buttons */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '520px', margin: '0 auto 2.5rem auto' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '540px', margin: '0 auto 2.5rem auto' }}>
                 <a 
                   href={whatsappUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="btn btn-gold btn-lg"
-                  style={{ width: '100%', padding: '1rem', fontSize: '1.05rem', fontWeight: '700', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}
+                  style={{ width: '100%', padding: '1rem', fontSize: '1.02rem', fontWeight: '700', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}
                 >
                   <IconWhatsApp size={22} color="#031122" />
-                  <span>Open & Transmit on WhatsApp ({contactData.phoneFormatted})</span>
+                  <span>Open & Confirm on WhatsApp ({contactData.phoneFormatted})</span>
                 </a>
 
                 <a 
@@ -815,14 +857,14 @@ Please review this application and schedule the placement assessment. Jazakumull
                   What Happens Next?
                 </h4>
                 <ul style={{ margin: 0, paddingLeft: '1.25rem', color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.8' }}>
-                  <li>Our Admissions Coordinator will review your background and time preferences.</li>
-                  <li>We will contact you via WhatsApp / Phone to confirm your scheduled placement assessment.</li>
-                  <li>You will be assigned a certified Ustadh / Ustadha suited to your learning pace.</li>
+                  <li>Ustadh Nasir will review your background and time preferences.</li>
+                  <li>You will receive a WhatsApp message / phone call to confirm your scheduled trial & placement class.</li>
+                  <li>Your customized timetable will be finalized based on your timezone.</li>
                 </ul>
               </div>
 
               <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-                Direct Admissions Line: <a href={`tel:${contactData.phone}`} style={{ color: 'var(--primary)', fontWeight: 700 }}>{contactData.phone}</a>
+                Direct Admissions Line: <a href={`tel:${contactData.phone}`} style={{ color: 'var(--primary)', fontWeight: 700 }}>{contactData.phone}</a> • Email: <a href={`mailto:${contactData.email}`} style={{ color: 'var(--primary)', fontWeight: 700 }}>{contactData.email}</a>
               </div>
 
             </div>
