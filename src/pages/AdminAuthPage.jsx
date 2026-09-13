@@ -8,7 +8,9 @@ import {
   IconArrowRight, 
   IconAlertCircle,
   IconCheckCircle,
-  IconMail
+  IconMail,
+  IconEye,
+  IconEyeOff
 } from '../components/common/Icons';
 
 export default function AdminAuthPage() {
@@ -20,6 +22,7 @@ export default function AdminAuthPage() {
   // Login State
   const [loginIdentifier, setLoginIdentifier] = useState(initialRememberedEmail);
   const [loginPassword, setLoginPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(!!initialRememberedEmail);
 
   const emailInputRef = useRef(null);
@@ -201,22 +204,47 @@ export default function AdminAuthPage() {
               <label style={{ display: 'block', fontWeight: '600', color: '#1E293B', marginBottom: '0.4rem', fontSize: '0.88rem' }}>
                 Admin Password *
               </label>
-              <input
-                ref={passwordInputRef}
-                type="password"
-                placeholder="Enter administrator password"
-                value={loginPassword}
-                onChange={(e) => setLoginPassword(e.target.value)}
-                required
-                style={{
-                  width: '100%',
-                  padding: '0.8rem 1rem',
-                  borderRadius: '10px',
-                  border: '1.5px solid #CBD5E1',
-                  fontSize: '0.92rem',
-                  boxSizing: 'border-box'
-                }}
-              />
+              <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                <input
+                  ref={passwordInputRef}
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Enter administrator password"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                  required
+                  style={{
+                    width: '100%',
+                    padding: '0.8rem 2.75rem 0.8rem 1rem',
+                    borderRadius: '10px',
+                    border: '1.5px solid #CBD5E1',
+                    fontSize: '0.92rem',
+                    boxSizing: 'border-box'
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none',
+                    border: 'none',
+                    padding: '6px',
+                    borderRadius: '6px',
+                    cursor: 'pointer',
+                    color: showPassword ? '#005DB8' : '#64748B',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'color 0.15s ease'
+                  }}
+                >
+                  {showPassword ? <IconEyeOff size={18} /> : <IconEye size={18} />}
+                </button>
+              </div>
             </div>
 
             {/* Remember Login Checkbox */}

@@ -11,7 +11,9 @@ import {
   IconLock, 
   IconAlertCircle, 
   IconCheckCircle, 
-  IconArrowRight 
+  IconArrowRight,
+  IconEye,
+  IconEyeOff
 } from '../components/common/Icons';
 
 export default function StudentAuthPage() {
@@ -28,6 +30,7 @@ export default function StudentAuthPage() {
   // Email Sign In State
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   // Phone Sign In State
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -40,7 +43,9 @@ export default function StudentAuthPage() {
   const [emailOtpSent, setEmailOtpSent] = useState(false);
   const [emailOtpCode, setEmailOtpCode] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [showNewPassword, setShowNewPassword] = useState(false);
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
   const [receivedOtpNotice, setReceivedOtpNotice] = useState('');
 
   // Check active session on mount
@@ -376,28 +381,74 @@ export default function StudentAuthPage() {
                       <label style={{ display: 'block', fontWeight: '600', color: '#1E293B', marginBottom: '0.4rem', fontSize: '0.9rem' }}>
                         New Password *
                       </label>
-                      <input
-                        type="password"
-                        placeholder="At least 6 characters"
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        required
-                        style={{ width: '100%', padding: '0.8rem 1rem', borderRadius: '8px', border: '1.5px solid #CBD5E1', fontSize: '0.95rem' }}
-                      />
+                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                        <input
+                          type={showNewPassword ? 'text' : 'password'}
+                          placeholder="At least 6 characters"
+                          value={newPassword}
+                          onChange={(e) => setNewPassword(e.target.value)}
+                          required
+                          style={{ width: '100%', padding: '0.8rem 2.5rem 0.8rem 1rem', borderRadius: '8px', border: '1.5px solid #CBD5E1', fontSize: '0.95rem', boxSizing: 'border-box' }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowNewPassword(!showNewPassword)}
+                          aria-label={showNewPassword ? 'Hide password' : 'Show password'}
+                          style={{
+                            position: 'absolute',
+                            right: '8px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            background: 'none',
+                            border: 'none',
+                            padding: '4px',
+                            cursor: 'pointer',
+                            color: showNewPassword ? '#005DB8' : '#64748B',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}
+                        >
+                          {showNewPassword ? <IconEyeOff size={16} /> : <IconEye size={16} />}
+                        </button>
+                      </div>
                     </div>
 
                     <div>
                       <label style={{ display: 'block', fontWeight: '600', color: '#1E293B', marginBottom: '0.4rem', fontSize: '0.9rem' }}>
                         Confirm New Password *
                       </label>
-                      <input
-                        type="password"
-                        placeholder="Repeat new password"
-                        value={confirmNewPassword}
-                        onChange={(e) => setConfirmNewPassword(e.target.value)}
-                        required
-                        style={{ width: '100%', padding: '0.8rem 1rem', borderRadius: '8px', border: '1.5px solid #CBD5E1', fontSize: '0.95rem' }}
-                      />
+                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                        <input
+                          type={showConfirmNewPassword ? 'text' : 'password'}
+                          placeholder="Repeat new password"
+                          value={confirmNewPassword}
+                          onChange={(e) => setConfirmNewPassword(e.target.value)}
+                          required
+                          style={{ width: '100%', padding: '0.8rem 2.5rem 0.8rem 1rem', borderRadius: '8px', border: '1.5px solid #CBD5E1', fontSize: '0.95rem', boxSizing: 'border-box' }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmNewPassword(!showConfirmNewPassword)}
+                          aria-label={showConfirmNewPassword ? 'Hide password' : 'Show password'}
+                          style={{
+                            position: 'absolute',
+                            right: '8px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            background: 'none',
+                            border: 'none',
+                            padding: '4px',
+                            cursor: 'pointer',
+                            color: showConfirmNewPassword ? '#005DB8' : '#64748B',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}
+                        >
+                          {showConfirmNewPassword ? <IconEyeOff size={16} /> : <IconEye size={16} />}
+                        </button>
+                      </div>
                     </div>
                   </div>
 
@@ -565,14 +616,38 @@ export default function StudentAuthPage() {
                         Forgot Password? (Reset via OTP)
                       </button>
                     </div>
-                    <input
-                      type="password"
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid #CBD5E1', fontSize: '0.95rem' }}
-                    />
+                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="Enter your password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        style={{ width: '100%', padding: '0.85rem 2.75rem 0.85rem 1rem', borderRadius: '10px', border: '1.5px solid #CBD5E1', fontSize: '0.95rem', boxSizing: 'border-box' }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        aria-label={showPassword ? 'Hide password' : 'Show password'}
+                        style={{
+                          position: 'absolute',
+                          right: '10px',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                          background: 'none',
+                          border: 'none',
+                          padding: '6px',
+                          cursor: 'pointer',
+                          color: showPassword ? '#005DB8' : '#64748B',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          transition: 'color 0.15s ease'
+                        }}
+                      >
+                        {showPassword ? <IconEyeOff size={18} /> : <IconEye size={18} />}
+                      </button>
+                    </div>
                   </div>
 
                   <button

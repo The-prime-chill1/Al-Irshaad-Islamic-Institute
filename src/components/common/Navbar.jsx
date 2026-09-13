@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Logo from './Logo';
+import { Link, useLocation } from 'react-router-dom';
 import { contactData } from '../../data/contactData';
-import { studentDatabase } from '../../services/studentDatabase';
-import { IconChevronDown, IconWhatsApp, IconArrowRight } from './Icons';
+import { 
+  IconChevronDown, 
+  IconWhatsApp, 
+  IconArrowRight 
+} from './Icons';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,25 +13,7 @@ export default function Navbar() {
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false);
   const [programsDropdownOpen, setProgramsDropdownOpen] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
-  const [quranDropdownOpen, setQuranDropdownOpen] = useState(false);
-  const [adminSession, setAdminSession] = useState(null);
   const location = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const checkAdmin = () => {
-      setAdminSession(studentDatabase.getAdminSession());
-    };
-    checkAdmin();
-    window.addEventListener('storage', checkAdmin);
-    window.addEventListener('admin-auth-changed', checkAdmin);
-    return () => {
-      window.removeEventListener('storage', checkAdmin);
-      window.removeEventListener('admin-auth-changed', checkAdmin);
-    };
-  }, [location.pathname]);
-
-  const isAdminLoggedIn = !!adminSession;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,24 +23,12 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Body scroll locking when drawer is open
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [mobileMenuOpen]);
-
-  // Close menus on route navigation
+  // Close menus on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setProgramsDropdownOpen(false);
     setAboutDropdownOpen(false);
-    setQuranDropdownOpen(false);
+    setMobileProgramsOpen(false);
   }, [location.pathname]);
 
   const isActive = (path) => {
@@ -65,22 +37,35 @@ export default function Navbar() {
   };
 
   return (
-    <>
-      {/* 1. Golden Islamic Geometric Pattern Top Banner */}
-      <div className="top-islamic-ribbon" aria-hidden="true"></div>
+    <header className="site-header-root">
+      {/* 1. Golden Accent Ribbon */}
+      <div className="header-gold-ribbon" aria-hidden="true" />
 
-      {/* 2. Floating Capsule Navbar */}
-      <div className={`navbar-floating-wrapper ${isScrolled ? 'is-sticky' : ''}`}>
-        <nav className="navbar-pill">
+      {/* 2. Main Navigation Bar */}
+      <div className={`nav-bar-wrapper ${isScrolled ? 'is-scrolled' : ''}`}>
+        <div className="nav-bar-inner">
           
           {/* Logo Brand */}
-          <div className="navbar-logo-box">
-            <Logo size="normal" />
+          <div className="nav-brand">
+            <Link to="/" className="brand-link" aria-label="Al-Irshaad Islamic Institute Home">
+              <div className="brand-seal-wrap">
+                <img 
+                  src="/logo.jpg" 
+                  onError={(e) => { e.target.src = '/logo.svg'; }}
+                  alt="Al-Irshaad Seal" 
+                  className="brand-seal-img"
+                />
+              </div>
+              <div className="brand-titles">
+                <span className="brand-main">AL-IRSHAAD</span>
+                <span className="brand-sub">ISLAMIC INSTITUTE</span>
+              </div>
+            </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="desktop-nav">
-            <ul className="desktop-nav-list">
+          {/* Desktop Navigation Links (>= 1024px) */}
+          <nav className="desktop-nav-menu" aria-label="Main Navigation">
+            <ul className="desktop-links-list">
               <li>
                 <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>
                   <span>Home</span>
@@ -93,24 +78,24 @@ export default function Navbar() {
                 onMouseEnter={() => setAboutDropdownOpen(true)}
                 onMouseLeave={() => setAboutDropdownOpen(false)}
               >
-                <Link to="/about" className={`nav-link ${isActive('/about') ? 'active' : ''}`}>
+                <Link to="/about" className={`nav-link ${isActive('/about') || isActive('/teachers') || isActive('/for-parents') ? 'active' : ''}`}>
                   <span>Institute</span>
-                  <IconChevronDown size={11} color="currentColor" style={{ transition: 'transform 0.2s ease', transform: aboutDropdownOpen ? 'rotate(180deg)' : 'none', marginLeft: '0.2rem' }} />
+                  <IconChevronDown size={11} color="currentColor" style={{ transition: 'transform 0.2s ease', transform: aboutDropdownOpen ? 'rotate(180deg)' : 'none', marginLeft: '2px' }} />
                 </Link>
 
                 {aboutDropdownOpen && (
-                  <div className="dropdown-menu">
-                    <Link to="/about" className="dropdown-item">
-                      <strong style={{ color: 'var(--primary)' }}>About Al-Irshaad</strong>
-                      <p className="dropdown-item-desc">Vision, mission, and international leadership</p>
+                  <div className="dropdown-panel animate-fade-in">
+                    <Link to="/about" className="dropdown-panel-item">
+                      <div className="dropdown-item-title">About Al-Irshaad</div>
+                      <div className="dropdown-item-desc">Vision, mission, and international leadership</div>
                     </Link>
-                    <Link to="/teachers" className="dropdown-item">
-                      <strong style={{ color: 'var(--primary)' }}>Meet Our Teachers</strong>
-                      <p className="dropdown-item-desc">Certified Huffaz & scholarly faculty</p>
+                    <Link to="/teachers" className="dropdown-panel-item">
+                      <div className="dropdown-item-title">Meet Our Teachers</div>
+                      <div className="dropdown-item-desc">Certified Huffaz & Scholarly faculty</div>
                     </Link>
-                    <Link to="/for-parents" className="dropdown-item">
-                      <strong style={{ color: 'var(--primary)' }}>For Parents & Families</strong>
-                      <p className="dropdown-item-desc">Safeguarding, progress tracking & flexible timings</p>
+                    <Link to="/for-parents" className="dropdown-panel-item">
+                      <div className="dropdown-item-title">For Parents & Families</div>
+                      <div className="dropdown-item-desc">Safeguarding, progress tracking & flexible timings</div>
                     </Link>
                   </div>
                 )}
@@ -122,79 +107,50 @@ export default function Navbar() {
                 onMouseEnter={() => setProgramsDropdownOpen(true)}
                 onMouseLeave={() => setProgramsDropdownOpen(false)}
               >
-                <Link to="/programs" className={`nav-link ${isActive('/programs') && !location.pathname.startsWith('/programs/quran') ? 'active' : ''}`}>
+                <Link to="/programs" className={`nav-link ${isActive('/programs') ? 'active' : ''}`}>
                   <span>Programs</span>
-                  <IconChevronDown size={11} color="currentColor" style={{ transition: 'transform 0.2s ease', transform: programsDropdownOpen ? 'rotate(180deg)' : 'none', marginLeft: '0.2rem' }} />
+                  <IconChevronDown size={11} color="currentColor" style={{ transition: 'transform 0.2s ease', transform: programsDropdownOpen ? 'rotate(180deg)' : 'none', marginLeft: '2px' }} />
                 </Link>
 
                 {programsDropdownOpen && (
-                  <div className="dropdown-menu" style={{ width: '320px' }}>
-                    <Link to="/programs/nuurul-bayaan" className="dropdown-item">
-                      <strong style={{ color: 'var(--primary)' }}>Nuurul Bayaan</strong>
-                      <p className="dropdown-item-desc">Foundation in Qur'anic reading & pronunciation</p>
-                    </Link>
-                    <Link to="/programs/quran-recitation" className="dropdown-item">
-                      <strong style={{ color: 'var(--primary)' }}>Qur'an Recitation with Tajweed</strong>
-                      <p className="dropdown-item-desc">Verse-by-verse fluency & applied rules</p>
-                    </Link>
-                    <Link to="/programs/hifdh" className="dropdown-item">
-                      <strong style={{ color: 'var(--primary)' }}>Qur'an Memorization (Hifdh)</strong>
-                      <p className="dropdown-item-desc">Structured 3-Cycle method with Haafidh mentor</p>
-                    </Link>
-                    <Link to="/programs/islamic-studies" className="dropdown-item">
-                      <strong style={{ color: 'var(--primary)' }}>Fundamentals of Islamic Studies</strong>
-                      <p className="dropdown-item-desc">Age-tailored tracks (Ages 5–10, 11–15, 16–20)</p>
-                    </Link>
-                    <Link to="/programs/advanced-islamic-studies" className="dropdown-item">
-                      <strong style={{ color: 'var(--primary)' }}>Advanced Islamic Studies</strong>
-                      <p className="dropdown-item-desc">Classical Islamic sciences & Usul al-Fiqh</p>
-                    </Link>
-                    <Link to="/programs/arabic-adhkaar" className="dropdown-item">
-                      <strong style={{ color: 'var(--primary)' }}>Arabic & Adhkaar</strong>
-                      <p className="dropdown-item-desc">Arabic for English speakers & daily Duas</p>
-                    </Link>
+                  <div className="dropdown-panel programs-dropdown animate-fade-in">
+                    <div className="dropdown-grid-header">
+                      <span>Structured Online Curricula</span>
+                      <Link to="/programs" className="dropdown-view-all">View All →</Link>
+                    </div>
+                    <div className="dropdown-items-grid">
+                      <Link to="/programs/nuurul-bayaan" className="dropdown-panel-item">
+                        <div className="dropdown-item-title">Nuurul Bayaan</div>
+                        <div className="dropdown-item-desc">Reading foundation & phonetics</div>
+                      </Link>
+                      <Link to="/programs/quran-recitation" className="dropdown-panel-item">
+                        <div className="dropdown-item-title">Qur'an Recitation</div>
+                        <div className="dropdown-item-desc">Tajweed & applied rules</div>
+                      </Link>
+                      <Link to="/programs/hifdh" className="dropdown-panel-item">
+                        <div className="dropdown-item-title">Hifdh Memorization</div>
+                        <div className="dropdown-item-desc">3-Cycle retention system</div>
+                      </Link>
+                      <Link to="/programs/islamic-studies" className="dropdown-panel-item">
+                        <div className="dropdown-item-title">Islamic Studies</div>
+                        <div className="dropdown-item-desc">Age-tailored fundamental tracks</div>
+                      </Link>
+                      <Link to="/programs/advanced-islamic-studies" className="dropdown-panel-item">
+                        <div className="dropdown-item-title">Advanced Studies</div>
+                        <div className="dropdown-item-desc">Classical sciences & Usul</div>
+                      </Link>
+                      <Link to="/programs/arabic-adhkaar" className="dropdown-panel-item">
+                        <div className="dropdown-item-title">Arabic & Adhkaar</div>
+                        <div className="dropdown-item-desc">Daily Duas & language</div>
+                      </Link>
+                    </div>
                   </div>
                 )}
-              </li>
-
-              {/* Qur'an & Tajweed Dropdown */}
-              <li 
-                className="nav-item-dropdown"
-                onMouseEnter={() => setQuranDropdownOpen(true)}
-                onMouseLeave={() => setQuranDropdownOpen(false)}
-              >
-                <Link to="/programs/quran-recitation" className={`nav-link ${location.pathname.startsWith('/programs/quran') || location.pathname === '/programs/nuurul-bayaan' || location.pathname === '/programs/hifdh' ? 'active' : ''}`}>
-                  <span>Qur'an & Tajweed</span>
-                  <IconChevronDown size={11} color="currentColor" style={{ transition: 'transform 0.2s ease', transform: quranDropdownOpen ? 'rotate(180deg)' : 'none', marginLeft: '0.2rem' }} />
-                </Link>
-
-                {quranDropdownOpen && (
-                  <div className="dropdown-menu" style={{ width: '300px' }}>
-                    <Link to="/programs/nuurul-bayaan" className="dropdown-item">
-                      <strong style={{ color: 'var(--primary)' }}>1. Nuurul Bayaan (Beginners)</strong>
-                      <p className="dropdown-item-desc">Arabic alphabet, vowels, and phonetics</p>
-                    </Link>
-                    <Link to="/programs/quran-recitation" className="dropdown-item">
-                      <strong style={{ color: 'var(--primary)' }}>2. Qur'an Recitation</strong>
-                      <p className="dropdown-item-desc">Applied Makharij and Tajweed rules</p>
-                    </Link>
-                    <Link to="/programs/hifdh" className="dropdown-item">
-                      <strong style={{ color: 'var(--primary)' }}>3. Hifdh Memorization</strong>
-                      <p className="dropdown-item-desc">3-Cycle systematic retention system</p>
-                    </Link>
-                  </div>
-                )}
-              </li>
-
-              <li>
-                <Link to="/programs/islamic-studies" className={`nav-link ${location.pathname === '/programs/islamic-studies' ? 'active' : ''}`}>
-                  <span>Islamic Studies</span>
-                </Link>
               </li>
 
               <li>
                 <Link to="/programs#pricing" className={`nav-link ${location.pathname === '/programs' && location.hash === '#pricing' ? 'active' : ''}`}>
-                  <span>Tuition & Pricing</span>
+                  <span>Tuition</span>
                 </Link>
               </li>
 
@@ -210,305 +166,298 @@ export default function Navbar() {
                 </Link>
               </li>
             </ul>
+          </nav>
+
+          {/* Desktop Right CTA Action (>= 1024px) */}
+          <div className="desktop-action-box">
+            <Link to="/enroll" className="header-gold-cta-btn">
+              <span>Enroll Now</span>
+              <IconArrowRight size={13} color="currentColor" />
+            </Link>
           </div>
 
-          {/* Desktop Right CTAs */}
-          <div className="desktop-cta">
-            {isAdminLoggedIn ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                <Link 
-                  to="/admin/dashboard" 
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.45rem',
-                    padding: '0.55rem 1.15rem',
-                    borderRadius: '9999px',
-                    background: 'linear-gradient(135deg, #031122 0%, #071C34 100%)',
-                    color: '#E6CA85',
-                    fontSize: '0.85rem',
-                    fontWeight: '700',
-                    border: '1.5px solid rgba(197, 168, 105, 0.5)',
-                    textDecoration: 'none',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-                  }}
-                >
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981', display: 'inline-block' }} />
-                  <span>Admin Portal</span>
-                </Link>
+          {/* Mobile Right Controls (< 1024px) */}
+          <div className="mobile-controls-row">
+            <Link to="/enroll" className="mobile-enroll-pill">
+              <span>Enroll</span>
+            </Link>
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    studentDatabase.adminLogout();
-                    setAdminSession(null);
-                    navigate('/admin/login');
-                  }}
-                  style={{
-                    padding: '0.55rem 1rem',
-                    borderRadius: '9999px',
-                    background: 'rgba(220, 38, 38, 0.08)',
-                    color: '#DC2626',
-                    border: '1px solid rgba(220, 38, 38, 0.25)',
-                    fontSize: '0.82rem',
-                    fontWeight: '700',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease'
-                  }}
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <Link 
-                to="/enroll" 
-                className="navbar-cta-btn"
-              >
-                <span>Enroll Now</span>
-              </Link>
-            )}
-          </div>
-
-          {/* Mobile Clean Hamburger Button */}
-          <button 
-            type="button"
-            className="mobile-toggle-btn"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle navigation menu"
-            aria-expanded={mobileMenuOpen}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#005DB8" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-          </button>
-        </nav>
-      </div>
-
-      {/* Mobile Drawer */}
-      <div 
-        className={`mobile-drawer ${mobileMenuOpen ? 'open' : ''}`} 
-        onClick={() => setMobileMenuOpen(false)}
-      >
-        <div className="mobile-drawer-content" onClick={(e) => e.stopPropagation()}>
-          
-          {/* Header */}
-          <div className="drawer-header">
-            <Logo size="small" />
             <button 
               type="button"
-              className="drawer-close-btn"
-              onClick={() => setMobileMenuOpen(false)}
-              aria-label="Close menu"
+              className={`mobile-menu-trigger ${mobileMenuOpen ? 'is-active' : ''}`}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#005DB8" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
+              <span className="hamburger-bar top-bar" />
+              <span className="hamburger-bar mid-bar" />
+              <span className="hamburger-bar bot-bar" />
             </button>
           </div>
 
-          {/* Nav Links */}
-          <div className="drawer-links-box">
-            <Link to="/" className={`drawer-link ${isActive('/') ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-              Home
-            </Link>
-            <Link to="/about" className={`drawer-link ${isActive('/about') ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-              About Institute
-            </Link>
+        </div>
 
-            {/* Expandable Programs */}
-            <div>
-              <div 
-                className="drawer-link drawer-accordion-header"
-                onClick={() => setMobileProgramsOpen(!mobileProgramsOpen)}
-                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+        {/* Mobile Dropdown Menu (Drops neatly right below the header) */}
+        {mobileMenuOpen && (
+          <div className="mobile-dropdown-menu animate-slide-down">
+            <div className="mobile-menu-content">
+              
+              <Link 
+                to="/" 
+                className={`mobile-nav-link ${isActive('/') ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
               >
-                <span>Academic Programs</span>
-                <IconChevronDown size={14} color="currentColor" style={{ transition: 'transform 0.2s ease', transform: mobileProgramsOpen ? 'rotate(180deg)' : 'none' }} />
-              </div>
+                <span>Home</span>
+              </Link>
 
-              {mobileProgramsOpen && (
-                <div className="drawer-sublinks-list">
-                  <Link to="/programs" className="drawer-sublink" onClick={() => setMobileMenuOpen(false)}>
-                    • All Programs Overview
-                  </Link>
-                  <Link to="/programs/nuurul-bayaan" className="drawer-sublink" onClick={() => setMobileMenuOpen(false)}>
-                    • Nuurul Bayaan (Beginners)
-                  </Link>
-                  <Link to="/programs/quran-recitation" className="drawer-sublink" onClick={() => setMobileMenuOpen(false)}>
-                    • Qur'an Recitation & Tajweed
-                  </Link>
-                  <Link to="/programs/hifdh" className="drawer-sublink" onClick={() => setMobileMenuOpen(false)}>
-                    • Qur'an Memorization (Hifdh)
-                  </Link>
-                  <Link to="/programs/islamic-studies" className="drawer-sublink" onClick={() => setMobileMenuOpen(false)}>
-                    • Fundamentals of Islamic Studies
-                  </Link>
-                  <Link to="/programs/advanced-islamic-studies" className="drawer-sublink" onClick={() => setMobileMenuOpen(false)}>
-                    • Advanced Islamic Studies
-                  </Link>
-                  <Link to="/programs/arabic-adhkaar" className="drawer-sublink" onClick={() => setMobileMenuOpen(false)}>
-                    • Arabic & Adhkaar
-                  </Link>
-                </div>
-              )}
-            </div>
+              <Link 
+                to="/about" 
+                className={`mobile-nav-link ${isActive('/about') ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span>About Al-Irshaad</span>
+              </Link>
 
-            <Link to="/programs#pricing" className={`drawer-link ${location.pathname === '/programs' && location.hash === '#pricing' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-              Tuition & Course Pricing
-            </Link>
-            <Link to="/how-it-works" className={`drawer-link ${isActive('/how-it-works') ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-              How Online Classes Work
-            </Link>
-            <Link to="/teachers" className={`drawer-link ${isActive('/teachers') ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-              Meet Our Teachers
-            </Link>
-            <Link to="/for-parents" className={`drawer-link ${isActive('/for-parents') ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-              For Parents & Families
-            </Link>
-            <Link to="/contact" className={`drawer-link ${isActive('/contact') ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-              Contact Admissions
-            </Link>
-            <Link to="/faqs" className={`drawer-link ${isActive('/faqs') ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-              Frequently Asked Questions
-            </Link>
-          </div>
-
-          {/* Action CTAs */}
-          <div className="drawer-cta-box">
-            {isAdminLoggedIn ? (
-              <>
-                <Link 
-                  to="/admin/dashboard" 
-                  className="drawer-enroll-btn"
-                  onClick={() => setMobileMenuOpen(false)}
-                  style={{ background: 'linear-gradient(135deg, #031122 0%, #071C34 100%)', color: '#E6CA85', border: '1.5px solid rgba(197, 168, 105, 0.45)' }}
-                >
-                  <span>Go to Admin Dashboard</span>
-                  <IconArrowRight size={16} color="#E6CA85" />
-                </Link>
-
+              {/* Expandable Programs */}
+              <div className="mobile-accordion-block">
                 <button 
                   type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    studentDatabase.adminLogout();
-                    setAdminSession(null);
-                    navigate('/admin/login');
-                  }}
-                  className="drawer-whatsapp-btn"
-                  style={{ color: '#DC2626', borderColor: 'rgba(220, 38, 38, 0.3)', background: 'rgba(220, 38, 38, 0.06)', width: '100%', cursor: 'pointer' }}
+                  className={`mobile-nav-link mobile-accordion-btn ${mobileProgramsOpen ? 'expanded' : ''}`}
+                  onClick={() => setMobileProgramsOpen(!mobileProgramsOpen)}
                 >
-                  <span>Admin Logout</span>
+                  <span>Academic Programs</span>
+                  <IconChevronDown size={13} color="currentColor" style={{ transition: 'transform 0.2s ease', transform: mobileProgramsOpen ? 'rotate(180deg)' : 'none' }} />
                 </button>
-              </>
-            ) : (
-              <>
+                {mobileProgramsOpen && (
+                  <div className="mobile-sublinks-box">
+                    <Link to="/programs" className="mobile-sublink highlight" onClick={() => setMobileMenuOpen(false)}>
+                      • All Programs & Pricing Overview
+                    </Link>
+                    <Link to="/programs/nuurul-bayaan" className="mobile-sublink" onClick={() => setMobileMenuOpen(false)}>
+                      • Nuurul Bayaan (Beginners)
+                    </Link>
+                    <Link to="/programs/quran-recitation" className="mobile-sublink" onClick={() => setMobileMenuOpen(false)}>
+                      • Qur'an Recitation & Tajweed
+                    </Link>
+                    <Link to="/programs/hifdh" className="mobile-sublink" onClick={() => setMobileMenuOpen(false)}>
+                      • Qur'an Memorization (Hifdh)
+                    </Link>
+                    <Link to="/programs/islamic-studies" className="mobile-sublink" onClick={() => setMobileMenuOpen(false)}>
+                      • Fundamentals of Islamic Studies
+                    </Link>
+                    <Link to="/programs/advanced-islamic-studies" className="mobile-sublink" onClick={() => setMobileMenuOpen(false)}>
+                      • Advanced Islamic Studies
+                    </Link>
+                    <Link to="/programs/arabic-adhkaar" className="mobile-sublink" onClick={() => setMobileMenuOpen(false)}>
+                      • Arabic & Adhkaar
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              <Link 
+                to="/programs#pricing" 
+                className={`mobile-nav-link ${location.pathname === '/programs' && location.hash === '#pricing' ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span>Tuition & Fees</span>
+              </Link>
+
+              <Link 
+                to="/how-it-works" 
+                className={`mobile-nav-link ${isActive('/how-it-works') ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span>How Classes Work</span>
+              </Link>
+
+              <Link 
+                to="/teachers" 
+                className={`mobile-nav-link ${isActive('/teachers') ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span>Meet Our Teachers</span>
+              </Link>
+
+              <Link 
+                to="/contact" 
+                className={`mobile-nav-link ${isActive('/contact') ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span>Contact Admissions</span>
+              </Link>
+
+              <Link 
+                to="/faqs" 
+                className={`mobile-nav-link ${isActive('/faqs') ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span>FAQs</span>
+              </Link>
+
+              {/* Bottom Action inside Dropdown */}
+              <div className="mobile-menu-footer">
                 <Link 
                   to="/enroll" 
-                  className="drawer-enroll-btn"
+                  className="mobile-menu-cta-btn"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <span>Enroll Now</span>
-                  <IconArrowRight size={16} color="#FFFFFF" />
+                  <span>Apply for Admission</span>
+                  <IconArrowRight size={14} color="#031122" />
                 </Link>
 
                 <a 
-                  href={contactData.whatsappLink}
+                  href={contactData.whatsappLink} 
                   target="_blank" 
-                  rel="noopener noreferrer"
-                  className="drawer-whatsapp-btn"
+                  rel="noopener noreferrer" 
+                  className="mobile-quick-btn whatsapp"
                 >
-                  <IconWhatsApp size={17} color="#128C7E" />
-                  <span>Admissions WhatsApp</span>
+                  <IconWhatsApp size={15} color="#128C7E" />
+                  <span>WhatsApp Admissions Desk</span>
                 </a>
-              </>
-            )}
-          </div>
+              </div>
 
-          {/* Contact summary */}
-          <div className="drawer-footer-text">
-            <p style={{ margin: '0 0 3px 0', fontWeight: 600, color: 'var(--primary)', fontSize: '0.8rem' }}>
-              {contactData.email}
-            </p>
-            <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.74rem' }}>
-              Norwalk, Connecticut, USA • International Virtual Campus
-            </p>
+            </div>
           </div>
+        )}
 
-        </div>
       </div>
 
       <style>{`
-        /* Top Islamic Ribbon */
-        .top-islamic-ribbon {
-          height: 42px;
-          width: 100%;
-          background-color: #C5A869;
-          background-image: 
-            url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L24.5 9.5L34 5L30 15L40 20L30 25L34 35L24.5 30.5L20 40L15.5 30.5L6 35L10 25L0 20L10 15L6 5L15.5 9.5L20 0z' fill='%23FFFFFF' fill-opacity='0.16' fill-rule='evenodd'/%3E%3Cpath d='M20 6L23 13L30 10L27 17L34 20L27 23L30 30L23 27L20 34L17 27L10 30L13 23L6 20L13 17L10 10L17 13L20 6z' fill='%238E6A1B' fill-opacity='0.22' fill-rule='evenodd'/%3E%3C/svg%3E"),
-            linear-gradient(90deg, #D4A347 0%, #C5A869 50%, #BA8E35 100%);
-          background-size: 32px 32px, 100% 100%;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-        }
-
-        /* Floating Capsule Navbar */
-        .navbar-floating-wrapper {
+        /* ==========================================================================
+           1. ROOT SITE HEADER
+           ========================================================================== */
+        .site-header-root {
           position: sticky;
-          top: 8px;
-          z-index: 1000;
+          top: 0;
+          left: 0;
+          right: 0;
           width: 100%;
-          max-width: 100%;
-          box-sizing: border-box;
-          padding: 0 1rem;
-          margin-top: -22px;
+          max-width: 100vw;
+          z-index: 1000;
         }
 
-        .navbar-pill {
-          max-width: 1380px;
+        .header-gold-ribbon {
           width: 100%;
+          height: 3px;
+          background: linear-gradient(90deg, #BA8E35 0%, #D4A347 25%, #FFE8AA 50%, #D4A347 75%, #BA8E35 100%);
+        }
+
+        /* ==========================================================================
+           2. NAVBAR CONTAINER
+           ========================================================================== */
+        .nav-bar-wrapper {
+          position: relative;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border-bottom: 1px solid rgba(197, 168, 105, 0.3);
+          box-shadow: 0 2px 10px rgba(3, 17, 34, 0.05);
+          transition: background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .nav-bar-wrapper.is-scrolled {
+          background: #FFFFFF;
+          box-shadow: 0 4px 18px rgba(3, 17, 34, 0.09);
+        }
+
+        .nav-bar-inner {
+          max-width: 1240px;
           margin: 0 auto;
-          background: #FAF7F2;
-          border: 1.5px solid rgba(197, 168, 105, 0.45);
-          border-radius: 16px;
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+          padding: 0.45rem 1rem;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0.4rem 1rem;
           box-sizing: border-box;
-          transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+          gap: 0.5rem;
+          width: 100%;
         }
 
-        .navbar-floating-wrapper.is-sticky .navbar-pill {
-          background: rgba(250, 247, 242, 0.98);
-          box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
-          border-color: rgba(197, 168, 105, 0.65);
-        }
-
-        .navbar-logo-box {
+        /* ==========================================================================
+           3. BRAND LOGO
+           ========================================================================== */
+        .nav-brand {
           display: flex;
           align-items: center;
           flex-shrink: 0;
+          min-width: 0;
         }
 
-        /* Desktop Nav List */
-        .desktop-nav {
+        .brand-link {
+          display: inline-flex;
+          align-items: center;
+          gap: clamp(0.35rem, 1.5vw, 0.55rem);
+          text-decoration: none;
+          min-width: 0;
+        }
+
+        .brand-seal-wrap {
+          width: 36px;
+          height: 36px;
+          min-width: 36px;
+          border-radius: 50%;
+          padding: 1.5px;
+          background: #FFFFFF;
+          border: 1.5px solid #005DB8;
+          box-shadow: 0 2px 6px rgba(0, 93, 184, 0.15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          flex-shrink: 0;
+        }
+
+        .brand-seal-img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+
+        .brand-titles {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-width: 0;
+        }
+
+        .brand-main {
+          font-family: var(--font-heading, 'Plus Jakarta Sans', sans-serif);
+          font-weight: 800;
+          font-size: clamp(0.85rem, 2.5vw, 0.98rem);
+          color: #005DB8;
+          letter-spacing: 0.02em;
+          line-height: 1.1;
+          white-space: nowrap;
+        }
+
+        .brand-sub {
+          font-family: var(--font-sans, sans-serif);
+          font-weight: 700;
+          font-size: clamp(0.5rem, 1.5vw, 0.56rem);
+          color: #B8860B;
+          letter-spacing: 0.09em;
+          text-transform: uppercase;
+          line-height: 1.15;
+          margin-top: 1px;
+          white-space: nowrap;
+        }
+
+        /* ==========================================================================
+           4. DESKTOP NAVIGATION (>= 1024px)
+           ========================================================================== */
+        .desktop-nav-menu {
           display: none;
           align-items: center;
-          flex-shrink: 0;
         }
 
-        .desktop-nav-list {
+        .desktop-links-list {
           display: flex;
           align-items: center;
-          gap: 0.15rem;
+          gap: 0.2rem;
           list-style: none;
           margin: 0;
           padding: 0;
-          flex-wrap: nowrap;
         }
 
         .nav-item-dropdown {
@@ -516,294 +465,366 @@ export default function Navbar() {
         }
 
         .nav-link {
-          font-size: 0.88rem;
+          font-size: 0.86rem;
           font-weight: 600;
           color: #2D3748;
-          padding: 0.42rem 0.58rem;
-          border-radius: 8px;
+          padding: 0.4rem 0.55rem;
+          border-radius: 6px;
           display: inline-flex;
           align-items: center;
           gap: 0.2rem;
-          position: relative;
-          white-space: nowrap;
           text-decoration: none;
-          transition: color 0.2s ease;
+          transition: color 0.15s ease, background 0.15s ease;
+          white-space: nowrap;
         }
 
         .nav-link:hover, .nav-link.active {
-          color: var(--primary);
+          color: #005DB8;
+          background: rgba(0, 93, 184, 0.05);
         }
 
-        .dropdown-menu {
+        .dropdown-panel {
           position: absolute;
-          top: 100%;
+          top: calc(100% + 6px);
           left: 0;
           background: #FFFFFF;
-          min-width: 270px;
-          border-radius: 14px;
-          box-shadow: 0 15px 35px rgba(3, 17, 34, 0.16);
+          min-width: 260px;
+          border-radius: 10px;
           border: 1px solid rgba(197, 168, 105, 0.35);
-          padding: 0.65rem;
+          box-shadow: 0 12px 30px rgba(3, 17, 34, 0.12);
+          padding: 0.5rem;
           z-index: 1100;
         }
 
-        .dropdown-item {
-          display: block;
-          padding: 0.55rem 0.75rem;
-          border-radius: 8px;
-          text-decoration: none;
-          transition: background 0.18s ease;
+        .dropdown-panel.programs-dropdown {
+          width: 480px;
+          left: -40px;
         }
 
-        .dropdown-item:hover {
-          background: var(--primary-ultralight);
-        }
-
-        .dropdown-item-desc {
-          font-size: 0.78rem;
-          color: var(--text-muted);
-          margin: 2px 0 0 0;
-          line-height: 1.3;
-        }
-
-        /* Desktop CTA Area */
-        .desktop-cta {
-          display: none;
-          align-items: center;
-          gap: 0.55rem;
-          flex-shrink: 0;
-          white-space: nowrap;
-        }
-
-        .navbar-whatsapp-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.4rem;
-          padding: 0.48rem 0.85rem;
-          border-radius: 10px;
-          background: rgba(37, 211, 102, 0.1);
-          color: #128C7E;
-          font-size: 0.84rem;
-          font-weight: 700;
-          text-decoration: none;
-          border: 1px solid rgba(37, 211, 102, 0.3);
-          white-space: nowrap;
-          transition: all 0.2s ease;
-        }
-
-        .navbar-whatsapp-btn:hover {
-          background: rgba(37, 211, 102, 0.18);
-        }
-
-        .navbar-cta-btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 10px;
-          padding: 0.52rem 1.3rem;
-          font-weight: 700;
-          font-size: 0.88rem;
-          color: #FFFFFF !important;
-          background: linear-gradient(135deg, #D4A347 0%, #BA8E35 100%);
-          border: 1px solid rgba(255, 255, 255, 0.4);
-          box-shadow: 0 4px 14px rgba(197, 168, 105, 0.45);
-          text-decoration: none;
-          white-space: nowrap;
-          transition: all 0.2s ease;
-        }
-
-        .navbar-cta-btn:hover {
-          transform: translateY(-1px);
-        }
-
-        /* Clean Mobile Toggle Button */
-        .mobile-toggle-btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 38px;
-          height: 38px;
-          padding: 0;
-          border-radius: 8px;
-          border: 1px solid rgba(197, 168, 105, 0.35);
-          background: rgba(255, 255, 255, 0.7);
-          cursor: pointer;
-          flex-shrink: 0;
-          transition: all 0.2s ease;
-        }
-
-        .mobile-toggle-btn:active {
-          background: #FFFFFF;
-          transform: scale(0.95);
-        }
-
-        /* Mobile Drawer */
-        .mobile-drawer {
-          position: fixed;
-          inset: 0;
-          background: rgba(3, 17, 34, 0.65);
-          backdrop-filter: blur(6px);
-          -webkit-backdrop-filter: blur(6px);
-          z-index: 9999;
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity 0.25s ease;
-          display: flex;
-          justify-content: flex-end;
-        }
-
-        .mobile-drawer.open {
-          opacity: 1;
-          pointer-events: auto;
-        }
-
-        .mobile-drawer-content {
-          width: 86%;
-          max-width: 360px;
-          height: 100%;
-          background: #FFFFFF;
-          padding: 1.25rem 1.25rem 1.5rem 1.25rem;
-          overflow-y: auto;
-          -webkit-overflow-scrolling: touch;
-          transform: translateX(100%);
-          transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: -8px 0 25px rgba(0, 0, 0, 0.25);
-          display: flex;
-          flex-direction: column;
-          box-sizing: border-box;
-        }
-
-        .mobile-drawer.open .mobile-drawer-content {
-          transform: translateX(0);
-        }
-
-        .drawer-header {
+        .dropdown-grid-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding-bottom: 0.85rem;
-          border-bottom: 1px solid #E2E8F0;
+          padding: 0.25rem 0.45rem 0.45rem;
+          border-bottom: 1px solid #F1F5F9;
+          font-size: 0.72rem;
+          font-weight: 700;
+          color: #64748B;
+          text-transform: uppercase;
         }
 
-        .drawer-close-btn {
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          border: 1px solid #E2E8F0;
-          background: #F8FAFC;
+        .dropdown-view-all {
+          color: #005DB8;
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 0.75rem;
+        }
+
+        .dropdown-items-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.25rem;
+          margin-top: 0.35rem;
+        }
+
+        .dropdown-panel-item {
+          display: block;
+          padding: 0.45rem 0.6rem;
+          border-radius: 6px;
+          text-decoration: none;
+          transition: background 0.15s ease;
+        }
+
+        .dropdown-panel-item:hover {
+          background: rgba(0, 93, 184, 0.04);
+        }
+
+        .dropdown-item-title {
+          font-size: 0.84rem;
+          font-weight: 700;
+          color: #005DB8;
+          line-height: 1.2;
+        }
+
+        .dropdown-item-desc {
+          font-size: 0.72rem;
+          color: #64748B;
+          margin-top: 1px;
+        }
+
+        /* ==========================================================================
+           5. DESKTOP CTA ACTIONS (>= 1024px)
+           ========================================================================== */
+        .desktop-action-box {
+          display: none;
+          align-items: center;
+          gap: 0.5rem;
+          flex-shrink: 0;
+        }
+
+        .header-gold-cta-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          padding: 0.45rem 1rem;
+          border-radius: 9999px;
+          background: linear-gradient(135deg, #FFE8AA 0%, #D4A347 50%, #B8892D 100%);
+          color: #031122 !important;
+          font-weight: 700;
+          font-size: 0.82rem;
+          text-decoration: none;
+          box-shadow: 0 2px 8px rgba(197, 168, 105, 0.35);
+          border: 1px solid rgba(255, 255, 255, 0.6);
+          white-space: nowrap;
+        }
+
+        /* ==========================================================================
+           6. MOBILE CONTROLS & HAMBURGER TRIGGER (< 1024px)
+           ========================================================================== */
+        .mobile-controls-row {
           display: flex;
           align-items: center;
-          justify-content: center;
-          cursor: pointer;
+          gap: 0.45rem;
+          flex-shrink: 0;
         }
 
-        .drawer-links-box {
+        .mobile-enroll-pill {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.32rem 0.72rem;
+          border-radius: 9999px;
+          background: linear-gradient(135deg, #FFE8AA 0%, #D4A347 50%, #B8892D 100%);
+          color: #031122 !important;
+          font-weight: 700;
+          font-size: 0.76rem;
+          text-decoration: none;
+          box-shadow: 0 2px 6px rgba(197, 168, 105, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          white-space: nowrap;
+        }
+
+        .mobile-menu-trigger {
+          width: 36px;
+          height: 36px;
+          min-width: 36px;
+          border-radius: 8px;
+          border: 1.5px solid rgba(0, 93, 184, 0.2);
+          background: #FFFFFF;
           display: flex;
           flex-direction: column;
-          gap: 0.2rem;
-          padding: 1rem 0;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          padding: 0;
+          cursor: pointer;
+          transition: all 0.2s ease;
         }
 
-        .drawer-link {
-          display: block;
-          padding: 0.62rem 0.75rem;
-          border-radius: 8px;
-          font-size: 0.94rem;
+        .mobile-menu-trigger:active {
+          background: #F1F5F9;
+        }
+
+        .hamburger-bar {
+          width: 17px;
+          height: 2px;
+          background-color: #005DB8;
+          border-radius: 2px;
+          transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .mobile-menu-trigger.is-active .top-bar {
+          transform: translateY(6px) rotate(45deg);
+        }
+
+        .mobile-menu-trigger.is-active .mid-bar {
+          opacity: 0;
+        }
+
+        .mobile-menu-trigger.is-active .bot-bar {
+          transform: translateY(-6px) rotate(-45deg);
+        }
+
+        /* ==========================================================================
+           7. CLEAN HEADER-ANCHORED MOBILE DROPDOWN (< 1024px)
+           ========================================================================== */
+        .mobile-dropdown-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          width: 100%;
+          background: #FFFFFF;
+          border-bottom: 2px solid #C5A869;
+          box-shadow: 0 14px 30px rgba(3, 17, 34, 0.15);
+          max-height: calc(100dvh - 60px);
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+          z-index: 1000;
+        }
+
+        .mobile-menu-content {
+          padding: 0.75rem 1rem 1rem 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.15rem;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .mobile-nav-link {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.55rem 0.65rem;
+          border-radius: 6px;
+          font-size: 0.9rem;
           font-weight: 600;
           color: #1E293B;
           text-decoration: none;
-          transition: all 0.18s ease;
+          background: transparent;
+          border: none;
+          width: 100%;
+          text-align: left;
+          cursor: pointer;
+          transition: background 0.15s ease, color 0.15s ease;
+          box-sizing: border-box;
         }
 
-        .drawer-link:hover, .drawer-link.active {
-          background: var(--primary-ultralight);
-          color: var(--primary);
+        .mobile-nav-link:hover, .mobile-nav-link.active {
+          background: rgba(0, 93, 184, 0.05);
+          color: #005DB8;
         }
 
-        .drawer-sublinks-list {
-          padding: 0.3rem 0 0.5rem 1.25rem;
+        .mobile-accordion-btn {
+          cursor: pointer;
+        }
+
+        .mobile-sublinks-box {
           display: flex;
           flex-direction: column;
-          gap: 0.4rem;
+          gap: 0.2rem;
+          padding: 0.35rem 0.5rem 0.45rem 1rem;
+          background: #F8FAFC;
+          border-radius: 6px;
+          margin: 0.15rem 0 0.35rem 0;
+          border-left: 2px solid rgba(0, 93, 184, 0.3);
         }
 
-        .drawer-sublink {
-          font-size: 0.85rem;
+        .mobile-sublink {
+          font-size: 0.82rem;
+          font-weight: 500;
           color: #475569;
           text-decoration: none;
-          padding: 0.2rem 0;
+          padding: 0.25rem 0;
         }
 
-        .drawer-sublink:hover {
-          color: var(--primary);
+        .mobile-sublink:hover {
+          color: #005DB8;
         }
 
-        .drawer-cta-box {
-          margin-top: auto;
+        .mobile-sublink.highlight {
+          color: #005DB8;
+          font-weight: 700;
+        }
+
+        /* Mobile Menu Bottom Actions */
+        .mobile-menu-footer {
+          margin-top: 0.5rem;
+          padding-top: 0.75rem;
+          border-top: 1px solid #F1F5F9;
           display: flex;
           flex-direction: column;
-          gap: 0.6rem;
-          padding-top: 1rem;
-          border-top: 1px solid #E2E8F0;
+          gap: 0.5rem;
         }
 
-        .drawer-enroll-btn {
+        .mobile-menu-cta-btn {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 0.5rem;
-          background: linear-gradient(135deg, #D4A347 0%, #BA8E35 100%);
-          color: #FFFFFF !important;
+          gap: 0.45rem;
+          padding: 0.65rem 1rem;
+          border-radius: 8px;
+          background: linear-gradient(135deg, #FFE8AA 0%, #D4A347 100%);
+          color: #031122 !important;
           font-weight: 700;
-          font-size: 0.95rem;
-          padding: 0.75rem 1rem;
-          border-radius: 10px;
+          font-size: 0.88rem;
           text-decoration: none;
-          box-shadow: 0 4px 12px rgba(197, 168, 105, 0.35);
+          box-shadow: 0 2px 8px rgba(197, 168, 105, 0.35);
         }
 
-        .drawer-whatsapp-btn {
+        .mobile-quick-btn {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 0.5rem;
-          background: rgba(37, 211, 102, 0.08);
-          color: #128C7E !important;
-          border: 1px solid rgba(37, 211, 102, 0.35);
+          gap: 0.45rem;
+          padding: 0.55rem 0.85rem;
+          border-radius: 6px;
+          font-size: 0.82rem;
           font-weight: 600;
-          font-size: 0.88rem;
-          padding: 0.7rem 1rem;
-          border-radius: 10px;
           text-decoration: none;
-        }
-
-        .drawer-footer-text {
-          padding-top: 0.85rem;
           text-align: center;
         }
 
-        /* Responsive Breakpoints */
-        @media (max-width: 640px) {
-          .top-islamic-ribbon {
-            height: 38px;
+        .mobile-quick-btn.whatsapp {
+          background: #F0FDF4;
+          border: 1px solid #86EFAC;
+          color: #166534;
+        }
+
+        /* Animation */
+        @keyframes slideDownNav {
+          from {
+            opacity: 0;
+            transform: translateY(-8px);
           }
-          .navbar-floating-wrapper {
-            top: 6px;
-            margin-top: -18px;
-            padding: 0 0.65rem;
-          }
-          .navbar-pill {
-            padding: 0.35rem 0.75rem;
-            border-radius: 14px;
+          to {
+            opacity: 1;
+            transform: translateY(0);
           }
         }
 
-        @media (min-width: 1180px) {
-          .desktop-nav { display: flex !important; }
-          .desktop-cta { display: flex !important; }
-          .mobile-toggle-btn { display: none !important; }
+        .animate-slide-down {
+          animation: slideDownNav 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* ==========================================================================
+           8. RESPONSIVE BREAKPOINTS
+           ========================================================================== */
+        @media (min-width: 1024px) {
+          .desktop-nav-menu { display: flex; }
+          .desktop-action-box { display: flex; }
+          .mobile-controls-row { display: none; }
+          .mobile-dropdown-menu { display: none !important; }
+        }
+
+        @media (max-width: 359px) {
+          .nav-bar-inner {
+            padding: 0.4rem 0.5rem;
+            gap: 0.3rem;
+          }
+          .brand-seal-wrap {
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+          }
+          .brand-main {
+            font-size: 0.8rem;
+          }
+          .brand-sub {
+            font-size: 0.48rem;
+          }
+          .mobile-enroll-pill {
+            padding: 0.28rem 0.55rem;
+            font-size: 0.7rem;
+          }
+          .mobile-menu-trigger {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+          }
         }
       `}</style>
-    </>
+    </header>
   );
 }
