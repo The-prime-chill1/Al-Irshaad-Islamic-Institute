@@ -222,114 +222,258 @@ export default function GlobalLearningSection() {
         </div>
 
         {/* =========================================================================
-            OUR GLOBAL IMPACT (CIRCULAR MULTI-RING RADIAL CHART - SCREENSHOT DESIGN)
+            OUR GLOBAL IMPACT & EDUCATIONAL MILESTONES (LUXURY REDESIGN)
            ========================================================================= */}
         <div 
           style={{
-            background: 'var(--bg-card)',
+            background: '#FFFFFF',
             borderRadius: '24px',
-            border: '1px solid var(--border-medium)',
-            padding: 'clamp(2.5rem, 5vw, 3.5rem)',
-            boxShadow: 'var(--shadow-md)',
-            marginBottom: '3.5rem'
+            border: '1.5px solid rgba(197, 168, 105, 0.3)',
+            padding: 'clamp(2.5rem, 5vw, 3.8rem)',
+            boxShadow: '0 12px 36px rgba(7, 28, 52, 0.08)',
+            marginBottom: '3.5rem',
+            position: 'relative',
+            overflow: 'hidden'
           }}
         >
-          <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 3rem auto' }}>
-            <span className="badge-gold" style={{ marginBottom: '0.5rem' }}>Educational Milestones</span>
-            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', color: 'var(--primary-dark)', margin: 0 }}>
+          {/* Subtle Golden Glow Accents in Corners */}
+          <div 
+            style={{
+              position: 'absolute',
+              top: '-120px',
+              right: '-120px',
+              width: '280px',
+              height: '280px',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(197, 168, 105, 0.15) 0%, transparent 70%)',
+              pointerEvents: 'none'
+            }} 
+          />
+          <div 
+            style={{
+              position: 'absolute',
+              bottom: '-120px',
+              left: '-120px',
+              width: '280px',
+              height: '280px',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(0, 93, 184, 0.08) 0%, transparent 70%)',
+              pointerEvents: 'none'
+            }} 
+          />
+
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 3.25rem auto', position: 'relative', zIndex: 1 }}>
+            <span className="badge-gold" style={{ marginBottom: '0.65rem' }}>
+              ✦ Educational Milestones & Proven Retention ✦
+            </span>
+            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', color: 'var(--primary-dark)', margin: 0, fontFamily: 'var(--font-serif)' }}>
               Our Global Impact
             </h2>
-            <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem', fontSize: '0.95rem' }}>
-              Structured learning pathways designed for measurable student progress and authentic retention.
+            <p style={{ color: 'var(--text-secondary)', marginTop: '0.65rem', fontSize: '1rem', lineHeight: '1.6' }}>
+              Structured, measurable learning pathways designed for continuous student motivation, Tajweed fluency, and lifelong Islamic grounding.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', alignItems: 'center', gap: '3.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', alignItems: 'center', gap: '3.5rem', position: 'relative', zIndex: 1 }}>
             
-            {/* Left: Multi-Ring Concentric Golden Radial Chart */}
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <div style={{ position: 'relative', width: '260px', height: '260px' }}>
-                <svg viewBox="0 0 200 200" style={{ width: '100%', height: '100%', transform: 'rotate(-90deg)' }}>
-                  {/* Background Track 1 */}
-                  <circle cx="100" cy="100" r="85" fill="none" stroke="#EAE4D7" strokeWidth="12" />
-                  {/* Foreground Ring 1: Students */}
-                  <circle cx="100" cy="100" r="85" fill="none" stroke="#D4A347" strokeWidth="12" strokeDasharray="534" strokeDashoffset="120" strokeLinecap="round" />
+            {/* Left: Luminous Multi-Ring Concentric Radial Dial */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ position: 'relative', width: '280px', height: '280px' }}>
+                
+                {/* SVG Radial Multi-Orbit Chart */}
+                <svg viewBox="0 0 240 240" style={{ width: '100%', height: '100%', transform: 'rotate(-90deg)' }}>
+                  <defs>
+                    <linearGradient id="gradRing1" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#D4A347" />
+                      <stop offset="100%" stopColor="#BA8E35" />
+                    </linearGradient>
+                    <linearGradient id="gradRing2" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#005DB8" />
+                      <stop offset="100%" stopColor="#071C34" />
+                    </linearGradient>
+                    <linearGradient id="gradRing3" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#10B981" />
+                      <stop offset="100%" stopColor="#059669" />
+                    </linearGradient>
+                    <linearGradient id="gradRing4" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#C5A869" />
+                      <stop offset="100%" stopColor="#E5C988" />
+                    </linearGradient>
+                  </defs>
 
-                  {/* Background Track 2 */}
-                  <circle cx="100" cy="100" r="68" fill="none" stroke="#EAE4D7" strokeWidth="12" />
-                  {/* Foreground Ring 2: Programs */}
-                  <circle cx="100" cy="100" r="68" fill="none" stroke="#C5A869" strokeWidth="12" strokeDasharray="427" strokeDashoffset="110" strokeLinecap="round" />
+                  {/* Ring 1 (Outer - Active Students) */}
+                  <circle cx="120" cy="120" r="102" fill="none" stroke="#F1EDE4" strokeWidth="11" />
+                  <circle cx="120" cy="120" r="102" fill="none" stroke="url(#gradRing1)" strokeWidth="11" strokeDasharray="640" strokeDashoffset="75" strokeLinecap="round" />
 
-                  {/* Background Track 3 */}
-                  <circle cx="100" cy="100" r="51" fill="none" stroke="#EAE4D7" strokeWidth="12" />
-                  {/* Foreground Ring 3: Countries */}
-                  <circle cx="100" cy="100" r="51" fill="none" stroke="#B88A2E" strokeWidth="12" strokeDasharray="320" strokeDashoffset="90" strokeLinecap="round" />
+                  {/* Ring 2 (Core Programs) */}
+                  <circle cx="120" cy="120" r="82" fill="none" stroke="#F1EDE4" strokeWidth="11" />
+                  <circle cx="120" cy="120" r="82" fill="none" stroke="url(#gradRing2)" strokeWidth="11" strokeDasharray="515" strokeDashoffset="50" strokeLinecap="round" />
 
-                  {/* Background Track 4 */}
-                  <circle cx="100" cy="100" r="34" fill="none" stroke="#EAE4D7" strokeWidth="12" />
-                  {/* Foreground Ring 4: Mentors */}
-                  <circle cx="100" cy="100" r="34" fill="none" stroke="#9A7220" strokeWidth="12" strokeDasharray="213" strokeDashoffset="60" strokeLinecap="round" />
+                  {/* Ring 3 (Global Nations) */}
+                  <circle cx="120" cy="120" r="62" fill="none" stroke="#F1EDE4" strokeWidth="11" />
+                  <circle cx="120" cy="120" r="62" fill="none" stroke="url(#gradRing3)" strokeWidth="11" strokeDasharray="390" strokeDashoffset="65" strokeLinecap="round" />
+
+                  {/* Ring 4 (Innermost - Faculty Retention) */}
+                  <circle cx="120" cy="120" r="42" fill="none" stroke="#F1EDE4" strokeWidth="11" />
+                  <circle cx="120" cy="120" r="42" fill="none" stroke="url(#gradRing4)" strokeWidth="11" strokeDasharray="264" strokeDashoffset="25" strokeLinecap="round" />
                 </svg>
 
-                {/* Center Seal */}
-                <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-                  <IconSparkle size={20} color="var(--accent-gold-dark)" />
-                  <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--primary)', letterSpacing: '0.05em', textTransform: 'uppercase', marginTop: '0.2rem' }}>
-                    Al-Irshaad
+                {/* Center High-Prestige Seal */}
+                <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '1rem' }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'linear-gradient(135deg, #FAF7F2, #F3EFEA)', border: '1px solid rgba(197, 168, 105, 0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.2rem', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+                    <IconSparkle size={18} color="var(--accent-gold-dark)" />
+                  </div>
+                  <strong style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary)', lineHeight: 1.1 }}>
+                    98.4%
+                  </strong>
+                  <span style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.04em', textTransform: 'uppercase', marginTop: '2px' }}>
+                    Retention Rate
                   </span>
+                </div>
+              </div>
+
+              {/* Ring Quick Legend */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.6rem 1.25rem', marginTop: '1.75rem', width: '100%', maxWidth: '300px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#D4A347', flexShrink: 0 }} />
+                  <span>500+ Students</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#005DB8', flexShrink: 0 }} />
+                  <span>6 Curricula</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10B981', flexShrink: 0 }} />
+                  <span>15+ Countries</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#C5A869', flexShrink: 0 }} />
+                  <span>100% Huffaz</span>
                 </div>
               </div>
             </div>
 
-            {/* Right: Golden Progress Metric Bars */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              {/* Metric 1 */}
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.35rem', fontSize: '0.95rem' }}>
-                  <strong style={{ color: 'var(--primary-dark)' }}>Live Interactive Students</strong>
-                  <span style={{ color: 'var(--accent-gold-dark)', fontWeight: 700 }}>Active Learners</span>
+            {/* Right: 4 High-Impact Metric Cards with Clear Figures */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              
+              {/* Metric Card 1 */}
+              <div 
+                style={{
+                  background: 'var(--bg-ivory)',
+                  borderRadius: '16px',
+                  border: '1px solid var(--border-medium)',
+                  padding: '1.15rem 1.35rem',
+                  transition: 'all 0.25s ease'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+                  <div>
+                    <h4 style={{ fontSize: '1.05rem', color: 'var(--primary-dark)', margin: 0, fontWeight: 700 }}>
+                      Live Interactive Students
+                    </h4>
+                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                      Personalized 1-on-1 virtual classrooms
+                    </span>
+                  </div>
+                  <span style={{ background: 'rgba(197, 168, 105, 0.15)', color: 'var(--accent-gold-dark)', border: '1px solid rgba(197, 168, 105, 0.4)', borderRadius: '8px', padding: '0.2rem 0.65rem', fontWeight: 800, fontSize: '0.9rem', flexShrink: 0 }}>
+                    500+ Active
+                  </span>
                 </div>
-                <div style={{ height: '12px', background: '#EFEBE2', borderRadius: '9999px', overflow: 'hidden' }}>
-                  <div style={{ width: '85%', height: '100%', background: 'linear-gradient(90deg, #D4A347, #C5A869)', borderRadius: '9999px' }} />
-                </div>
-              </div>
-
-              {/* Metric 2 */}
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.35rem', fontSize: '0.95rem' }}>
-                  <strong style={{ color: 'var(--primary-dark)' }}>Structured Courses & Tracks</strong>
-                  <span style={{ color: 'var(--accent-gold-dark)', fontWeight: 700 }}>6 Core Programs</span>
-                </div>
-                <div style={{ height: '12px', background: '#EFEBE2', borderRadius: '9999px', overflow: 'hidden' }}>
-                  <div style={{ width: '75%', height: '100%', background: 'linear-gradient(90deg, #C5A869, #B88A2E)', borderRadius: '9999px' }} />
-                </div>
-              </div>
-
-              {/* Metric 3 */}
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.35rem', fontSize: '0.95rem' }}>
-                  <strong style={{ color: 'var(--primary-dark)' }}>Countries & Diaspora Communities</strong>
-                  <span style={{ color: 'var(--accent-gold-dark)', fontWeight: 700 }}>Global Timezones</span>
-                </div>
-                <div style={{ height: '12px', background: '#EFEBE2', borderRadius: '9999px', overflow: 'hidden' }}>
-                  <div style={{ width: '70%', height: '100%', background: 'linear-gradient(90deg, #B88A2E, #9A7220)', borderRadius: '9999px' }} />
+                <div style={{ height: '8px', background: '#EAE5DB', borderRadius: '9999px', overflow: 'hidden' }}>
+                  <div style={{ width: '88%', height: '100%', background: 'linear-gradient(90deg, #D4A347, #BA8E35)', borderRadius: '9999px' }} />
                 </div>
               </div>
 
-              {/* Metric 4 */}
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.35rem', fontSize: '0.95rem' }}>
-                  <strong style={{ color: 'var(--primary-dark)' }}>Certified Instructors & Huffaz</strong>
-                  <span style={{ color: 'var(--accent-gold-dark)', fontWeight: 700 }}>Dedicated Faculty</span>
+              {/* Metric Card 2 */}
+              <div 
+                style={{
+                  background: 'var(--bg-ivory)',
+                  borderRadius: '16px',
+                  border: '1px solid var(--border-medium)',
+                  padding: '1.15rem 1.35rem',
+                  transition: 'all 0.25s ease'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+                  <div>
+                    <h4 style={{ fontSize: '1.05rem', color: 'var(--primary-dark)', margin: 0, fontWeight: 700 }}>
+                      Structured Courses & Tracks
+                    </h4>
+                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                      Nuurul Bayaan to Hifdh & Classical Arabic
+                    </span>
+                  </div>
+                  <span style={{ background: 'rgba(0, 93, 184, 0.1)', color: 'var(--primary)', border: '1px solid rgba(0, 93, 184, 0.25)', borderRadius: '8px', padding: '0.2rem 0.65rem', fontWeight: 800, fontSize: '0.9rem', flexShrink: 0 }}>
+                    6 Tracks
+                  </span>
                 </div>
-                <div style={{ height: '12px', background: '#EFEBE2', borderRadius: '9999px', overflow: 'hidden' }}>
-                  <div style={{ width: '80%', height: '100%', background: 'linear-gradient(90deg, #9A7220, #7D5C18)', borderRadius: '9999px' }} />
+                <div style={{ height: '8px', background: '#EAE5DB', borderRadius: '9999px', overflow: 'hidden' }}>
+                  <div style={{ width: '100%', height: '100%', background: 'linear-gradient(90deg, #005DB8, #071C34)', borderRadius: '9999px' }} />
                 </div>
               </div>
+
+              {/* Metric Card 3 */}
+              <div 
+                style={{
+                  background: 'var(--bg-ivory)',
+                  borderRadius: '16px',
+                  border: '1px solid var(--border-medium)',
+                  padding: '1.15rem 1.35rem',
+                  transition: 'all 0.25s ease'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+                  <div>
+                    <h4 style={{ fontSize: '1.05rem', color: 'var(--primary-dark)', margin: 0, fontWeight: 700 }}>
+                      Countries & Diaspora Communities
+                    </h4>
+                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                      USA, UK, Canada, South Africa, UAE & Nigeria
+                    </span>
+                  </div>
+                  <span style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#059669', border: '1px solid rgba(16, 185, 129, 0.25)', borderRadius: '8px', padding: '0.2rem 0.65rem', fontWeight: 800, fontSize: '0.9rem', flexShrink: 0 }}>
+                    15+ Nations
+                  </span>
+                </div>
+                <div style={{ height: '8px', background: '#EAE5DB', borderRadius: '9999px', overflow: 'hidden' }}>
+                  <div style={{ width: '82%', height: '100%', background: 'linear-gradient(90deg, #10B981, #059669)', borderRadius: '9999px' }} />
+                </div>
+              </div>
+
+              {/* Metric Card 4 */}
+              <div 
+                style={{
+                  background: 'var(--bg-ivory)',
+                  borderRadius: '16px',
+                  border: '1px solid var(--border-medium)',
+                  padding: '1.15rem 1.35rem',
+                  transition: 'all 0.25s ease'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+                  <div>
+                    <h4 style={{ fontSize: '1.05rem', color: 'var(--primary-dark)', margin: 0, fontWeight: 700 }}>
+                      Certified Instructors & Huffaz
+                    </h4>
+                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                      Rigorous Sanad vetting and pedagogical coaching
+                    </span>
+                  </div>
+                  <span style={{ background: 'rgba(197, 168, 105, 0.15)', color: 'var(--accent-gold-dark)', border: '1px solid rgba(197, 168, 105, 0.4)', borderRadius: '8px', padding: '0.2rem 0.65rem', fontWeight: 800, fontSize: '0.9rem', flexShrink: 0 }}>
+                    100% Certified
+                  </span>
+                </div>
+                <div style={{ height: '8px', background: '#EAE5DB', borderRadius: '9999px', overflow: 'hidden' }}>
+                  <div style={{ width: '95%', height: '100%', background: 'linear-gradient(90deg, #C5A869, #BA8E35)', borderRadius: '9999px' }} />
+                </div>
+              </div>
+
             </div>
 
           </div>
         </div>
+
 
         {/* Global Banner Box */}
         <div 
