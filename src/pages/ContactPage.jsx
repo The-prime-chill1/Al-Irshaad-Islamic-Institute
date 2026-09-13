@@ -82,7 +82,7 @@ Date: ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short',
       {/* Main Grid: Contact Info & Interactive Form */}
       <section className="section-padding" style={{ backgroundColor: 'var(--bg-ivory)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 'clamp(2rem, 4vw, 3.5rem)' }}>
             
             {/* Left: Institute Contact Coordinates */}
             <div>
@@ -194,7 +194,7 @@ Date: ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short',
                       />
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem' }}>
                       <div>
                         <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.35rem' }}>
                           Email Address *

@@ -36,7 +36,7 @@ export default function QuranJourneySection() {
         />
 
         {/* Pathway / Timeline Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginTop: '3.5rem', position: 'relative' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '2rem', marginTop: '3.5rem', position: 'relative' }}>
           
           {quranJourneySteps.map((step, idx) => (
             <div 

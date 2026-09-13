@@ -18,7 +18,7 @@ export default function HifdhMethodSection() {
         />
 
         {/* 3-Cycle Cards Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '3.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2rem', marginBottom: '3.5rem' }}>
           {methodCycles.map((cycle, idx) => (
             <div 
               key={idx}
@@ -77,7 +77,7 @@ export default function HifdhMethodSection() {
             Why the 3-Cycle System Succeeds
           </h4>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem', fontSize: '0.925rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '1.5rem', fontSize: '0.925rem' }}>
             <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
               <IconCheck size={18} color="var(--accent-gold-dark)" style={{ flexShrink: 0, marginTop: '2px' }} />
               <span><strong>Flawless Input:</strong> New verses are recited to the teacher before memorizing, preventing ingrained mistakes.</span>

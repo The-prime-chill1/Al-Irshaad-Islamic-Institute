@@ -77,13 +77,13 @@ export default function StudentDashboardPage() {
   const statusStyle = getStatusBadge(student.status);
 
   return (
-    <div style={{ backgroundColor: 'var(--bg-ivory)', minHeight: '90vh', paddingBottom: '5rem' }}>
+    <div style={{ backgroundColor: 'var(--bg-ivory)', minHeight: '90vh', paddingBottom: '5rem', overflowX: 'clip', maxWidth: '100vw', width: '100%', boxSizing: 'border-box' }}>
       {/* Top Banner with Student ID summary */}
-      <section style={{ background: 'linear-gradient(180deg, #031122 0%, #071C34 60%, #005DB8 100%)', color: '#FFFFFF', padding: '3.5rem 0 2.5rem 0' }}>
+      <section style={{ background: 'linear-gradient(180deg, #031122 0%, #071C34 60%, #005DB8 100%)', color: '#FFFFFF', padding: 'clamp(2rem, 4.5vw, 3.5rem) 0 clamp(1.5rem, 3.5vw, 2.5rem) 0' }}>
         <div className="container">
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1.5rem' }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1.25rem' }}>
+            <div style={{ flex: '1 1 280px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.6rem', marginBottom: '0.5rem' }}>
                 <span className="section-subtitle-badge light" style={{ margin: 0 }}>
                   Official Student Academic Portal
                 </span>
@@ -99,15 +99,15 @@ export default function StudentDashboardPage() {
                   {statusStyle.label}
                 </span>
               </div>
-              <h1 style={{ color: '#FFFFFF', fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', margin: 0 }}>
+              <h1 style={{ color: '#FFFFFF', fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.5rem)', margin: 0, lineHeight: 1.25 }}>
                 Ahlan wa Sahlan, {student.fullName}
               </h1>
-              <p style={{ color: 'var(--text-on-dark-muted)', marginTop: '0.4rem', fontSize: '0.98rem' }}>
+              <p style={{ color: 'var(--text-on-dark-muted)', marginTop: '0.35rem', fontSize: '0.94rem' }}>
                 Student ID: <strong style={{ color: '#C5A869', letterSpacing: '0.5px' }}>{student.id}</strong> | Program: <strong>{student.program}</strong>
               </p>
             </div>
 
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
               <button
                 type="button"
                 onClick={() => setIsEditing(!isEditing)}
@@ -118,9 +118,9 @@ export default function StudentDashboardPage() {
                   color: '#FFFFFF',
                   border: '1px solid rgba(255,255,255,0.3)',
                   fontWeight: '600',
-                  fontSize: '0.9rem',
+                  fontSize: '0.88rem',
                   cursor: 'pointer',
-                  display: 'flex',
+                  display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.4rem',
                   transition: 'all 0.2s ease'
@@ -139,7 +139,7 @@ export default function StudentDashboardPage() {
                   color: '#FECACA',
                   border: '1px solid rgba(239, 68, 68, 0.4)',
                   fontWeight: '600',
-                  fontSize: '0.9rem',
+                  fontSize: '0.88rem',
                   cursor: 'pointer'
                 }}
               >
@@ -152,19 +152,20 @@ export default function StudentDashboardPage() {
 
       <HadithRibbon variant="compact" />
 
-      <div className="container" style={{ marginTop: '2.5rem' }}>
+      <div className="container" style={{ marginTop: '2rem' }}>
         {saveSuccess && (
           <div style={{
             background: '#DCFCE7',
             border: '1px solid #86EFAC',
             color: '#166534',
-            padding: '1rem 1.5rem',
+            padding: '0.9rem 1.25rem',
             borderRadius: '12px',
             fontWeight: '600',
             marginBottom: '1.5rem',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.5rem'
+            gap: '0.5rem',
+            fontSize: '0.92rem'
           }}>
             <IconCheckCircle size={18} color="#166534" />
             <span>Student profile updated successfully!</span>
@@ -176,18 +177,19 @@ export default function StudentDashboardPage() {
           <div style={{
             background: '#FFFFFF',
             borderRadius: '16px',
-            padding: '2rem',
+            padding: 'clamp(1.25rem, 3.5vw, 2rem)',
             boxShadow: '0 10px 30px rgba(0,0,0,0.08)',
             border: '2px solid #C5A869',
-            marginBottom: '2.5rem'
+            marginBottom: '2rem',
+            boxSizing: 'border-box'
           }}>
-            <h2 style={{ fontSize: '1.3rem', color: '#031122', marginBottom: '1.25rem', fontWeight: '700' }}>
+            <h2 style={{ fontSize: '1.25rem', color: '#031122', marginBottom: '1.15rem', fontWeight: '700' }}>
               Update Student Profile Information
             </h2>
             <form onSubmit={handleSaveProfile}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '0.85rem', marginBottom: '1.25rem' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: '#334155', marginBottom: '0.3rem' }}>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', color: '#334155', marginBottom: '0.25rem' }}>
                     Full Name
                   </label>
                   <input
@@ -196,12 +198,12 @@ export default function StudentDashboardPage() {
                     value={editFormData.fullName || ''}
                     onChange={handleEditChange}
                     required
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #CBD5E1' }}
+                    style={{ width: '100%', padding: '0.7rem', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '0.9rem', boxSizing: 'border-box' }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: '#334155', marginBottom: '0.3rem' }}>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', color: '#334155', marginBottom: '0.25rem' }}>
                     WhatsApp Phone Number
                   </label>
                   <input
@@ -210,12 +212,12 @@ export default function StudentDashboardPage() {
                     value={editFormData.whatsappNumber || ''}
                     onChange={handleEditChange}
                     required
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #CBD5E1' }}
+                    style={{ width: '100%', padding: '0.7rem', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '0.9rem', boxSizing: 'border-box' }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: '#334155', marginBottom: '0.3rem' }}>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', color: '#334155', marginBottom: '0.25rem' }}>
                     Guardian Name
                   </label>
                   <input
@@ -223,22 +225,22 @@ export default function StudentDashboardPage() {
                     name="guardianName"
                     value={editFormData.guardianName || ''}
                     onChange={handleEditChange}
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #CBD5E1' }}
+                    style={{ width: '100%', padding: '0.7rem', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '0.9rem', boxSizing: 'border-box' }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: '#334155', marginBottom: '0.3rem' }}>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', color: '#334155', marginBottom: '0.25rem' }}>
                     City & Country
                   </label>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                  <div style={{ display: 'flex', gap: '0.4rem' }}>
                     <input
                       type="text"
                       name="city"
                       placeholder="City"
                       value={editFormData.city || ''}
                       onChange={handleEditChange}
-                      style={{ width: '50%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #CBD5E1' }}
+                      style={{ width: '50%', padding: '0.7rem', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '0.9rem', boxSizing: 'border-box' }}
                     />
                     <input
                       type="text"
@@ -246,13 +248,13 @@ export default function StudentDashboardPage() {
                       placeholder="Country"
                       value={editFormData.country || ''}
                       onChange={handleEditChange}
-                      style={{ width: '50%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #CBD5E1' }}
+                      style={{ width: '50%', padding: '0.7rem', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '0.9rem', boxSizing: 'border-box' }}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: '#334155', marginBottom: '0.3rem' }}>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', color: '#334155', marginBottom: '0.25rem' }}>
                     Preferred Schedule
                   </label>
                   <input
@@ -260,12 +262,12 @@ export default function StudentDashboardPage() {
                     name="preferredSchedule"
                     value={editFormData.preferredSchedule || ''}
                     onChange={handleEditChange}
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #CBD5E1' }}
+                    style={{ width: '100%', padding: '0.7rem', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '0.9rem', boxSizing: 'border-box' }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '600', color: '#334155', marginBottom: '0.3rem' }}>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: '600', color: '#334155', marginBottom: '0.25rem' }}>
                     Learning Goal / Notes
                   </label>
                   <input
@@ -273,12 +275,12 @@ export default function StudentDashboardPage() {
                     name="learningGoal"
                     value={editFormData.learningGoal || ''}
                     onChange={handleEditChange}
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #CBD5E1' }}
+                    style={{ width: '100%', padding: '0.7rem', borderRadius: '8px', border: '1px solid #CBD5E1', fontSize: '0.9rem', boxSizing: 'border-box' }}
                   />
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '1rem' }}>
+              <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
                 <button
                   type="submit"
                   style={{
@@ -288,7 +290,8 @@ export default function StudentDashboardPage() {
                     color: '#FFFFFF',
                     fontWeight: '700',
                     border: 'none',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    fontSize: '0.9rem'
                   }}
                 >
                   Save Changes
@@ -297,13 +300,14 @@ export default function StudentDashboardPage() {
                   type="button"
                   onClick={() => setIsEditing(false)}
                   style={{
-                    padding: '0.75rem 1.5rem',
+                    padding: '0.75rem 1.25rem',
                     borderRadius: '8px',
                     background: '#F1F5F9',
                     color: '#475569',
                     fontWeight: '600',
                     border: 'none',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    fontSize: '0.9rem'
                   }}
                 >
                   Cancel
@@ -314,27 +318,28 @@ export default function StudentDashboardPage() {
         )}
 
         {/* Dashboard Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.75rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '1.5rem' }}>
           
           {/* 1. DIGITAL STUDENT ID CARD */}
           <div style={{
             background: 'linear-gradient(135deg, #031122 0%, #071C34 50%, #005DB8 100%)',
             borderRadius: '20px',
-            padding: '2rem',
+            padding: 'clamp(1.25rem, 3.5vw, 2rem)',
             color: '#FFFFFF',
             position: 'relative',
             overflow: 'hidden',
             boxShadow: '0 12px 30px rgba(0, 93, 184, 0.25)',
-            border: '1px solid rgba(197, 168, 105, 0.4)'
+            border: '1px solid rgba(197, 168, 105, 0.4)',
+            boxSizing: 'border-box'
           }}>
             <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '120px', height: '120px', borderRadius: '50%', background: 'rgba(197, 168, 105, 0.15)', filter: 'blur(10px)' }}></div>
             
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem', gap: '0.5rem' }}>
               <div>
-                <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1px', color: '#C5A869', fontWeight: '700' }}>
+                <span style={{ fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '1px', color: '#C5A869', fontWeight: '700' }}>
                   Al-Irshaad Islamic Institute
                 </span>
-                <h2 style={{ fontSize: '1.25rem', color: '#FFFFFF', margin: '0.2rem 0 0 0', fontWeight: '700' }}>
+                <h2 style={{ fontSize: '1.15rem', color: '#FFFFFF', margin: '0.15rem 0 0 0', fontWeight: '700' }}>
                   Digital Student Identity
                 </h2>
               </div>
@@ -342,39 +347,41 @@ export default function StudentDashboardPage() {
                 background: 'rgba(197, 168, 105, 0.2)',
                 border: '1px solid #C5A869',
                 borderRadius: '8px',
-                padding: '0.3rem 0.6rem',
-                fontSize: '0.75rem',
+                padding: '0.25rem 0.55rem',
+                fontSize: '0.72rem',
                 color: '#FAF8F5',
-                fontWeight: '700'
+                fontWeight: '700',
+                whiteSpace: 'nowrap'
               }}>
                 ACADEMIC YEAR 2026
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
               <div style={{
-                width: '64px',
-                height: '64px',
+                width: '56px',
+                height: '56px',
                 borderRadius: '50%',
                 background: 'linear-gradient(135deg, #C5A869 0%, #E6CA85 100%)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '1.6rem',
+                fontSize: '1.4rem',
                 color: '#031122',
                 fontWeight: '700',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
+                boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                flexShrink: 0
               }}>
                 {student.fullName ? student.fullName.charAt(0).toUpperCase() : 'S'}
               </div>
               <div>
-                <div style={{ fontSize: '1.15rem', fontWeight: '700', color: '#FFFFFF' }}>
+                <div style={{ fontSize: '1.1rem', fontWeight: '700', color: '#FFFFFF' }}>
                   {student.fullName}
                 </div>
-                <div style={{ fontSize: '0.85rem', color: '#CBD5E1' }}>
+                <div style={{ fontSize: '0.82rem', color: '#CBD5E1', wordBreak: 'break-all' }}>
                   {student.email}
                 </div>
-                <div style={{ fontSize: '0.82rem', color: '#C5A869', marginTop: '0.2rem' }}>
+                <div style={{ fontSize: '0.8rem', color: '#C5A869', marginTop: '0.15rem' }}>
                   ID: <strong>{student.id}</strong>
                 </div>
               </div>
@@ -383,27 +390,27 @@ export default function StudentDashboardPage() {
             <div style={{
               background: 'rgba(0,0,0,0.25)',
               borderRadius: '12px',
-              padding: '1rem',
+              padding: '0.85rem',
               display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '0.75rem',
-              fontSize: '0.82rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 120px), 1fr))',
+              gap: '0.65rem',
+              fontSize: '0.8rem',
               border: '1px solid rgba(255,255,255,0.08)'
             }}>
               <div>
-                <span style={{ color: '#94A3B8', display: 'block' }}>Gender</span>
+                <span style={{ color: '#94A3B8', display: 'block', fontSize: '0.74rem' }}>Gender</span>
                 <strong>{student.gender}</strong>
               </div>
               <div>
-                <span style={{ color: '#94A3B8', display: 'block' }}>Location</span>
+                <span style={{ color: '#94A3B8', display: 'block', fontSize: '0.74rem' }}>Location</span>
                 <strong>{student.city ? `${student.city}, ` : ''}{student.country}</strong>
               </div>
               <div>
-                <span style={{ color: '#94A3B8', display: 'block' }}>Format</span>
+                <span style={{ color: '#94A3B8', display: 'block', fontSize: '0.74rem' }}>Format</span>
                 <strong>{student.classPreference}</strong>
               </div>
               <div>
-                <span style={{ color: '#94A3B8', display: 'block' }}>Admission Date</span>
+                <span style={{ color: '#94A3B8', display: 'block', fontSize: '0.74rem' }}>Admission Date</span>
                 <strong>{student.enrolledDate ? new Date(student.enrolledDate).toLocaleDateString() : 'Active'}</strong>
               </div>
             </div>
@@ -413,24 +420,25 @@ export default function StudentDashboardPage() {
           <div style={{
             background: '#FFFFFF',
             borderRadius: '20px',
-            padding: '2rem',
+            padding: 'clamp(1.25rem, 3.5vw, 2rem)',
             boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
             border: '1px solid #E2E8F0',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            boxSizing: 'border-box'
           }}>
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                <span style={{ fontSize: '0.8rem', fontWeight: '700', color: '#005DB8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', gap: '0.5rem' }}>
+                <span style={{ fontSize: '0.78rem', fontWeight: '700', color: '#005DB8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   Active Academic Course
                 </span>
-                <span style={{ fontSize: '0.8rem', background: '#F1F5F9', padding: '0.2rem 0.6rem', borderRadius: '6px', color: '#475569', fontWeight: '600' }}>
+                <span style={{ fontSize: '0.78rem', background: '#F1F5F9', padding: '0.2rem 0.6rem', borderRadius: '6px', color: '#475569', fontWeight: '600' }}>
                   {student.learningLevel}
                 </span>
               </div>
 
-              <h2 style={{ fontSize: '1.4rem', color: '#031122', fontWeight: '700', marginBottom: '0.5rem' }}>
+              <h2 style={{ fontSize: 'clamp(1.2rem, 3vw, 1.4rem)', color: '#031122', fontWeight: '700', marginBottom: '0.5rem' }}>
                 {student.program}
               </h2>
               
@@ -571,7 +579,7 @@ export default function StudentDashboardPage() {
             Academic Progress & Curriculum Path
           </h3>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '1rem' }}>
             <div style={{ background: '#F8FAFC', padding: '1.2rem', borderRadius: '12px', borderLeft: '4px solid #005DB8' }}>
               <div style={{ fontSize: '0.78rem', color: '#64748B', textTransform: 'uppercase', fontWeight: '700' }}>Stage 1</div>
               <div style={{ fontWeight: '700', color: '#1E293B', marginTop: '0.2rem' }}>Orientation & Assessment</div>

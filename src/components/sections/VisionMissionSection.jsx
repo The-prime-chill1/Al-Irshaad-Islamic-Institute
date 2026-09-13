@@ -36,7 +36,7 @@ export default function VisionMissionSection() {
         />
 
         {/* Vision & Mission Split Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', marginBottom: '3.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '2.5rem', marginBottom: '3.5rem' }}>
           
           {/* Vision Card */}
           <div 
@@ -92,7 +92,7 @@ export default function VisionMissionSection() {
           </h3>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '1.5rem' }}>
           {visionMissionData.commitments.map((val, idx) => (
             <div 
               key={idx}

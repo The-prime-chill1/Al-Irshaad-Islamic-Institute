@@ -184,6 +184,10 @@ export default function HeroSection() {
           padding-top: clamp(4rem, 7vw, 6.5rem);
           padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
           overflow: hidden;
+          contain: paint;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
           background: #031122;
           color: #FFFFFF;
         }

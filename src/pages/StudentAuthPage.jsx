@@ -371,7 +371,7 @@ export default function StudentAuthPage() {
                     />
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
                     <div>
                       <label style={{ display: 'block', fontWeight: '600', color: '#1E293B', marginBottom: '0.4rem', fontSize: '0.9rem' }}>
                         New Password *
@@ -484,7 +484,7 @@ export default function StudentAuthPage() {
                 </div>
 
                 {/* Method Pill (Email vs Phone) */}
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
                   <button
                     type="button"
                     onClick={() => { setAuthMethod('email'); setErrorMessage(''); }}

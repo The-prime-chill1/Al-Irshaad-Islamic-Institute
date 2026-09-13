@@ -73,15 +73,15 @@ export default function AdminAuthPage() {
   return (
     <div style={{ backgroundColor: '#F8FAFC', minHeight: '88vh', paddingBottom: '4rem' }}>
       {/* Header Banner */}
-      <section style={{ background: 'linear-gradient(180deg, #031122 0%, #071C34 50%, #005DB8 100%)', color: '#FFFFFF', padding: '3.5rem 0 2.5rem 0', textAlign: 'center' }}>
+      <section style={{ background: 'linear-gradient(180deg, #031122 0%, #071C34 50%, #005DB8 100%)', color: '#FFFFFF', padding: 'clamp(2.25rem, 5vw, 3.5rem) 0 clamp(1.5rem, 3.5vw, 2.5rem) 0', textAlign: 'center' }}>
         <div className="container">
           <span className="section-subtitle-badge light" style={{ marginBottom: '0.75rem' }}>
             Official Administration Gateway
           </span>
-          <h1 style={{ color: '#FFFFFF', fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', marginBottom: '0.75rem' }}>
+          <h1 style={{ color: '#FFFFFF', fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.75rem, 3.5vw, 2.8rem)', marginBottom: '0.75rem' }}>
             Administrative Control Panel
           </h1>
-          <p style={{ color: '#CBD5E1', maxWidth: '620px', margin: '0 auto', fontSize: '1.02rem', lineHeight: 1.6 }}>
+          <p style={{ color: '#CBD5E1', maxWidth: '620px', margin: '0 auto', fontSize: '0.98rem', lineHeight: 1.6 }}>
             Secure portal for Al-Irshaad admissions coordination and student database management.
           </p>
         </div>
@@ -89,13 +89,14 @@ export default function AdminAuthPage() {
 
       <HadithRibbon variant="compact" />
 
-      <div className="container" style={{ maxWidth: '480px', marginTop: '2.5rem' }}>
+      <div className="container" style={{ maxWidth: '480px', marginTop: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
         <div style={{
           background: '#FFFFFF',
           borderRadius: '20px',
-          padding: '2.5rem 2.25rem',
+          padding: 'clamp(1.5rem, 4vw, 2.5rem) clamp(1.15rem, 3.5vw, 2.25rem)',
           boxShadow: '0 12px 35px rgba(3, 17, 34, 0.09)',
-          border: '1px solid rgba(197, 168, 105, 0.35)'
+          border: '1px solid rgba(197, 168, 105, 0.35)',
+          boxSizing: 'border-box'
         }}>
           
           {/* Header Icon */}

@@ -130,7 +130,7 @@ export default function ProgramsGridSection() {
               <div 
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: `repeat(auto-fit, minmax(${cat.programs.length === 1 ? '100%' : '300px'}, 1fr))`,
+                  gridTemplateColumns: `repeat(auto-fit, minmax(${cat.programs.length === 1 ? '100%' : 'min(100%, 300px)'}, 1fr))`,
                   gap: '1.75rem'
                 }}
               >

@@ -175,7 +175,7 @@ export default function PricingPage() {
         {/* Pricing Cards Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
           gap: '2rem',
           alignItems: 'stretch',
           marginBottom: '4rem'
@@ -342,7 +342,7 @@ export default function PricingPage() {
           boxShadow: '0 12px 35px rgba(3, 17, 34, 0.15)',
           border: '1.5px solid rgba(197, 168, 105, 0.4)'
         }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '2rem', alignItems: 'center' }}>
             <div>
               <span style={{
                 display: 'inline-block',
@@ -390,7 +390,7 @@ export default function PricingPage() {
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
             gap: '1.5rem'
           }}>
             {pricingData.guarantees.map((item, idx) => (

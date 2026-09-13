@@ -63,7 +63,7 @@ export default function IslamicStudiesCurriculumSection() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '2rem' }}>
             {curriculumSections.map((sec, idx) => (
               <div key={idx} style={{ padding: '1.75rem', background: 'var(--bg-cream)', borderRadius: '16px', border: '1px solid var(--border-light)' }}>
                 <h4 style={{ fontSize: '1.25rem', color: 'var(--primary)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

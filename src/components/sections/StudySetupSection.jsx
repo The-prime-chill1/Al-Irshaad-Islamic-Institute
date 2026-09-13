@@ -31,8 +31,8 @@ export default function StudySetupSection() {
         <div 
           style={{ 
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-            gap: '3.5rem', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', 
+            gap: 'clamp(2rem, 4vw, 3.5rem)', 
             alignItems: 'center' 
           }}
         >

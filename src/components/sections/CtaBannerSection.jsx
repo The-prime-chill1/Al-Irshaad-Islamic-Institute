@@ -15,7 +15,11 @@ export default function CtaBannerSection({
         color: '#FFFFFF',
         padding: 'clamp(4rem, 6vw, 5.5rem) 0',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        contain: 'paint',
+        width: '100%',
+        maxWidth: '100%',
+        boxSizing: 'border-box'
       }}
     >
       {/* Pattern overlay */}

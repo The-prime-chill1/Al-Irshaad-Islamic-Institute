@@ -50,7 +50,7 @@ export default function HowItWorksSection({ showFullDetails = false }) {
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '1.5rem' }}>
               <div style={{ padding: '1.5rem', background: 'var(--bg-cream)', borderRadius: '12px', border: '1px solid var(--border-light)' }}>
                 <h4 style={{ color: 'var(--primary)', marginBottom: '0.5rem', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <IconWifi size={20} color="var(--accent-gold-dark)" /> HD Live Video & Audio

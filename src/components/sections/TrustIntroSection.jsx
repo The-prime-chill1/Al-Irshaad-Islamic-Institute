@@ -26,7 +26,7 @@ export default function TrustIntroSection() {
         />
 
         {/* Narrative & Pillars Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', alignItems: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 'clamp(2rem, 4vw, 3rem)', alignItems: 'center' }}>
           
           {/* Left Narrative Box */}
           <div>

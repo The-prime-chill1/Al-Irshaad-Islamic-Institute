@@ -61,7 +61,7 @@ export default function TeachersPage() {
               Our Rigorous Faculty Standards
             </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.75rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '1.75rem' }}>
               <div style={{ padding: '1.25rem', background: 'var(--bg-cream)', borderRadius: '12px' }}>
                 <strong style={{ color: 'var(--primary)', display: 'block', marginBottom: '0.35rem' }}>1. Sanad & Ijazah</strong>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', margin: 0 }}>

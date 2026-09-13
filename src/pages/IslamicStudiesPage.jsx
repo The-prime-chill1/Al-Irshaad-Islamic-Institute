@@ -60,7 +60,7 @@ export default function IslamicStudiesPage() {
               boxShadow: 'var(--shadow-md)',
               padding: '2rem',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 150px), 1fr))',
               gap: '1.5rem',
               marginBottom: '4.5rem'
             }}

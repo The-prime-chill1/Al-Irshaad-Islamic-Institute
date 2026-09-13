@@ -39,7 +39,7 @@ export default function AboutPage() {
       {/* Main Narrative Overview with Image */}
       <section className="section-padding" style={{ backgroundColor: 'var(--bg-ivory)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 'clamp(2rem, 4vw, 3.5rem)', alignItems: 'center' }}>
             
             <div>
               <span className="badge-emerald" style={{ marginBottom: '1rem' }}>Authentic Islamic Education</span>

@@ -464,16 +464,7 @@ export default function Navbar() {
           box-sizing: border-box;
           padding: 0 1rem;
           margin-top: -22px;
-          transition: all 0.25s ease;
         }
-
-        @media (max-width: 480px) {
-          .navbar-floating-wrapper {
-            padding: 0 0.5rem;
-            top: 4px;
-          }
-        }
-
 
         .navbar-pill {
           max-width: 1380px;
@@ -488,6 +479,7 @@ export default function Navbar() {
           justify-content: space-between;
           padding: 0.4rem 1rem;
           box-sizing: border-box;
+          transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .navbar-floating-wrapper.is-sticky .navbar-pill {

@@ -122,9 +122,10 @@ const ClickSpark = ({
       style={{
         position: 'relative',
         width: '100%',
-        maxWidth: '100%',
+        maxWidth: '100vw',
         minHeight: '100vh',
-        overflowX: 'hidden'
+        overflowX: 'clip',
+        contain: 'paint'
       }}
       onClickCapture={handleClick}
     >

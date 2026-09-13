@@ -274,7 +274,7 @@ Please review this application and schedule the placement assessment. Jazakumull
                       Please provide your contact details so the Admissions Office can confirm your assessment.
                     </p>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
                       <div>
                         <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
                           Student Full Name *
@@ -306,7 +306,7 @@ Please review this application and schedule the placement assessment. Jazakumull
                       </div>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
                       {/* Searchable Country Selector with Flag */}
                       <div>
                         <SearchableCountrySelect
@@ -346,7 +346,7 @@ Please review this application and schedule the placement assessment. Jazakumull
                       </div>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
                       {/* WhatsApp / Phone with Country Code */}
                       <div>
                         <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
@@ -407,7 +407,7 @@ Please review this application and schedule the placement assessment. Jazakumull
                       </div>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
                       <div>
                         <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
                           Parent / Guardian Name (For Children)
@@ -449,7 +449,7 @@ Please review this application and schedule the placement assessment. Jazakumull
                       Select the primary course you wish to study at Al-Irshaad Islamic Institute.
                     </p>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
                       {[
                         { title: 'Nuurul Bayaan', desc: 'Arabic reading foundations for absolute beginners' },
                         { title: 'Qur\'an Recitation & Tajweed', desc: 'Applied pronunciation, rules, and fluent recitation' },
@@ -520,7 +520,7 @@ Please review this application and schedule the placement assessment. Jazakumull
                       Customize your weekly session format and preferred time windows.
                     </p>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
                       <div>
                         <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
                           Class Format *
@@ -591,7 +591,7 @@ Please review this application and schedule the placement assessment. Jazakumull
                       Help our academic team design your personalized placement roadmap.
                     </p>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
                       <div>
                         <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
                           Previous Qur'an Education
@@ -658,7 +658,7 @@ Please review this application and schedule the placement assessment. Jazakumull
                         Application Summary
                       </h4>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', fontSize: '0.92rem' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem', fontSize: '0.92rem' }}>
                         <div>
                           <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: '0.8rem' }}>Student Name</span>
                           <strong>{formData.fullName || 'Not provided'}</strong>
@@ -703,7 +703,7 @@ Please review this application and schedule the placement assessment. Jazakumull
                         </div>
                       </div>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.75rem', marginTop: '0.65rem' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '0.75rem', marginTop: '0.65rem' }}>
                         <div style={{ background: '#FFFFFF', padding: '0.75rem 1rem', borderRadius: '10px', border: '1px solid #CBD5E1', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                           <IconMail size={18} color="#005DB8" />
                           <div>
@@ -811,7 +811,7 @@ Please review this application and schedule the placement assessment. Jazakumull
               </div>
 
               {/* Two Destination Channels Box */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.85rem', maxWidth: '640px', margin: '0 auto 1.75rem auto', textAlign: 'left', width: '100%', boxSizing: 'border-box' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '0.85rem', maxWidth: '640px', margin: '0 auto 1.75rem auto', textAlign: 'left', width: '100%', boxSizing: 'border-box' }}>
                 <div style={{ background: '#F0FDF4', border: '1.5px solid #86EFAC', borderRadius: '14px', padding: '1rem 1.15rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem', color: '#166534', fontWeight: '700', fontSize: '0.9rem' }}>
                     <IconWhatsApp size={18} color="#166534" />

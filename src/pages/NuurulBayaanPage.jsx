@@ -57,7 +57,7 @@ export default function NuurulBayaanPage() {
               boxShadow: 'var(--shadow-md)',
               padding: '2rem',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 150px), 1fr))',
               gap: '1.5rem',
               marginBottom: '4.5rem'
             }}
@@ -84,7 +84,7 @@ export default function NuurulBayaanPage() {
           </div>
 
           {/* Description & Goal */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center', marginBottom: '5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: 'clamp(2rem, 4vw, 3.5rem)', alignItems: 'center', marginBottom: '5rem' }}>
             <div>
               <span className="badge-emerald" style={{ marginBottom: '1rem' }}>Methodology Overview</span>
               <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', color: 'var(--primary)', marginBottom: '1.25rem' }}>
