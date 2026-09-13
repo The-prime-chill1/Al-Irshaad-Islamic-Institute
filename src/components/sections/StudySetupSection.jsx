@@ -121,22 +121,23 @@ export default function StudySetupSection() {
               All you need is a computer, tablet or smartphone, a headset, and a reliable internet connection.
             </p>
 
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', width: '100%' }}>
               <Link 
                 to="/programs" 
                 className="btn btn-gold btn-md" 
-                style={{ minWidth: '180px', padding: '0.85rem 1.75rem' }}
+                style={{ flex: '1 1 160px', maxWidth: '240px', padding: '0.85rem 1.75rem', justifyContent: 'center' }}
               >
                 View Our Programs
               </Link>
               <Link 
                 to="/enroll" 
                 className="btn btn-outline btn-md" 
-                style={{ minWidth: '180px', padding: '0.85rem 1.75rem' }}
+                style={{ flex: '1 1 160px', maxWidth: '240px', padding: '0.85rem 1.75rem', justifyContent: 'center' }}
               >
                 Enroll Now
               </Link>
             </div>
+
 
           </div>
 

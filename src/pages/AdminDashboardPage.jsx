@@ -473,7 +473,7 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Program Filter */}
-          <div style={{ minWidth: '180px' }}>
+          <div style={{ flex: '1 1 160px', minWidth: 'min(100%, 140px)' }}>
             <select
               value={filterProgram}
               onChange={(e) => setFilterProgram(e.target.value)}
@@ -497,7 +497,7 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Status Filter */}
-          <div style={{ minWidth: '150px' }}>
+          <div style={{ flex: '1 1 140px', minWidth: 'min(100%, 130px)' }}>
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
@@ -519,7 +519,7 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Country Filter */}
-          <div style={{ minWidth: '160px' }}>
+          <div style={{ flex: '1 1 140px', minWidth: 'min(100%, 130px)' }}>
             <select
               value={filterCountry}
               onChange={(e) => setFilterCountry(e.target.value)}
@@ -542,7 +542,7 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Gender Filter */}
-          <div style={{ minWidth: '120px' }}>
+          <div style={{ flex: '1 1 120px', minWidth: 'min(100%, 110px)' }}>
             <select
               value={filterGender}
               onChange={(e) => setFilterGender(e.target.value)}
@@ -560,6 +560,7 @@ export default function AdminDashboardPage() {
               <option value="Female">Female</option>
             </select>
           </div>
+
 
           {/* Reset Filters button */}
           {(searchTerm || filterProgram !== 'ALL' || filterStatus !== 'ALL' || filterGender !== 'ALL' || filterCountry !== 'ALL') && (

@@ -604,12 +604,15 @@ export default function CoursePricingCalculatorSection() {
             borderRadius: '24px',
             border: '2px solid rgba(197, 168, 105, 0.45)',
             boxShadow: '0 10px 30px rgba(3, 17, 34, 0.08)',
-            padding: 'clamp(1.75rem, 4vw, 2.75rem)',
+            padding: 'clamp(1.25rem, 3.5vw, 2.75rem)',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '2.5rem',
-            alignItems: 'center'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+            gap: '2rem',
+            alignItems: 'center',
+            width: '100%',
+            boxSizing: 'border-box'
           }}>
+
             {/* Left: What's included in this customized enrollment */}
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>

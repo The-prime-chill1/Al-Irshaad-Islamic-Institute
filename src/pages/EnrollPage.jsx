@@ -221,15 +221,19 @@ Please review this application and schedule the placement assessment. Jazakumull
           
           {!isSubmitted ? (
             <div 
+              className="enroll-form-card"
               style={{
                 background: 'var(--bg-card)',
                 borderRadius: '24px',
                 border: '1px solid var(--border-medium)',
                 boxShadow: 'var(--shadow-lg)',
-                padding: 'clamp(2rem, 4vw, 3.5rem)',
-                position: 'relative'
+                padding: 'clamp(1.25rem, 3.5vw, 3rem) clamp(1rem, 3vw, 2.5rem)',
+                position: 'relative',
+                width: '100%',
+                boxSizing: 'border-box'
               }}
             >
+
               
               {/* Stepper Progress Bar */}
               <div style={{ marginBottom: '2.5rem' }}>
@@ -721,13 +725,12 @@ Please review this application and schedule the placement assessment. Jazakumull
                 )}
 
                 {/* Form Navigation Controls */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-medium)' }}>
+                <div className="enroll-nav-controls">
                   {currentStep > 1 ? (
                     <button 
                       type="button" 
                       onClick={prevStep}
-                      className="btn btn-outline"
-                      style={{ padding: '0.75rem 1.5rem' }}
+                      className="btn btn-outline enroll-btn-back"
                     >
                       ← Back
                     </button>
@@ -737,8 +740,7 @@ Please review this application and schedule the placement assessment. Jazakumull
                     <button 
                       type="button" 
                       onClick={nextStep}
-                      className="btn btn-primary"
-                      style={{ padding: '0.85rem 2rem' }}
+                      className="btn btn-primary enroll-btn-next"
                     >
                       <span>Continue Next Step</span>
                       <IconArrowRight size={16} color="#FFFFFF" />
@@ -747,8 +749,7 @@ Please review this application and schedule the placement assessment. Jazakumull
                     <button 
                       type="submit" 
                       disabled={isSubmitting}
-                      className="btn btn-gold btn-lg"
-                      style={{ minWidth: '280px', padding: '1rem 2rem', fontWeight: 700 }}
+                      className="btn btn-gold btn-lg enroll-btn-submit"
                     >
                       <IconCheckCircle size={20} color="#031122" />
                       <span>{isSubmitting ? 'Transmitting to Email & WhatsApp...' : 'Submit Application (Email + WhatsApp)'}</span>
@@ -756,100 +757,108 @@ Please review this application and schedule the placement assessment. Jazakumull
                   )}
                 </div>
 
+
               </form>
 
             </div>
           ) : (
             /* Application Success State */
             <div 
+              className="enroll-success-card"
               style={{
                 background: 'var(--bg-card)',
                 borderRadius: '24px',
                 border: '2px solid var(--accent-gold)',
                 boxShadow: 'var(--shadow-lg)',
-                padding: 'clamp(2.5rem, 5vw, 4rem)',
-                textAlign: 'center'
+                padding: 'clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 3vw, 2.5rem)',
+                textAlign: 'center',
+                width: '100%',
+                boxSizing: 'border-box'
               }}
             >
               <div 
                 style={{
-                  width: '76px',
-                  height: '76px',
+                  width: '68px',
+                  height: '68px',
                   borderRadius: '50%',
                   background: 'rgba(0, 93, 184, 0.08)',
                   color: 'var(--primary)',
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginBottom: '1.5rem'
+                  marginBottom: '1.25rem'
                 }}
               >
-                <IconCheckCircle size={42} color="var(--primary)" />
+                <IconCheckCircle size={38} color="var(--primary)" />
               </div>
 
-              <span className="badge-gold" style={{ marginBottom: '1rem', display: 'inline-block' }}>
+              <span className="badge-gold" style={{ marginBottom: '0.85rem', display: 'inline-block' }}>
                 Application Transmitted to Email & WhatsApp
               </span>
 
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', color: 'var(--primary)', marginBottom: '0.75rem' }}>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.3rem)', color: 'var(--primary)', marginBottom: '0.75rem' }}>
                 Assalamu Alaikum, {formData.fullName}!
               </h2>
 
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: '650px', margin: '0 auto 1.5rem auto', lineHeight: '1.7' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.98rem', maxWidth: '650px', margin: '0 auto 1.5rem auto', lineHeight: '1.65' }}>
                 Your enrollment application for <strong>{formData.program}</strong> has been logged into the Al-Irshaad Admissions Database and prepared for instant dispatch to both <strong>Official Email</strong> and <strong>WhatsApp</strong>.
               </p>
 
               {/* Reference ID Pill */}
-              <div style={{ display: 'inline-block', padding: '0.85rem 2rem', background: 'var(--bg-cream)', borderRadius: '12px', border: '1px solid var(--border-medium)', marginBottom: '2rem' }}>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Your Application Tracking ID</span>
-                <strong style={{ fontSize: '1.4rem', color: 'var(--primary)', fontFamily: 'var(--font-heading)' }}>{applicationId}</strong>
+              <div style={{ display: 'inline-block', padding: '0.75rem 1.5rem', background: 'var(--bg-cream)', borderRadius: '12px', border: '1px solid var(--border-medium)', marginBottom: '1.75rem', maxWidth: '100%', boxSizing: 'border-box' }}>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Your Application Tracking ID</span>
+                <strong style={{ fontSize: 'clamp(1.15rem, 2.5vw, 1.4rem)', color: 'var(--primary)', fontFamily: 'var(--font-heading)', wordBreak: 'break-all' }}>{applicationId}</strong>
               </div>
 
               {/* Two Destination Channels Box */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', maxWidth: '640px', margin: '0 auto 2rem auto', textAlign: 'left' }}>
-                <div style={{ background: '#F0FDF4', border: '1.5px solid #86EFAC', borderRadius: '14px', padding: '1.1rem 1.25rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem', color: '#166534', fontWeight: '700', fontSize: '0.92rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.85rem', maxWidth: '640px', margin: '0 auto 1.75rem auto', textAlign: 'left', width: '100%', boxSizing: 'border-box' }}>
+                <div style={{ background: '#F0FDF4', border: '1.5px solid #86EFAC', borderRadius: '14px', padding: '1rem 1.15rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem', color: '#166534', fontWeight: '700', fontSize: '0.9rem' }}>
                     <IconWhatsApp size={18} color="#166534" />
                     <span>Channel 1: WhatsApp</span>
                   </div>
-                  <p style={{ fontSize: '0.82rem', color: '#334155', margin: 0, lineHeight: 1.5 }}>
+                  <p style={{ fontSize: '0.8rem', color: '#334155', margin: 0, lineHeight: 1.5 }}>
                     Sent directly to Ustadh Nasir at <strong>{contactData.phoneFormatted}</strong> for quick scheduling.
                   </p>
                 </div>
 
-                <div style={{ background: '#EFF6FF', border: '1.5px solid #93C5FD', borderRadius: '14px', padding: '1.1rem 1.25rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem', color: '#1E40AF', fontWeight: '700', fontSize: '0.92rem' }}>
+                <div style={{ background: '#EFF6FF', border: '1.5px solid #93C5FD', borderRadius: '14px', padding: '1rem 1.15rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem', color: '#1E40AF', fontWeight: '700', fontSize: '0.9rem' }}>
                     <IconMail size={18} color="#1E40AF" />
                     <span>Channel 2: Official Email</span>
                   </div>
-                  <p style={{ fontSize: '0.82rem', color: '#334155', margin: 0, lineHeight: 1.5 }}>
+                  <p style={{ fontSize: '0.8rem', color: '#334155', margin: 0, lineHeight: 1.5, wordBreak: 'break-all' }}>
                     Delivered to <strong>{contactData.email}</strong> for permanent registry documentation.
                   </p>
                 </div>
               </div>
 
-              {/* Dual Action Buttons */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '540px', margin: '0 auto 2.5rem auto' }}>
+              {/* Dual Action Buttons (Fully Responsive & Non-Overflowing) */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', maxWidth: '500px', margin: '0 auto 2rem auto', width: '100%', boxSizing: 'border-box' }}>
                 <a 
                   href={whatsappUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="btn btn-gold btn-lg"
-                  style={{ width: '100%', padding: '1rem', fontSize: '1.02rem', fontWeight: '700', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}
+                  className="btn btn-gold"
+                  style={{ width: '100%', padding: '0.9rem 1.25rem', fontSize: '0.95rem', fontWeight: '700', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', whiteSpace: 'normal', textAlign: 'center', lineHeight: 1.35, boxSizing: 'border-box' }}
                 >
-                  <IconWhatsApp size={22} color="#031122" />
-                  <span>Open & Confirm on WhatsApp ({contactData.phoneFormatted})</span>
+                  <IconWhatsApp size={22} color="#031122" style={{ flexShrink: 0 }} />
+                  <div>
+                    <span>Open & Confirm on WhatsApp</span>
+                    <span style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, opacity: 0.85 }}>({contactData.phoneFormatted})</span>
+                  </div>
                 </a>
 
                 <a 
                   href={emailMailtoUrl} 
-                  className="btn btn-outline btn-lg"
-                  style={{ width: '100%', padding: '0.9rem', fontSize: '0.95rem', fontWeight: '700', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', background: '#FFFFFF' }}
+                  className="btn btn-outline"
+                  style={{ width: '100%', padding: '0.85rem 1.25rem', fontSize: '0.92rem', fontWeight: '700', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', background: '#FFFFFF', whiteSpace: 'normal', textAlign: 'center', lineHeight: 1.35, boxSizing: 'border-box' }}
                 >
-                  <IconMail size={18} color="var(--primary)" />
+                  <IconMail size={18} color="var(--primary)" style={{ flexShrink: 0 }} />
                   <span>Send Direct Email Copy to Admissions Desk</span>
                 </a>
               </div>
+
 
               {/* Next Steps Card */}
               <div style={{ background: 'var(--bg-cream)', borderRadius: '16px', padding: '1.5rem', textAlign: 'left', maxWidth: '600px', margin: '0 auto 2rem auto', border: '1px solid var(--border-medium)' }}>
@@ -872,6 +881,74 @@ Please review this application and schedule the placement assessment. Jazakumull
 
         </div>
       </section>
+
+      <style>{`
+
+        .enroll-nav-controls {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 0.75rem;
+          margin-top: 2rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid var(--border-medium);
+          width: 100%;
+          box-sizing: border-box;
+        }
+
+        .enroll-btn-back {
+          padding: 0.75rem 1.35rem;
+          font-size: 0.92rem;
+          flex-shrink: 0;
+        }
+
+        .enroll-btn-next {
+          padding: 0.85rem 1.75rem;
+          font-size: 0.92rem;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+
+        .enroll-btn-submit {
+          min-width: 280px;
+          padding: 1rem 2rem;
+          font-weight: 700;
+        }
+
+        @media (max-width: 540px) {
+          .enroll-nav-controls {
+            flex-direction: row;
+            gap: 0.5rem;
+            width: 100%;
+          }
+
+          .enroll-btn-back {
+            padding: 0.7rem 0.9rem !important;
+            font-size: 0.82rem !important;
+            flex-shrink: 0 !important;
+          }
+
+          .enroll-btn-next {
+            padding: 0.7rem 0.9rem !important;
+            font-size: 0.82rem !important;
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
+            white-space: nowrap !important;
+            gap: 0.35rem !important;
+            justify-content: center !important;
+          }
+
+          .enroll-btn-submit {
+            width: 100% !important;
+            min-width: 0 !important;
+            font-size: 0.88rem !important;
+            padding: 0.85rem 0.9rem !important;
+            white-space: normal !important;
+            text-align: center !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
+

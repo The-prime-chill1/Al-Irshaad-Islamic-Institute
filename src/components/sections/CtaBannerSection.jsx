@@ -77,7 +77,7 @@ export default function CtaBannerSection({
           {subtitle}
         </p>
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: '1.25rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: '1.25rem', width: '100%' }}>
           <Link to="/enroll" style={{ textDecoration: 'none' }}>
             <StarBorder
               as="div"
@@ -97,14 +97,15 @@ export default function CtaBannerSection({
 
           <a 
             href={contactData.whatsappLink}
-            target="_blank"
+            target="_blank" 
             rel="noopener noreferrer"
             className="btn btn-outline-light btn-lg"
-            style={{ minWidth: '200px', borderColor: 'rgba(197, 168, 105, 0.5)' }}
+            style={{ padding: '0.9rem 1.75rem', borderColor: 'rgba(197, 168, 105, 0.5)' }}
           >
             <span>Ask a Question</span>
           </a>
         </div>
+
 
         {/* Quick Phone Call Tag */}
         <div style={{ marginTop: '2rem', fontSize: '0.9rem', color: 'var(--text-on-dark-muted)' }}>
