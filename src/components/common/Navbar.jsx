@@ -333,7 +333,7 @@ export default function Navbar() {
           left: 0;
           right: 0;
           width: 100%;
-          max-width: 100vw;
+          max-width: 100%;
           z-index: 1000;
         }
 
@@ -349,6 +349,7 @@ export default function Navbar() {
         .nav-bar-wrapper {
           position: relative;
           width: 100%;
+          max-width: 100%;
           background: rgba(255, 255, 255, 0.98);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
@@ -365,12 +366,12 @@ export default function Navbar() {
         .nav-bar-inner {
           max-width: 1240px;
           margin: 0 auto;
-          padding: 0.45rem 1rem;
+          padding: 0.45rem clamp(0.6rem, 2.5vw, 1rem);
           display: flex;
           align-items: center;
           justify-content: space-between;
           box-sizing: border-box;
-          gap: 0.5rem;
+          gap: 0.4rem;
           width: 100%;
         }
 
@@ -380,22 +381,22 @@ export default function Navbar() {
         .nav-brand {
           display: flex;
           align-items: center;
-          flex-shrink: 0;
+          flex-shrink: 1;
           min-width: 0;
         }
 
         .brand-link {
           display: inline-flex;
           align-items: center;
-          gap: clamp(0.35rem, 1.5vw, 0.55rem);
+          gap: clamp(0.3rem, 1.5vw, 0.5rem);
           text-decoration: none;
           min-width: 0;
         }
 
         .brand-seal-wrap {
-          width: 36px;
-          height: 36px;
-          min-width: 36px;
+          width: 34px;
+          height: 34px;
+          min-width: 34px;
           border-radius: 50%;
           padding: 1.5px;
           background: #FFFFFF;
@@ -424,7 +425,7 @@ export default function Navbar() {
         .brand-main {
           font-family: var(--font-heading, 'Plus Jakarta Sans', sans-serif);
           font-weight: 800;
-          font-size: clamp(0.85rem, 2.5vw, 0.98rem);
+          font-size: clamp(0.78rem, 2.5vw, 0.95rem);
           color: #005DB8;
           letter-spacing: 0.02em;
           line-height: 1.1;
@@ -434,9 +435,9 @@ export default function Navbar() {
         .brand-sub {
           font-family: var(--font-sans, sans-serif);
           font-weight: 700;
-          font-size: clamp(0.5rem, 1.5vw, 0.56rem);
+          font-size: clamp(0.46rem, 1.4vw, 0.54rem);
           color: #B8860B;
-          letter-spacing: 0.09em;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
           line-height: 1.15;
           margin-top: 1px;
@@ -584,7 +585,7 @@ export default function Navbar() {
         .mobile-controls-row {
           display: flex;
           align-items: center;
-          gap: 0.45rem;
+          gap: 0.35rem;
           flex-shrink: 0;
         }
 
@@ -592,12 +593,12 @@ export default function Navbar() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          padding: 0.32rem 0.72rem;
+          padding: 0.28rem 0.65rem;
           border-radius: 9999px;
           background: linear-gradient(135deg, #FFE8AA 0%, #D4A347 50%, #B8892D 100%);
           color: #031122 !important;
           font-weight: 700;
-          font-size: 0.76rem;
+          font-size: 0.75rem;
           text-decoration: none;
           box-shadow: 0 2px 6px rgba(197, 168, 105, 0.3);
           border: 1px solid rgba(255, 255, 255, 0.5);
@@ -605,20 +606,21 @@ export default function Navbar() {
         }
 
         .mobile-menu-trigger {
-          width: 36px;
-          height: 36px;
-          min-width: 36px;
-          border-radius: 8px;
+          width: 34px;
+          height: 34px;
+          min-width: 34px;
+          border-radius: 7px;
           border: 1.5px solid rgba(0, 93, 184, 0.2);
           background: #FFFFFF;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          gap: 4px;
+          gap: 3.5px;
           padding: 0;
           cursor: pointer;
           transition: all 0.2s ease;
+          flex-shrink: 0;
         }
 
         .mobile-menu-trigger:active {
@@ -626,7 +628,7 @@ export default function Navbar() {
         }
 
         .hamburger-bar {
-          width: 17px;
+          width: 16px;
           height: 2px;
           background-color: #005DB8;
           border-radius: 2px;
@@ -634,7 +636,7 @@ export default function Navbar() {
         }
 
         .mobile-menu-trigger.is-active .top-bar {
-          transform: translateY(6px) rotate(45deg);
+          transform: translateY(5.5px) rotate(45deg);
         }
 
         .mobile-menu-trigger.is-active .mid-bar {
@@ -642,7 +644,7 @@ export default function Navbar() {
         }
 
         .mobile-menu-trigger.is-active .bot-bar {
-          transform: translateY(-6px) rotate(-45deg);
+          transform: translateY(-5.5px) rotate(-45deg);
         }
 
         /* ==========================================================================
@@ -654,6 +656,7 @@ export default function Navbar() {
           left: 0;
           right: 0;
           width: 100%;
+          max-width: 100%;
           background: #FFFFFF;
           border-bottom: 2px solid #C5A869;
           box-shadow: 0 14px 30px rgba(3, 17, 34, 0.15);
@@ -664,7 +667,7 @@ export default function Navbar() {
         }
 
         .mobile-menu-content {
-          padding: 0.75rem 1rem 1rem 1rem;
+          padding: 0.75rem 0.85rem 1rem 0.85rem;
           display: flex;
           flex-direction: column;
           gap: 0.15rem;
@@ -798,30 +801,57 @@ export default function Navbar() {
           .mobile-dropdown-menu { display: none !important; }
         }
 
-        @media (max-width: 359px) {
+        @media (max-width: 480px) {
           .nav-bar-inner {
-            padding: 0.4rem 0.5rem;
+            padding: 0.4rem 0.65rem;
             gap: 0.3rem;
           }
           .brand-seal-wrap {
-            width: 30px;
-            height: 30px;
-            min-width: 30px;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
           }
           .brand-main {
-            font-size: 0.8rem;
+            font-size: 0.82rem;
           }
           .brand-sub {
             font-size: 0.48rem;
           }
           .mobile-enroll-pill {
-            padding: 0.28rem 0.55rem;
-            font-size: 0.7rem;
+            padding: 0.25rem 0.55rem;
+            font-size: 0.72rem;
           }
           .mobile-menu-trigger {
             width: 32px;
             height: 32px;
             min-width: 32px;
+          }
+        }
+
+        @media (max-width: 340px) {
+          .nav-bar-inner {
+            padding: 0.35rem 0.45rem;
+            gap: 0.2rem;
+          }
+          .brand-seal-wrap {
+            width: 28px;
+            height: 28px;
+            min-width: 28px;
+          }
+          .brand-main {
+            font-size: 0.74rem;
+          }
+          .brand-sub {
+            font-size: 0.44rem;
+          }
+          .mobile-enroll-pill {
+            padding: 0.22rem 0.45rem;
+            font-size: 0.68rem;
+          }
+          .mobile-menu-trigger {
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
           }
         }
       `}</style>

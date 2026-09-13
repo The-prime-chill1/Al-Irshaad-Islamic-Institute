@@ -237,6 +237,7 @@ export default function HeroSection() {
 
 
         /* 4. Content Layout */
+        /* 4. Content Layout */
         .hero-content-container {
           position: relative;
           z-index: 10;
@@ -245,26 +246,33 @@ export default function HeroSection() {
           align-items: center;
           text-align: center;
           max-width: 1020px;
+          width: 100%;
           margin: 0 auto;
-          padding: 0 1.25rem;
+          padding: 0 clamp(0.75rem, 3vw, 1.25rem);
+          box-sizing: border-box;
         }
 
         /* Eyebrow Badge */
         .hero-badge {
           display: inline-flex;
           align-items: center;
-          gap: 0.5rem;
-          padding: 0.4rem 1.2rem;
+          justify-content: center;
+          gap: 0.45rem;
+          padding: 0.35rem clamp(0.65rem, 2vw, 1.1rem);
           border-radius: 9999px;
           background: rgba(3, 17, 34, 0.65);
           border: 1px solid rgba(197, 168, 105, 0.45);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          font-size: 0.825rem;
+          font-size: clamp(0.72rem, 2.2vw, 0.825rem);
           font-weight: 600;
           color: var(--accent-gold-light);
-          margin-bottom: 1.25rem;
+          margin-bottom: 1.1rem;
           box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+          max-width: 100%;
+          box-sizing: border-box;
+          line-height: 1.35;
+          text-align: center;
         }
 
         .hero-badge-dot {
@@ -274,19 +282,21 @@ export default function HeroSection() {
           background: #25D366;
           box-shadow: 0 0 8px #25D366;
           display: inline-block;
+          flex-shrink: 0;
         }
 
         .hero-badge-sparkle {
           color: var(--accent-gold);
           font-size: 0.85rem;
+          flex-shrink: 0;
         }
 
         /* Arabic Bismillah */
         .hero-bismillah {
           font-family: var(--font-arabic);
-          font-size: clamp(1.6rem, 3.2vw, 2.5rem);
+          font-size: clamp(1.45rem, 3.2vw, 2.5rem);
           color: var(--accent-gold-light);
-          margin-bottom: 0.65rem;
+          margin-bottom: 0.5rem;
           text-shadow: 0 2px 16px rgba(197, 168, 105, 0.5), 0 4px 20px rgba(0,0,0,0.8);
           letter-spacing: 0.03em;
         }
@@ -294,13 +304,16 @@ export default function HeroSection() {
         /* Headline */
         .hero-title {
           font-family: var(--font-serif);
-          font-size: clamp(2.5rem, 5.5vw, 4.6rem);
+          font-size: clamp(1.85rem, 5.5vw, 4.4rem);
           font-weight: 700;
-          line-height: 1.15;
+          line-height: 1.18;
           letter-spacing: -0.01em;
           color: #FFFFFF;
-          margin-bottom: 1.25rem;
+          margin-bottom: 1.15rem;
           text-shadow: 0 4px 25px rgba(0, 0, 0, 0.85), 0 2px 6px rgba(0,0,0,0.6);
+          word-break: normal;
+          overflow-wrap: break-word;
+          max-width: 100%;
         }
 
         .hero-title-accent {
@@ -521,21 +534,49 @@ export default function HeroSection() {
 
         @media (max-width: 640px) {
           .hero-cinema-wrapper {
-            padding-top: 3.5rem;
-            padding-bottom: 3.5rem;
+            padding-top: 3.25rem;
+            padding-bottom: 3.25rem;
           }
           .hero-badge {
-            font-size: 0.76rem;
-            padding: 0.35rem 0.9rem;
+            font-size: 0.74rem;
+            padding: 0.32rem 0.8rem;
             line-height: 1.35;
-            margin-bottom: 1rem;
+            margin-bottom: 0.85rem;
           }
           .hero-trust-bar {
             grid-template-columns: 1fr;
             gap: 0.85rem;
+            padding: 1rem;
+          }
+          .hero-actions {
+            width: 100%;
+            max-width: 380px;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
           }
           .hero-btn-gold, .hero-btn-outline, .hero-btn-whatsapp {
             width: 100%;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-cinema-wrapper {
+            padding-top: 2.75rem;
+            padding-bottom: 2.75rem;
+          }
+          .hero-title {
+            font-size: clamp(1.75rem, 8vw, 2.35rem);
+            margin-bottom: 0.85rem;
+          }
+          .hero-bismillah {
+            font-size: 1.35rem;
+          }
+          .hero-hadith-text {
+            font-size: 0.96rem;
+          }
+          .hero-subtext {
+            font-size: 0.88rem;
+            margin-bottom: 1.4rem;
           }
         }
       `}</style>
