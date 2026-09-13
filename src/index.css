@@ -67,7 +67,7 @@
   color: #031122;
 }
 
-/* Base Reset & Typography */
+/* Base Reset & Strict Mobile Overflow Lock */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -79,6 +79,9 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 body {
@@ -87,7 +90,19 @@ body {
   background-color: var(--bg-ivory);
   line-height: 1.65;
   overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
+  touch-action: pan-y;
 }
+
+#root, .app-layout {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
+}
+
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {

@@ -260,24 +260,12 @@ export default function Navbar() {
                 </button>
               </div>
             ) : (
-              <>
-                <a 
-                  href={contactData.whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="navbar-whatsapp-btn"
-                >
-                  <IconWhatsApp size={16} color="#128C7E" />
-                  <span>Admissions WhatsApp</span>
-                </a>
-
-                <Link 
-                  to="/enroll" 
-                  className="navbar-cta-btn"
-                >
-                  <span>Enroll Now</span>
-                </Link>
-              </>
+              <Link 
+                to="/enroll" 
+                className="navbar-cta-btn"
+              >
+                <span>Enroll Now</span>
+              </Link>
             )}
           </div>
 
@@ -472,10 +460,20 @@ export default function Navbar() {
           top: 8px;
           z-index: 1000;
           width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
           padding: 0 1rem;
           margin-top: -22px;
           transition: all 0.25s ease;
         }
+
+        @media (max-width: 480px) {
+          .navbar-floating-wrapper {
+            padding: 0 0.5rem;
+            top: 4px;
+          }
+        }
+
 
         .navbar-pill {
           max-width: 1380px;

@@ -188,31 +188,16 @@ export default function HeroSection() {
           color: #FFFFFF;
         }
 
-        /* 1. Ken Burns Slow Cinematic Motion */
+        /* 1. Solid Majestic Mosque Background (Static & Completely Stable) */
         .hero-cinema-bg {
           position: absolute;
-          inset: -20px;
+          inset: 0;
           background-size: cover;
           background-position: center 36%;
           background-repeat: no-repeat;
-          filter: contrast(108%) saturate(115%) brightness(0.95);
-          animation: kenBurnsSmooth 32s cubic-bezier(0.25, 1, 0.5, 1) infinite alternate;
+          filter: contrast(105%) saturate(110%) brightness(0.95);
           pointer-events: none;
           z-index: 1;
-          will-change: transform;
-          transform: translateZ(0);
-        }
-
-        @keyframes kenBurnsSmooth {
-          0% {
-            transform: scale(1.0) translateY(0);
-          }
-          50% {
-            transform: scale(1.06) translateY(-10px);
-          }
-          100% {
-            transform: scale(1.12) translateY(5px);
-          }
         }
 
         /* 2. Luxury Dark Cinematic Vignette */
@@ -230,7 +215,7 @@ export default function HeroSection() {
           z-index: 2;
         }
 
-        /* 3. Floating Gold Particles */
+        /* 3. Static Golden Stars/Dust (No moving drift) */
         .hero-particles-container {
           position: absolute;
           inset: 0;
@@ -244,17 +229,8 @@ export default function HeroSection() {
           border-radius: 50%;
           background: radial-gradient(circle, #FFE49E 20%, #C5A869 80%, transparent 100%);
           box-shadow: 0 0 8px rgba(224, 199, 136, 0.7);
-          animation: particleDrift infinite ease-in-out alternate;
         }
 
-        @keyframes particleDrift {
-          0% {
-            transform: translateY(0) scale(0.85);
-          }
-          100% {
-            transform: translateY(-25px) scale(1.2);
-          }
-        }
 
         /* 4. Content Layout */
         .hero-content-container {
