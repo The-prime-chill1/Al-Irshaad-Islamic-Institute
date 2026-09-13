@@ -91,14 +91,17 @@ export default function GlobalLearningSection() {
             background: 'var(--bg-card)',
             borderRadius: '24px',
             border: '1px solid var(--border-medium)',
-            padding: 'clamp(2.5rem, 5vw, 4rem) 2rem',
+            padding: 'clamp(1.75rem, 4vw, 3.5rem) clamp(1rem, 3vw, 2rem)',
             textAlign: 'center',
             marginBottom: '4.5rem',
             boxShadow: 'var(--shadow-md)',
             position: 'relative',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            boxSizing: 'border-box',
+            width: '100%'
           }}
         >
+
           {/* Watermark subtle Islamic geometry */}
           <div 
             style={{
@@ -222,28 +225,17 @@ export default function GlobalLearningSection() {
         </div>
 
         {/* =========================================================================
-            OUR GLOBAL IMPACT & EDUCATIONAL MILESTONES (LUXURY REDESIGN)
+            OUR GLOBAL IMPACT & EDUCATIONAL MILESTONES (100% RESPONSIVE REDESIGN)
            ========================================================================= */}
-        <div 
-          style={{
-            background: '#FFFFFF',
-            borderRadius: '24px',
-            border: '1.5px solid rgba(197, 168, 105, 0.3)',
-            padding: 'clamp(2.5rem, 5vw, 3.8rem)',
-            boxShadow: '0 12px 36px rgba(7, 28, 52, 0.08)',
-            marginBottom: '3.5rem',
-            position: 'relative',
-            overflow: 'hidden'
-          }}
-        >
+        <div className="global-impact-card">
           {/* Subtle Golden Glow Accents in Corners */}
           <div 
             style={{
               position: 'absolute',
               top: '-120px',
               right: '-120px',
-              width: '280px',
-              height: '280px',
+              width: '240px',
+              height: '240px',
               borderRadius: '50%',
               background: 'radial-gradient(circle, rgba(197, 168, 105, 0.15) 0%, transparent 70%)',
               pointerEvents: 'none'
@@ -254,8 +246,8 @@ export default function GlobalLearningSection() {
               position: 'absolute',
               bottom: '-120px',
               left: '-120px',
-              width: '280px',
-              height: '280px',
+              width: '240px',
+              height: '240px',
               borderRadius: '50%',
               background: 'radial-gradient(circle, rgba(0, 93, 184, 0.08) 0%, transparent 70%)',
               pointerEvents: 'none'
@@ -263,23 +255,23 @@ export default function GlobalLearningSection() {
           />
 
           {/* Section Header */}
-          <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 3.25rem auto', position: 'relative', zIndex: 1 }}>
+          <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 2.5rem auto', position: 'relative', zIndex: 1 }}>
             <span className="badge-gold" style={{ marginBottom: '0.65rem' }}>
-              ✦ Educational Milestones & Proven Retention ✦
+              ✦ Educational Milestones & Retention ✦
             </span>
-            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', color: 'var(--primary-dark)', margin: 0, fontFamily: 'var(--font-serif)' }}>
+            <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: 'var(--primary-dark)', margin: 0, fontFamily: 'var(--font-serif)' }}>
               Our Global Impact
             </h2>
-            <p style={{ color: 'var(--text-secondary)', marginTop: '0.65rem', fontSize: '1rem', lineHeight: '1.6' }}>
+            <p style={{ color: 'var(--text-secondary)', marginTop: '0.65rem', fontSize: 'clamp(0.9rem, 1.8vw, 1rem)', lineHeight: '1.6' }}>
               Structured, measurable learning pathways designed for continuous student motivation, Tajweed fluency, and lifelong Islamic grounding.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', alignItems: 'center', gap: '3.5rem', position: 'relative', zIndex: 1 }}>
+          <div className="global-impact-grid">
             
             {/* Left: Luminous Multi-Ring Concentric Radial Dial */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ position: 'relative', width: '280px', height: '280px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+              <div className="radial-dial-wrapper">
                 
                 {/* SVG Radial Multi-Orbit Chart */}
                 <svg viewBox="0 0 240 240" style={{ width: '100%', height: '100%', transform: 'rotate(-90deg)' }}>
@@ -320,151 +312,119 @@ export default function GlobalLearningSection() {
                 </svg>
 
                 {/* Center High-Prestige Seal */}
-                <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '1rem' }}>
-                  <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'linear-gradient(135deg, #FAF7F2, #F3EFEA)', border: '1px solid rgba(197, 168, 105, 0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.2rem', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
-                    <IconSparkle size={18} color="var(--accent-gold-dark)" />
+                <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0.75rem' }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'linear-gradient(135deg, #FAF7F2, #F3EFEA)', border: '1px solid rgba(197, 168, 105, 0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.2rem', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+                    <IconSparkle size={16} color="var(--accent-gold-dark)" />
                   </div>
-                  <strong style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary)', lineHeight: 1.1 }}>
+                  <strong style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.25rem)', fontWeight: 800, color: 'var(--primary)', lineHeight: 1.1 }}>
                     98.4%
                   </strong>
-                  <span style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.04em', textTransform: 'uppercase', marginTop: '2px' }}>
+                  <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.04em', textTransform: 'uppercase', marginTop: '2px' }}>
                     Retention Rate
                   </span>
                 </div>
               </div>
 
               {/* Ring Quick Legend */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.6rem 1.25rem', marginTop: '1.75rem', width: '100%', maxWidth: '300px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#D4A347', flexShrink: 0 }} />
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem 1rem', marginTop: '1.5rem', width: '100%', maxWidth: '300px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.76rem', color: 'var(--text-secondary)' }}>
+                  <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: '#D4A347', flexShrink: 0 }} />
                   <span>500+ Students</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#005DB8', flexShrink: 0 }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.76rem', color: 'var(--text-secondary)' }}>
+                  <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: '#005DB8', flexShrink: 0 }} />
                   <span>6 Curricula</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10B981', flexShrink: 0 }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.76rem', color: 'var(--text-secondary)' }}>
+                  <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: '#10B981', flexShrink: 0 }} />
                   <span>15+ Countries</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                  <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#C5A869', flexShrink: 0 }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.76rem', color: 'var(--text-secondary)' }}>
+                  <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: '#C5A869', flexShrink: 0 }} />
                   <span>100% Huffaz</span>
                 </div>
               </div>
             </div>
 
-            {/* Right: 4 High-Impact Metric Cards with Clear Figures */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            {/* Right: 4 High-Impact Metric Cards with Fully Responsive Badges */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', minWidth: 0 }}>
               
               {/* Metric Card 1 */}
-              <div 
-                style={{
-                  background: 'var(--bg-ivory)',
-                  borderRadius: '16px',
-                  border: '1px solid var(--border-medium)',
-                  padding: '1.15rem 1.35rem',
-                  transition: 'all 0.25s ease'
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                  <div>
-                    <h4 style={{ fontSize: '1.05rem', color: 'var(--primary-dark)', margin: 0, fontWeight: 700 }}>
+              <div className="impact-stat-card">
+                <div className="impact-stat-header">
+                  <div className="impact-stat-text">
+                    <h4 className="impact-stat-title">
                       Live Interactive Students
                     </h4>
-                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                    <span className="impact-stat-desc">
                       Personalized 1-on-1 virtual classrooms
                     </span>
                   </div>
-                  <span style={{ background: 'rgba(197, 168, 105, 0.15)', color: 'var(--accent-gold-dark)', border: '1px solid rgba(197, 168, 105, 0.4)', borderRadius: '8px', padding: '0.2rem 0.65rem', fontWeight: 800, fontSize: '0.9rem', flexShrink: 0 }}>
+                  <span className="impact-stat-badge badge-gold-fill">
                     500+ Active
                   </span>
                 </div>
-                <div style={{ height: '8px', background: '#EAE5DB', borderRadius: '9999px', overflow: 'hidden' }}>
+                <div className="impact-stat-track">
                   <div style={{ width: '88%', height: '100%', background: 'linear-gradient(90deg, #D4A347, #BA8E35)', borderRadius: '9999px' }} />
                 </div>
               </div>
 
               {/* Metric Card 2 */}
-              <div 
-                style={{
-                  background: 'var(--bg-ivory)',
-                  borderRadius: '16px',
-                  border: '1px solid var(--border-medium)',
-                  padding: '1.15rem 1.35rem',
-                  transition: 'all 0.25s ease'
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                  <div>
-                    <h4 style={{ fontSize: '1.05rem', color: 'var(--primary-dark)', margin: 0, fontWeight: 700 }}>
+              <div className="impact-stat-card">
+                <div className="impact-stat-header">
+                  <div className="impact-stat-text">
+                    <h4 className="impact-stat-title">
                       Structured Courses & Tracks
                     </h4>
-                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                    <span className="impact-stat-desc">
                       Nuurul Bayaan to Hifdh & Classical Arabic
                     </span>
                   </div>
-                  <span style={{ background: 'rgba(0, 93, 184, 0.1)', color: 'var(--primary)', border: '1px solid rgba(0, 93, 184, 0.25)', borderRadius: '8px', padding: '0.2rem 0.65rem', fontWeight: 800, fontSize: '0.9rem', flexShrink: 0 }}>
+                  <span className="impact-stat-badge badge-blue-fill">
                     6 Tracks
                   </span>
                 </div>
-                <div style={{ height: '8px', background: '#EAE5DB', borderRadius: '9999px', overflow: 'hidden' }}>
+                <div className="impact-stat-track">
                   <div style={{ width: '100%', height: '100%', background: 'linear-gradient(90deg, #005DB8, #071C34)', borderRadius: '9999px' }} />
                 </div>
               </div>
 
               {/* Metric Card 3 */}
-              <div 
-                style={{
-                  background: 'var(--bg-ivory)',
-                  borderRadius: '16px',
-                  border: '1px solid var(--border-medium)',
-                  padding: '1.15rem 1.35rem',
-                  transition: 'all 0.25s ease'
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                  <div>
-                    <h4 style={{ fontSize: '1.05rem', color: 'var(--primary-dark)', margin: 0, fontWeight: 700 }}>
+              <div className="impact-stat-card">
+                <div className="impact-stat-header">
+                  <div className="impact-stat-text">
+                    <h4 className="impact-stat-title">
                       Countries & Diaspora Communities
                     </h4>
-                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                    <span className="impact-stat-desc">
                       USA, UK, Canada, South Africa, UAE & Nigeria
                     </span>
                   </div>
-                  <span style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#059669', border: '1px solid rgba(16, 185, 129, 0.25)', borderRadius: '8px', padding: '0.2rem 0.65rem', fontWeight: 800, fontSize: '0.9rem', flexShrink: 0 }}>
+                  <span className="impact-stat-badge badge-green-fill">
                     15+ Nations
                   </span>
                 </div>
-                <div style={{ height: '8px', background: '#EAE5DB', borderRadius: '9999px', overflow: 'hidden' }}>
+                <div className="impact-stat-track">
                   <div style={{ width: '82%', height: '100%', background: 'linear-gradient(90deg, #10B981, #059669)', borderRadius: '9999px' }} />
                 </div>
               </div>
 
               {/* Metric Card 4 */}
-              <div 
-                style={{
-                  background: 'var(--bg-ivory)',
-                  borderRadius: '16px',
-                  border: '1px solid var(--border-medium)',
-                  padding: '1.15rem 1.35rem',
-                  transition: 'all 0.25s ease'
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                  <div>
-                    <h4 style={{ fontSize: '1.05rem', color: 'var(--primary-dark)', margin: 0, fontWeight: 700 }}>
+              <div className="impact-stat-card">
+                <div className="impact-stat-header">
+                  <div className="impact-stat-text">
+                    <h4 className="impact-stat-title">
                       Certified Instructors & Huffaz
                     </h4>
-                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                      Rigorous Sanad vetting and pedagogical coaching
+                    <span className="impact-stat-desc">
+                      Rigorous Sanad vetting & pedagogical coaching
                     </span>
                   </div>
-                  <span style={{ background: 'rgba(197, 168, 105, 0.15)', color: 'var(--accent-gold-dark)', border: '1px solid rgba(197, 168, 105, 0.4)', borderRadius: '8px', padding: '0.2rem 0.65rem', fontWeight: 800, fontSize: '0.9rem', flexShrink: 0 }}>
+                  <span className="impact-stat-badge badge-gold-fill">
                     100% Certified
                   </span>
                 </div>
-                <div style={{ height: '8px', background: '#EAE5DB', borderRadius: '9999px', overflow: 'hidden' }}>
+                <div className="impact-stat-track">
                   <div style={{ width: '95%', height: '100%', background: 'linear-gradient(90deg, #C5A869, #BA8E35)', borderRadius: '9999px' }} />
                 </div>
               </div>
@@ -473,6 +433,128 @@ export default function GlobalLearningSection() {
 
           </div>
         </div>
+
+        {/* Scoped CSS for 100% Mobile Responsiveness */}
+        <style>{`
+          .global-impact-card {
+            background: #FFFFFF;
+            border-radius: 24px;
+            border: 1.5px solid rgba(197, 168, 105, 0.3);
+            padding: clamp(1.25rem, 4vw, 3.5rem);
+            box-shadow: 0 12px 36px rgba(7, 28, 52, 0.08);
+            margin-bottom: 3.5rem;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            box-sizing: border-box;
+          }
+
+          .global-impact-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+            align-items: center;
+            gap: 2.5rem;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+          }
+
+          @media (max-width: 860px) {
+            .global-impact-grid {
+              grid-template-columns: 1fr;
+              gap: 2rem;
+            }
+          }
+
+          .radial-dial-wrapper {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            max-width: 100%;
+          }
+
+          @media (max-width: 480px) {
+            .radial-dial-wrapper {
+              width: 220px;
+              height: 220px;
+            }
+          }
+
+          .impact-stat-card {
+            background: var(--bg-ivory);
+            border-radius: 14px;
+            border: 1px solid var(--border-medium);
+            padding: 1rem 1.15rem;
+            width: 100%;
+            box-sizing: border-box;
+          }
+
+          .impact-stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.65rem;
+            margin-bottom: 0.65rem;
+            flex-wrap: wrap;
+          }
+
+          .impact-stat-text {
+            min-width: 0;
+            flex: 1 1 180px;
+          }
+
+          .impact-stat-title {
+            font-size: clamp(0.92rem, 2vw, 1.02rem);
+            color: var(--primary-dark);
+            margin: 0;
+            font-weight: 700;
+            line-height: 1.3;
+          }
+
+          .impact-stat-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 2px;
+            line-height: 1.3;
+          }
+
+          .impact-stat-badge {
+            border-radius: 8px;
+            padding: 0.22rem 0.6rem;
+            font-weight: 800;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+          }
+
+          .badge-gold-fill {
+            background: rgba(197, 168, 105, 0.15);
+            color: var(--accent-gold-dark);
+            border: 1px solid rgba(197, 168, 105, 0.4);
+          }
+
+          .badge-blue-fill {
+            background: rgba(0, 93, 184, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(0, 93, 184, 0.25);
+          }
+
+          .badge-green-fill {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+          }
+
+          .impact-stat-track {
+            height: 7px;
+            background: #EAE5DB;
+            border-radius: 9999px;
+            overflow: hidden;
+            width: 100%;
+          }
+        `}</style>
+
 
 
         {/* Global Banner Box */}
