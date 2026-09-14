@@ -65,10 +65,10 @@ export default function HomePage() {
           <div 
             style={{ 
               display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 270px), 1fr))', 
-              gap: '1.5rem', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', 
+              gap: '1.75rem', 
               alignItems: 'stretch',
-              marginBottom: '2.5rem' 
+              marginBottom: '3rem' 
             }}
           >
             {teachersData.teachers.map((t) => (

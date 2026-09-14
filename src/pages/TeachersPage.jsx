@@ -1,18 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SectionHeader from '../components/common/SectionHeader';
 import TeacherCard from '../components/cards/TeacherCard';
 import CtaBannerSection from '../components/sections/CtaBannerSection';
 import { teachersData } from '../data/teachersData';
-import { IconShield, IconMapPin, IconSparkle, IconGraduationCap, IconCheckCircle } from '../components/common/Icons';
+import { 
+  IconShield, 
+  IconMapPin, 
+  IconSparkle, 
+  IconGraduationCap, 
+  IconCheckCircle,
+  IconHeart,
+  IconBookOpen,
+  IconUsers
+} from '../components/common/Icons';
 
 export default function TeachersPage() {
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  const filterOptions = [
+    { id: 'all', label: 'All Faculty', count: teachersData.teachers.length },
+    { 
+      id: 'female', 
+      label: 'Sisters & Kids Faculty', 
+      count: teachersData.teachers.filter(t => t.gender === 'Female' || t.forFemaleAndKids).length 
+    },
+    { 
+      id: 'quran', 
+      label: 'Qur\'an & Hifz Scholars', 
+      count: teachersData.teachers.filter(t => 
+        (t.specialization && (t.specialization.includes('Qur\'an') || t.specialization.includes('Hifz') || t.specialization.includes('Nuurul Bayaan')))
+      ).length 
+    },
+    { 
+      id: 'islamic-studies', 
+      label: 'Islamic Studies & Shariah', 
+      count: teachersData.teachers.filter(t => 
+        (t.specialization && (t.specialization.includes('Islamic Studies') || t.specialization.includes('Shariah') || t.specialization.includes('Fiqh')))
+      ).length 
+    }
+  ];
+
+  const filteredTeachers = teachersData.teachers.filter(teacher => {
+    if (activeFilter === 'female') {
+      return teacher.gender === 'Female' || teacher.forFemaleAndKids;
+    }
+    if (activeFilter === 'quran') {
+      return teacher.specialization && (
+        teacher.specialization.includes('Qur\'an') || 
+        teacher.specialization.includes('Hifz') || 
+        teacher.specialization.includes('Nuurul Bayaan')
+      );
+    }
+    if (activeFilter === 'islamic-studies') {
+      return teacher.specialization && (
+        teacher.specialization.includes('Islamic Studies') || 
+        teacher.specialization.includes('Shariah') || 
+        teacher.specialization.includes('Fiqh')
+      );
+    }
+    return true;
+  });
+
   return (
     <div>
       {/* Header Banner */}
       <section style={{ background: 'linear-gradient(180deg, #031122 0%, #071C34 50%, #005DB8 100%)', color: '#FFFFFF', padding: '5.5rem 0 4.5rem 0', textAlign: 'center' }}>
         <div className="container">
           <span className="section-subtitle-badge light" style={{ marginBottom: '1rem' }}>
-            ✦ Scholarly Leadership & Faculty ✦
+            ✦ Scholarly Leadership & Verified Faculty ✦
           </span>
           <div style={{ fontFamily: 'var(--font-arabic)', fontSize: '2.2rem', color: 'var(--accent-gold-light)', marginBottom: '0.5rem', direction: 'rtl' }}>
             عُلَمَاءُ أُمَّتِي كَأَنْبِيَاءِ بَنِي إِسْرَائِيل
@@ -21,7 +76,7 @@ export default function TeachersPage() {
             Meet Our Distinguished Faculty
           </h1>
           <p style={{ color: 'var(--text-on-dark-muted)', maxWidth: '820px', margin: '0 auto', fontSize: '1.15rem', lineHeight: 1.6 }}>
-            Guided by Founder & Director Ustaadh Naasir Akinbolanle Jamiu from Connecticut, USA, our team of certified Huffaz, Islamic Law scholars, and experienced educators provides authentic 1-on-1 Qur'anic and Islamic education worldwide.
+            Guided by Founder & Director Ustaadh Naasir Akinbolanle Jamiu from Connecticut, USA, our faculty of certified Huffaz, Islamic Law scholars, and experienced educators provides authentic 1-on-1 Qur'anic and Islamic education worldwide.
           </p>
         </div>
       </section>
@@ -40,40 +95,100 @@ export default function TeachersPage() {
           {/* Institutional Headquarters & Faculty Notice */}
           <div 
             style={{ 
-              padding: '1.25rem 1.75rem', 
+              padding: '1.35rem 1.85rem', 
               background: '#FFFFFF', 
-              borderRadius: '16px', 
+              borderRadius: '18px', 
               border: '1.5px solid var(--accent-gold)', 
-              boxShadow: '0 4px 20px rgba(0, 93, 184, 0.06)',
-              marginBottom: '3.5rem', 
+              boxShadow: '0 6px 24px rgba(0, 93, 184, 0.07)',
+              marginBottom: '2.5rem', 
               display: 'flex',
               flexDirection: 'column',
               gap: '0.6rem',
               textAlign: 'center',
-              maxWidth: '900px',
-              margin: '0 auto 3.5rem auto'
+              maxWidth: '920px',
+              margin: '0 auto 2.5rem auto'
             }}
           >
-            <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', color: 'var(--primary-dark)', fontWeight: 700, fontSize: '0.98rem' }}>
-              <IconMapPin size={18} color="var(--accent-gold-dark)" />
+            <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', color: 'var(--primary-dark)', fontWeight: 700, fontSize: '1rem' }}>
+              <IconMapPin size={20} color="var(--accent-gold-dark)" />
               <span>{teachersData.baseLocationNotice}</span>
             </div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0, lineHeight: 1.6 }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', margin: 0, lineHeight: 1.6 }}>
               {teachersData.facultyCountText}
             </p>
+          </div>
+
+          {/* Interactive Faculty Category Filter Bar */}
+          <div 
+            style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              gap: '0.65rem', 
+              flexWrap: 'wrap', 
+              marginBottom: '3rem' 
+            }}
+          >
+            {filterOptions.map((opt) => {
+              const isActive = activeFilter === opt.id;
+              return (
+                <button
+                  key={opt.id}
+                  type="button"
+                  onClick={() => setActiveFilter(opt.id)}
+                  style={{
+                    padding: '0.6rem 1.25rem',
+                    borderRadius: '9999px',
+                    fontSize: '0.88rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    transition: 'all 0.25s ease',
+                    border: isActive 
+                      ? '1.5px solid var(--primary)' 
+                      : '1.5px solid var(--border-medium)',
+                    background: isActive 
+                      ? 'var(--primary)' 
+                      : '#FFFFFF',
+                    color: isActive 
+                      ? '#FFFFFF' 
+                      : 'var(--text-secondary)',
+                    boxShadow: isActive 
+                      ? '0 6px 18px rgba(0, 93, 184, 0.25)' 
+                      : '0 2px 8px rgba(0, 0, 0, 0.04)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                  }}
+                >
+                  <span>{opt.label}</span>
+                  <span 
+                    style={{
+                      fontSize: '0.74rem',
+                      padding: '0.15rem 0.5rem',
+                      borderRadius: '9999px',
+                      background: isActive ? 'rgba(255, 255, 255, 0.25)' : 'var(--primary-ultralight)',
+                      color: isActive ? '#FFFFFF' : 'var(--primary)',
+                      fontWeight: 800
+                    }}
+                  >
+                    {opt.count}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Teachers Cards Grid */}
           <div 
             style={{ 
               display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 270px), 1fr))', 
-              gap: '1.5rem', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', 
+              gap: '1.75rem', 
               alignItems: 'stretch',
               marginBottom: '4.5rem' 
             }}
           >
-            {teachersData.teachers.map((t) => (
+            {filteredTeachers.map((t) => (
               <TeacherCard key={t.id} teacher={t} />
             ))}
           </div>
@@ -100,18 +215,18 @@ export default function TeachersPage() {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: '1.75rem' }}>
               <div style={{ padding: '1.5rem', background: 'var(--bg-cream)', borderRadius: '16px', border: '1px solid var(--border-medium)' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--primary)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'var(--primary)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
                   <IconGraduationCap size={22} color="#FFFFFF" />
                 </div>
                 <strong style={{ color: 'var(--primary-dark)', display: 'block', fontSize: '1.05rem', marginBottom: '0.4rem' }}>1. Authentic Scholarly Lineage</strong>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', margin: 0, lineHeight: 1.6 }}>
-                  Instructors are certified Huffaz and graduates of renowned Islamic universities (King Faisal University, Islamic University of Madeenah, Arabic Institute of Nigeria).
+                  Instructors are certified Huffaz and graduates of renowned Islamic universities (King Faisal University, Islamic University of Madeenah, An-Najah, Arabic Institute of Nigeria).
                 </p>
               </div>
 
               <div style={{ padding: '1.5rem', background: 'var(--bg-cream)', borderRadius: '16px', border: '1px solid var(--border-medium)' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--primary)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-                  <IconShield size={22} color="#FFFFFF" />
+                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: '#059669', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                  <IconHeart size={22} color="#FFFFFF" />
                 </div>
                 <strong style={{ color: 'var(--primary-dark)', display: 'block', fontSize: '1.05rem', marginBottom: '0.4rem' }}>2. Dedicated Female Ustadhat</strong>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', margin: 0, lineHeight: 1.6 }}>
@@ -120,7 +235,7 @@ export default function TeachersPage() {
               </div>
 
               <div style={{ padding: '1.5rem', background: 'var(--bg-cream)', borderRadius: '16px', border: '1px solid var(--border-medium)' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--primary)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'var(--primary)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
                   <IconSparkle size={22} color="#FFFFFF" />
                 </div>
                 <strong style={{ color: 'var(--primary-dark)', display: 'block', fontSize: '1.05rem', marginBottom: '0.4rem' }}>3. Child-Centered Patience & Tarbiyah</strong>
@@ -130,7 +245,7 @@ export default function TeachersPage() {
               </div>
 
               <div style={{ padding: '1.5rem', background: 'var(--bg-cream)', borderRadius: '16px', border: '1px solid var(--border-medium)' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--primary)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'var(--primary)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
                   <IconCheckCircle size={22} color="#FFFFFF" />
                 </div>
                 <strong style={{ color: 'var(--primary-dark)', display: 'block', fontSize: '1.05rem', marginBottom: '0.4rem' }}>4. Punctuality & Global Timezone Matching</strong>

@@ -123,6 +123,36 @@ export const teachersData = {
       ],
       gender: "Male",
       placeholder: false
+    },
+    {
+      id: "teacher-waliyyah",
+      name: "Ustaadha Waliyyah Yuusuf",
+      shortName: "Ustaadha Waliyyah",
+      arabicName: "الأستاذة وليّة يوسف",
+      role: "Instructor | Qur'an and Islamic Studies for Kids and Sisters",
+      location: "Dedicated Sisters & Kids Faculty",
+      titleBadge: "Sisters & Kids Specialist",
+      specialization: "Nuurul Bayaan, Qur'an Reading and Recitation, Islamic Studies for Kids, Tajweed Foundations",
+      qualifications: "Graduate of An-Najah Islamic Institute, Professional Software Developer & Business Consultant, Physiology (LAUTECH)",
+      qualificationsList: [
+        "Graduate, An-Najah Islamic Institute (Qur'anic & Islamic Sciences)",
+        "Pursuing degree in Physiology – Ladoke Akintola University of Technology (LAUTECH)",
+        "Professional Software Developer & Business Consultant",
+        "Specialized in Patient, Engaging & Tech-Savvy Pedagogy for Kids and Sisters",
+        "Expert in Nuurul Bayaan, Tajweed Foundations & Islamic Studies for Young Learners"
+      ],
+      experience: "Modern tech-savvy educator combining authentic Islamic scholarship with patient, interactive instruction",
+      bio: "Ustaadha Waliyyah Yuusuf is a graduate of An-Najah Islamic Institute with a strong foundation in Qur'anic and Islamic sciences.\n\nIn addition to her Islamic scholarship, she is a professional Software Developer and Business Consultant, bringing modern teaching skills, organization, and creativity to her classes.\n\nShe is currently pursuing a degree in Physiology at LAUTECH (Ladoke Akintola University of Technology), reflecting her commitment to both sacred and contemporary knowledge.\n\nUstaadha Waliyyah is passionate about teaching children and sisters, known for her patient, engaging, and tech-savvy approach that makes learning the Qur'an enjoyable and effective.",
+      programsTaught: [
+        "Nuurul Bayaan (Arabic Reading Foundations)",
+        "Qur'an Reading and Recitation",
+        "Islamic Studies for Kids",
+        "Tajweed Foundations"
+      ],
+      gender: "Female",
+      forFemaleAndKids: true,
+      placeholder: false
     }
   ]
 };
+
