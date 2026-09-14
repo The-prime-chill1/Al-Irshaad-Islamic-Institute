@@ -14,10 +14,6 @@ import GlobalLearningSection from '../components/sections/GlobalLearningSection'
 import TestimonialsSection from '../components/sections/TestimonialsSection';
 import FaqAccordionSection from '../components/sections/FaqAccordionSection';
 import CtaBannerSection from '../components/sections/CtaBannerSection';
-import { teachersData } from '../data/teachersData';
-import TeacherCard from '../components/cards/TeacherCard';
-import SectionHeader from '../components/common/SectionHeader';
-import { Link } from 'react-router-dom';
 
 export default function HomePage() {
   return (
@@ -52,51 +48,19 @@ export default function HomePage() {
       {/* 10. How Online Learning Works (6 Steps) */}
       <HowItWorksSection />
 
-      {/* 11. Meet Our Scholarly Leadership & Faculty Preview */}
-      <section className="section-padding" style={{ backgroundColor: 'var(--bg-ivory)' }}>
-        <div className="container">
-          <SectionHeader 
-            badge="Scholarly Leadership"
-            arabicTitle="مُعَلِّمُونَا الأَفَاضِل"
-            title="Learn Under Dedicated Mentorship"
-            description="Guided by Founder & Director Ustaadh Naasir Akinbolanle Jamiu (Connecticut, USA), our faculty brings verified degrees from premier Islamic institutions to every 1-on-1 personalized lesson."
-          />
-
-          <div 
-            style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', 
-              gap: '1.75rem', 
-              alignItems: 'stretch',
-              marginBottom: '3rem' 
-            }}
-          >
-            {teachersData.teachers.map((t) => (
-              <TeacherCard key={t.id} teacher={t} />
-            ))}
-          </div>
-
-          <div style={{ textAlign: 'center' }}>
-            <Link to="/teachers" className="btn btn-primary btn-md">
-              View All Faculty Credentials & Scheduling Details →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 12. Vision & Mission */}
+      {/* 11. Vision & Mission */}
       <VisionMissionSection />
 
-      {/* 13. Global Learning & Diaspora */}
+      {/* 12. Global Learning & Diaspora */}
       <GlobalLearningSection />
 
-      {/* 14. What Our Students & Parents Say (Testimonials) */}
+      {/* 13. What Our Students & Parents Say (Testimonials) */}
       <TestimonialsSection />
 
-      {/* 15. Frequently Asked Questions */}
+      {/* 14. Frequently Asked Questions */}
       <FaqAccordionSection limit={6} />
 
-      {/* 16. Final CTA Banner */}
+      {/* 15. Final CTA Banner */}
       <CtaBannerSection />
     </div>
   );

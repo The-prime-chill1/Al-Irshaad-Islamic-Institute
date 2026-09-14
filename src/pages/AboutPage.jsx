@@ -5,6 +5,8 @@ import GlobalLearningSection from '../components/sections/GlobalLearningSection'
 import CtaBannerSection from '../components/sections/CtaBannerSection';
 import HadithRibbon from '../components/common/HadithRibbon';
 import { images } from '../data/imageAssets';
+import { teachersData } from '../data/teachersData';
+import TeacherCard from '../components/cards/TeacherCard';
 import { Link } from 'react-router-dom';
 import { 
   IconGraduationCap, 
@@ -303,8 +305,68 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. Our Core Values */}
+      {/* 4. Meet Our Distinguished Faculty & Scholarly Team */}
       <section className="section-padding" style={{ backgroundColor: 'var(--bg-ivory)' }}>
+        <div className="container">
+          <SectionHeader 
+            badge="Faculty & Scholarly Team"
+            arabicTitle="مُعَلِّمُونَا الأَفَاضِل"
+            title="Meet Our Distinguished Faculty"
+            description="Our instructors bring authentic academic degrees from prestigious institutions in Chad, Saudi Arabia, and Nigeria, combined with years of dedicated virtual Tarbiyah."
+          />
+
+          {/* Location & Timezone notice banner */}
+          <div 
+            style={{ 
+              padding: '1.2rem 1.6rem', 
+              background: '#FFFFFF', 
+              borderRadius: '16px', 
+              border: '1.5px solid var(--accent-gold)', 
+              boxShadow: '0 4px 20px rgba(0, 93, 184, 0.06)',
+              marginBottom: '3rem', 
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.5rem',
+              textAlign: 'center',
+              maxWidth: '900px',
+              margin: '0 auto 3rem auto'
+            }}
+          >
+            <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', color: 'var(--primary-dark)', fontWeight: 700, fontSize: '0.96rem' }}>
+              <IconMapPin size={18} color="var(--accent-gold-dark)" />
+              <span>{teachersData.baseLocationNotice}</span>
+            </div>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', margin: 0, lineHeight: 1.6 }}>
+              {teachersData.facultyCountText}
+            </p>
+          </div>
+
+          {/* Teachers Cards Grid */}
+          <div 
+            style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', 
+              gap: '1.75rem', 
+              alignItems: 'stretch',
+              marginBottom: '3rem' 
+            }}
+          >
+            {teachersData.teachers.map((t) => (
+              <TeacherCard key={t.id} teacher={t} />
+            ))}
+          </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <Link to="/teachers" className="btn btn-primary btn-md">
+              <span>View Full Scholarly Profiles & Filter By Specialty</span>
+              <IconArrowRight size={16} color="#FFFFFF" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Our Core Values */}
+      <section className="section-padding" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid var(--border-medium)' }}>
         <div className="container">
           <SectionHeader 
             badge="Institutional Identity"
@@ -340,13 +402,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 5. Vision & Mission Section */}
+      {/* 6. Vision & Mission Section */}
       <VisionMissionSection />
 
-      {/* 6. Global Learning & Diaspora Reach */}
+      {/* 7. Global Learning & Diaspora Reach */}
       <GlobalLearningSection />
 
-      {/* 7. Final CTA Banner */}
+      {/* 8. Final CTA Banner */}
       <CtaBannerSection 
         badge="Join Al-Irshaad Today"
         title="Experience Authentic Islamic Education from Home"
