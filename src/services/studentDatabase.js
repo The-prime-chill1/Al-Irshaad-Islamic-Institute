@@ -7,7 +7,7 @@
 const STORAGE_KEY_STUDENTS = 'alirshaad_students_db_v4';
 const STORAGE_KEY_AUTH_STUDENT = 'alirshaad_current_student_v4';
 const STORAGE_KEY_AUTH_ADMIN = 'alirshaad_admin_session_v4';
-const STORAGE_KEY_ADMIN_USERS = 'alirshaad_admin_accounts_v4';
+const STORAGE_KEY_ADMIN_USERS = 'alirshaad_admin_accounts_v5';
 
 // Default Clean State: 0 initial dummy student accounts
 const INITIAL_STUDENTS = [];
@@ -19,7 +19,7 @@ const INITIAL_ADMINS = [
     name: 'Al-Irshaad Admissions Dean',
     email: 'instituteofislamicguidance@gmail.com',
     username: 'admin',
-    password: 'AngelLolade@!!',
+    password: 'Alhamdulillah@94',
     role: 'Super Administrator',
     createdAt: new Date().toISOString()
   },
@@ -28,7 +28,7 @@ const INITIAL_ADMINS = [
     name: 'Academic Registry Office',
     email: 'admin@alirshaad.edu',
     username: 'registrar',
-    password: 'AngelLolade@!!',
+    password: 'Alhamdulillah@94',
     role: 'Admissions Registrar',
     createdAt: new Date().toISOString()
   }
@@ -247,9 +247,9 @@ export const studentDatabase = {
 
     // Built-in master overrides for instant access
     if (
-      (cleanId === 'instituteofislamicguidance@gmail.com' && cleanPass === 'AngelLolade@!!') ||
-      (cleanId === 'admin@alirshaad.edu' && cleanPass === 'AngelLolade@!!') ||
-      (cleanId === 'admin' && (cleanPass === 'AngelLolade@!!' || cleanPass === 'AlIrshaad@2026' || cleanPass === '8899'))
+      (cleanId === 'instituteofislamicguidance@gmail.com' && cleanPass === 'Alhamdulillah@94') ||
+      (cleanId === 'admin@alirshaad.edu' && cleanPass === 'Alhamdulillah@94') ||
+      (cleanId === 'admin' && (cleanPass === 'Alhamdulillah@94' || cleanPass === 'AlIrshaad@2026' || cleanPass === '8899'))
     ) {
       const masterSession = {
         id: 'ADMIN-MASTER',
