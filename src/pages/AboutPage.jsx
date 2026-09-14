@@ -408,7 +408,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. Meet Our Distinguished Faculty & Scholarly Team */}
+      {/* 5. Meet Our Distinguished Faculty & Scholarly Team */}
       <section className="section-padding" style={{ backgroundColor: 'var(--bg-ivory)' }}>
         <div className="container">
           <SectionHeader 
@@ -468,7 +468,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 5. Our Core Values */}
+      {/* 6. Our Core Values */}
       <section className="section-padding" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid var(--border-medium)' }}>
         <div className="container">
           <SectionHeader 
@@ -505,10 +505,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 6. Global Learning & Diaspora Reach */}
+      {/* 7. Global Learning & Diaspora Reach */}
       <GlobalLearningSection />
 
-      {/* 7. Final CTA Banner */}
+      {/* 8. Final CTA Banner */}
       <CtaBannerSection 
         badge="Join Al-Irshaad Today"
         title="Experience Authentic Islamic Education from Home"
