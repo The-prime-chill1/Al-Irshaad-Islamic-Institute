@@ -459,7 +459,7 @@ export default function StudentDashboardPage() {
                   <IconGraduationCap size={16} color="#005DB8" />
                   <div>
                     <strong style={{ display: 'block', fontSize: '0.88rem', color: '#1E293B' }}>Assigned Tutor</strong>
-                    <span style={{ fontSize: '0.82rem', color: '#64748B' }}>{student.assignedTeacher || 'Ustadh Nasir'}</span>
+                    <span style={{ fontSize: '0.82rem', color: '#64748B' }}>{student.assignedTeacher || 'Ustaadh Naasir Akinbolanle Jamiu'}</span>
                   </div>
                 </div>
               </div>

@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { studentDatabase } from '../services/studentDatabase';
 import { firebaseDbService } from '../services/firebaseDbService';
 import { countriesData, getCountryByName, getCountryByDialCode, getFlagEmoji } from '../data/countriesData';
+import { teachersData } from '../data/teachersData';
 import SearchableCountrySelect from '../components/common/SearchableCountrySelect';
 import SearchableCitySelect from '../components/common/SearchableCitySelect';
 import HadithRibbon from '../components/common/HadithRibbon';
@@ -34,6 +35,7 @@ export default function AdminDashboardPage() {
   const [filterStatus, setFilterStatus] = useState('ALL');
   const [filterGender, setFilterGender] = useState('ALL');
   const [filterCountry, setFilterCountry] = useState('ALL');
+  const [filterTeacher, setFilterTeacher] = useState('ALL');
 
   // Modals state
   const [selectedStudent, setSelectedStudent] = useState(null); // For View Dossier
@@ -61,7 +63,7 @@ export default function AdminDashboardPage() {
     previousQuranEducation: 'None',
     learningGoal: '',
     status: 'Active',
-    assignedTeacher: 'Ustadh Nasir',
+    assignedTeacher: 'Ustaadh Naasir Akinbolanle Jamiu',
     adminNotes: 'Direct administrative admission.'
   });
 
@@ -116,10 +118,11 @@ export default function AdminDashboardPage() {
       const matchStatus = filterStatus === 'ALL' || student.status === filterStatus;
       const matchGender = filterGender === 'ALL' || student.gender === filterGender;
       const matchCountry = filterCountry === 'ALL' || (student.country && student.country.toLowerCase() === filterCountry.toLowerCase());
+      const matchTeacher = filterTeacher === 'ALL' || (student.assignedTeacher && student.assignedTeacher.toLowerCase().includes(filterTeacher.toLowerCase()));
 
-      return matchSearch && matchProgram && matchStatus && matchGender && matchCountry;
+      return matchSearch && matchProgram && matchStatus && matchGender && matchCountry && matchTeacher;
     });
-  }, [students, searchTerm, filterProgram, filterStatus, filterGender, filterCountry]);
+  }, [students, searchTerm, filterProgram, filterStatus, filterGender, filterCountry, filterTeacher]);
 
   // KPIs
   const totalStudents = students.length;
@@ -218,7 +221,7 @@ export default function AdminDashboardPage() {
         previousQuranEducation: 'None',
         learningGoal: '',
         status: 'Active',
-        assignedTeacher: 'Ustadh Nasir',
+        assignedTeacher: 'Ustaadh Naasir Akinbolanle Jamiu',
         adminNotes: 'Direct administrative admission.'
       });
     } catch (err) {
@@ -572,8 +575,32 @@ export default function AdminDashboardPage() {
             </select>
           </div>
 
+          {/* Teacher / Tutor Filter */}
+          <div style={{ flex: '1 1 150px', minWidth: 'min(100%, 140px)' }}>
+            <select
+              value={filterTeacher}
+              onChange={(e) => setFilterTeacher(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '0.65rem 0.85rem',
+                borderRadius: '10px',
+                border: '1.5px solid #CBD5E1',
+                fontSize: '0.86rem',
+                background: '#FFFFFF',
+                boxSizing: 'border-box'
+              }}
+            >
+              <option value="ALL">All Tutors / Faculty</option>
+              {teachersData.teachers.map((t) => (
+                <option key={t.id} value={t.shortName || t.name}>
+                  {t.shortName || t.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Reset Filters button */}
-          {(searchTerm || filterProgram !== 'ALL' || filterStatus !== 'ALL' || filterGender !== 'ALL' || filterCountry !== 'ALL') && (
+          {(searchTerm || filterProgram !== 'ALL' || filterStatus !== 'ALL' || filterGender !== 'ALL' || filterCountry !== 'ALL' || filterTeacher !== 'ALL') && (
             <button
               type="button"
               onClick={() => {
@@ -582,6 +609,7 @@ export default function AdminDashboardPage() {
                 setFilterStatus('ALL');
                 setFilterGender('ALL');
                 setFilterCountry('ALL');
+                setFilterTeacher('ALL');
               }}
               style={{
                 padding: '0.65rem 1rem',
@@ -1421,13 +1449,25 @@ export default function AdminDashboardPage() {
                     Assigned Tutor (Coordinates & Gives Class Timings) *
                   </label>
                   <select
-                    value={editingStudent.assignedTeacher || 'Ustadh Nasir'}
+                    value={editingStudent.assignedTeacher || 'Ustaadh Naasir Akinbolanle Jamiu'}
                     onChange={(e) => setEditingStudent({ ...editingStudent, assignedTeacher: e.target.value })}
                     style={{ width: '100%', padding: '0.7rem', borderRadius: '8px', border: '1.5px solid #CBD5E1', fontWeight: '700', color: '#005DB8', fontSize: '0.88rem', boxSizing: 'border-box' }}
                   >
-                    <option value="Ustadh Nasir">Ustadh Nasir (Head Tutor & Instructor)</option>
-                    <option value="Ustadh Nasir (Class Timing Confirmed)">Ustadh Nasir (Class Timing Confirmed)</option>
-                    <option value="Ustadh Nasir (Awaiting Timing Assignment)">Ustadh Nasir (Awaiting Timing Assignment)</option>
+                    <optgroup label="Official Faculty & Instructors">
+                      {teachersData.teachers.map((t) => (
+                        <option key={t.id} value={t.name}>
+                          {t.name} ({t.gender === 'Female' ? 'Female Ustaadha' : 'Male Scholar'} • {t.titleBadge})
+                        </option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Status & Timing Specific Overrides">
+                      <option value="Ustaadh Naasir (Class Timing Confirmed)">Ustaadh Naasir (Class Timing Confirmed)</option>
+                      <option value="Ustaadh Tijani (Class Timing Confirmed)">Ustaadh Tijani (Class Timing Confirmed)</option>
+                      <option value="Ustaadha Yaseeroh (Class Timing Confirmed)">Ustaadha Yaseeroh (Class Timing Confirmed)</option>
+                      <option value="Ustaadh Muhammad Ballo (Class Timing Confirmed)">Ustaadh Muhammad Ballo (Class Timing Confirmed)</option>
+                      <option value="Ustaadha Waliyyah (Class Timing Confirmed)">Ustaadha Waliyyah (Class Timing Confirmed)</option>
+                      <option value="Awaiting Faculty Assignment">Awaiting Faculty Assignment</option>
+                    </optgroup>
                   </select>
                 </div>
 
@@ -1762,9 +1802,21 @@ export default function AdminDashboardPage() {
                     onChange={(e) => setNewStudentData({ ...newStudentData, assignedTeacher: e.target.value })}
                     style={{ width: '100%', padding: '0.7rem', borderRadius: '8px', border: '1.5px solid #CBD5E1', fontWeight: '700', color: '#005DB8', fontSize: '0.88rem', boxSizing: 'border-box' }}
                   >
-                    <option value="Ustadh Nasir">Ustadh Nasir (Head Tutor & Instructor)</option>
-                    <option value="Ustadh Nasir (Class Timing Confirmed)">Ustadh Nasir (Class Timing Confirmed)</option>
-                    <option value="Ustadh Nasir (Awaiting Timing Assignment)">Ustadh Nasir (Awaiting Timing Assignment)</option>
+                    <optgroup label="Official Faculty & Instructors">
+                      {teachersData.teachers.map((t) => (
+                        <option key={t.id} value={t.name}>
+                          {t.name} ({t.gender === 'Female' ? 'Female Ustaadha' : 'Male Scholar'} • {t.titleBadge})
+                        </option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Status & Timing Specific Overrides">
+                      <option value="Ustaadh Naasir (Class Timing Confirmed)">Ustaadh Naasir (Class Timing Confirmed)</option>
+                      <option value="Ustaadh Tijani (Class Timing Confirmed)">Ustaadh Tijani (Class Timing Confirmed)</option>
+                      <option value="Ustaadha Yaseeroh (Class Timing Confirmed)">Ustaadha Yaseeroh (Class Timing Confirmed)</option>
+                      <option value="Ustaadh Muhammad Ballo (Class Timing Confirmed)">Ustaadh Muhammad Ballo (Class Timing Confirmed)</option>
+                      <option value="Ustaadha Waliyyah (Class Timing Confirmed)">Ustaadha Waliyyah (Class Timing Confirmed)</option>
+                      <option value="Awaiting Faculty Assignment">Awaiting Faculty Assignment</option>
+                    </optgroup>
                   </select>
                 </div>
 

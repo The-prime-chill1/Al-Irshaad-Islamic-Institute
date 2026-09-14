@@ -220,7 +220,7 @@ export default function TeachersPage() {
                 </div>
                 <strong style={{ color: 'var(--primary-dark)', display: 'block', fontSize: '1.05rem', marginBottom: '0.4rem' }}>1. Authentic Scholarly Lineage</strong>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', margin: 0, lineHeight: 1.6 }}>
-                  Instructors are certified Huffaz and graduates of renowned Islamic universities (King Faisal University, Islamic University of Madeenah, An-Najah, Arabic Institute of Nigeria).
+                  Instructors are certified Huffaz, Islamic scholars, and graduates of prestigious Islamic institutes with authentic chains of recitation.
                 </p>
               </div>
 

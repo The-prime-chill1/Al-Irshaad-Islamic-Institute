@@ -142,6 +142,28 @@ p {
   margin-bottom: 1rem;
 }
 
+/* Ensure absolute crisp contrast for paragraphs inside dark backgrounds */
+.card-dark,
+.director-message-box {
+  color: #FFFFFF !important;
+}
+
+.card-dark p,
+.director-message-box p,
+.director-letter-text,
+[style*="#031122"] p,
+[style*="#071C34"] p {
+  color: #F8FAFC !important;
+}
+
+.director-message-box strong {
+  color: #FFFFFF !important;
+}
+
+.director-message-box em {
+  color: #E5C988 !important;
+}
+
 a {
   color: inherit;
   text-decoration: none;

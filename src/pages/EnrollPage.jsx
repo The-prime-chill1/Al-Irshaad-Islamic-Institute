@@ -35,6 +35,7 @@ export default function EnrollPage() {
     classPreference: '1-on-1 (Private)',
     preferredSchedule: 'Evening (5:00 PM - 7:00 PM)',
     preferredDays: '3 Days / Week',
+    teacherPreference: 'Any Qualified Faculty (Fastest Placement)',
 
     // Step 4: Background & Goals
     previousQuranEducation: 'None / Complete Beginner',
@@ -125,6 +126,7 @@ Date Submitted: ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month
 - Format Preference: ${formData.classPreference}
 - Preferred Time: ${formData.preferredSchedule}
 - Weekly Commitment: ${formData.preferredDays}
+- Instructor Preference: ${formData.teacherPreference || 'Any Qualified Faculty'}
 
 3. BACKGROUND & GOALS:
 - Qur'an Background: ${formData.previousQuranEducation}
@@ -568,14 +570,34 @@ Please review this application and schedule the placement assessment. Jazakumull
                         <option value="Afternoon (12:00 PM - 4:00 PM)">Afternoon (12:00 PM - 4:00 PM)</option>
                         <option value="Evening (5:00 PM - 7:00 PM)">Evening (5:00 PM - 7:00 PM)</option>
                         <option value="Night (7:00 PM - 10:00 PM)">Night (7:00 PM - 10:00 PM)</option>
-                        <option value="Flexible / Negotiable">Flexible / To be confirmed with Ustadh Nasir</option>
+                        <option value="Flexible / Negotiable">Flexible / Timezone matched</option>
+                      </select>
+                    </div>
+
+                    <div style={{ marginTop: '1.25rem' }}>
+                      <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.4rem', color: 'var(--primary)' }}>
+                        Preferred Instructor / Faculty (Optional)
+                      </label>
+                      <select
+                        name="teacherPreference"
+                        value={formData.teacherPreference}
+                        onChange={handleChange}
+                        style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem', background: '#fff' }}
+                      >
+                        <option value="Any Qualified Faculty (Fastest Placement)">Any Qualified Faculty (Fastest Placement)</option>
+                        <option value="Ustaadh Naasir Akinbolanle Jamiu (Founder & Director)">Ustaadh Naasir Akinbolanle Jamiu (Founder & Director)</option>
+                        <option value="Ustaadh Tijani Jamiu Ayinde (Senior Islamic Studies & Shariah)">Ustaadh Tijani Jamiu Ayinde (Senior Islamic Studies & Shariah)</option>
+                        <option value="Ustaadha Yaseeroh G. Gozali (Dedicated Sisters & Kids)">Ustaadha Yaseeroh G. Gozali (Dedicated Sisters & Kids)</option>
+                        <option value="Ustaadh Muhammad Ballo Jamiu (Madeenah Scholar & Tajweed)">Ustaadh Muhammad Ballo Jamiu (Madeenah Scholar & Tajweed)</option>
+                        <option value="Ustaadha Waliyyah Yuusuf (Dedicated Sisters & Kids)">Ustaadha Waliyyah Yuusuf (Dedicated Sisters & Kids)</option>
+                        <option value="Dedicated Female Ustaadha (For Sisters & Young Learners)">Dedicated Female Ustaadha (For Sisters & Young Learners)</option>
                       </select>
                     </div>
 
                     <div style={{ marginTop: '1.25rem', background: '#FAF8F5', border: '1.5px solid #E2E8F0', borderRadius: '12px', padding: '1rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
                       <span style={{ fontSize: '1.4rem' }}>🗓️</span>
                       <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', lineHeight: 1.5 }}>
-                        <strong>Dedicated Tutoring by Ustadh Nasir:</strong> Ustadh Nasir personally reviews your submitted time preferences and will assign and confirm your exact recurring lesson timetable directly with you during placement.
+                        <strong>Personalized Timetable Coordination:</strong> Our faculty coordinates directly with you upon admission to confirm your exact recurring 1-on-1 lesson slots matching your timezone (EST, CST, PST, GMT, WAT).
                       </p>
                     </div>
                   </div>

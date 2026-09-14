@@ -15,17 +15,16 @@ export const teachersData = {
       location: "Connecticut, USA (Base)",
       titleBadge: "Founder & Director",
       specialization: "Qur'an Memorization (Hifz), Tajweed, Nuurul Bayaan, Islamic Studies & Shariah",
-      qualifications: "Haafidh of the Holy Qur'an, B.A. in Islamic Law (Shariah) & M.A. in Islamic Studies (Comparative Jurisprudence) – King Faisal University (Chad)",
+      qualifications: "Haafidh of the Holy Qur'an, Founder, Director & CEO (Connecticut, USA)",
       qualificationsList: [
         "Haafidh of the Holy Qur'an",
-        "M.A. in Islamic Studies (Comparative Jurisprudence) – King Faisal University, Chad",
-        "B.A. in Islamic Law (Shariah) – King Faisal University, Chad",
-        "Graduate, Arabic Institute of Nigeria (المعهد العربي النيجيري)",
-        "Studied at Imam Malik College of Shariah",
-        "Founder & Director, Al-Irshaad Islamic Institute (Connecticut, USA)"
+        "Founder, Director & CEO, Al-Irshaad Islamic Institute (Connecticut, USA)",
+        "Specialist in Qur'an Memorization (Hifz) & Tajweed",
+        "Director of Academic Curriculum & Faculty Mentorship",
+        "Experienced in 1-on-1 Virtual Islamic Tarbiyah Globally"
       ],
       experience: "Years of specialized virtual & physical Islamic scholarship and educational leadership",
-      bio: "Ustaadh Naasir Akinbolanle Jamiu is a Haafidh of the Qur'an and the Founder & Director of Al-Irshaad Islamic Institute. He is a graduate of the Arabic Institute of Nigeria (المعهد العربي النيجيري) and studied at Imam Malik College of Shariah.\n\nHe holds a Bachelor's degree in Islamic Law (Shariah) and a Master's degree in Islamic Studies (Comparative Jurisprudence) from King Faisal University of Chad.\n\nBased in Connecticut, USA, Ustaadh Naasir leads the institute with a vision to make authentic Qur'anic education accessible to every home through personalized online learning. He oversees curriculum, teacher training, and student progress with a commitment to Ikhlas, Itqan, and Amanah.",
+      bio: "Ustaadh Naasir Akinbolanle Jamiu is a Haafidh of the Holy Qur'an, Islamic scholar, and the Founder, Director & CEO of Al-Irshaad Islamic Institute.\n\nWith years of specialized teaching experience, Ustaadh Naasir founded Al-Irshaad Islamic Institute with a vision to make quality Qur'an memorization, Tajweed, and authentic Islamic Studies accessible to every Muslim home through personalized online learning.\n\nBased in Connecticut, USA, he leads an elite team of qualified teachers serving students globally with a steadfast commitment to Ikhlas (sincerity), Itqan (excellence), and Amanah (trust).",
       programsTaught: [
         "Qur'an Memorization (Hifz)",
         "Qur'an Recitation with Tajweed",

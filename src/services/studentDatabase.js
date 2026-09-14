@@ -134,7 +134,7 @@ export const studentDatabase = {
       currentReadingLevel: studentData.currentReadingLevel || 'Beginner',
       learningGoal: studentData.learningGoal || '',
       status: studentData.status || 'Active',
-      assignedTeacher: studentData.assignedTeacher || 'Ustadh Nasir',
+      assignedTeacher: studentData.assignedTeacher || 'Ustaadh Naasir Akinbolanle Jamiu',
       enrolledDate: studentData.enrolledDate || new Date().toISOString(),
       adminNotes: studentData.adminNotes || 'Admitted directly by Al-Irshaad Administrator.',
       source: studentData.source || 'Admin Direct Entry'
@@ -171,7 +171,7 @@ export const studentDatabase = {
       currentReadingLevel: enrollFormData.currentReadingLevel || 'Cannot read Arabic yet',
       learningGoal: enrollFormData.learningGoal || '',
       status: 'Pending Review',
-      assignedTeacher: 'Ustadh Nasir',
+      assignedTeacher: enrollFormData.teacherPreference || 'Ustaadh Naasir Akinbolanle Jamiu',
       enrolledDate: new Date().toISOString(),
       adminNotes: 'Direct online inquiry received via Website Application Dossier.',
       source: 'Website Enrollment Form'
