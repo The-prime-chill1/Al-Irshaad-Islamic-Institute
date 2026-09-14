@@ -52,25 +52,33 @@ export default function HomePage() {
       {/* 10. How Online Learning Works (6 Steps) */}
       <HowItWorksSection />
 
-      {/* 11. Meet Our Lead Tutor Preview */}
+      {/* 11. Meet Our Scholarly Leadership & Faculty Preview */}
       <section className="section-padding" style={{ backgroundColor: 'var(--bg-ivory)' }}>
         <div className="container">
           <SectionHeader 
-            badge="Scholarly Mentorship"
+            badge="Scholarly Leadership"
             arabicTitle="مُعَلِّمُونَا الأَفَاضِل"
             title="Learn Under Dedicated Mentorship"
-            description="Ustadh Nasir brings deep knowledge, patience, and verified credentials to every 1-on-1 personalized lesson, coordinating your schedule to match your availability."
+            description="Guided by Founder & Director Ustaadh Naasir Akinbolanle Jamiu (Connecticut, USA), our faculty brings verified degrees from premier Islamic institutions to every 1-on-1 personalized lesson."
           />
 
-          <div style={{ maxWidth: '640px', margin: '0 auto 2.5rem auto' }}>
+          <div 
+            style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 270px), 1fr))', 
+              gap: '1.5rem', 
+              alignItems: 'stretch',
+              marginBottom: '2.5rem' 
+            }}
+          >
             {teachersData.teachers.map((t) => (
               <TeacherCard key={t.id} teacher={t} />
             ))}
           </div>
 
           <div style={{ textAlign: 'center' }}>
-            <Link to="/teachers" className="btn btn-outline btn-sm">
-              View Faculty Credentials & Scheduling Details →
+            <Link to="/teachers" className="btn btn-primary btn-md">
+              View All Faculty Credentials & Scheduling Details →
             </Link>
           </div>
         </div>

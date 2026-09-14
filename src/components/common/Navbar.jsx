@@ -72,14 +72,14 @@ export default function Navbar() {
                 </Link>
               </li>
 
-              {/* Institute Dropdown */}
+              {/* About Us Dropdown */}
               <li 
                 className="nav-item-dropdown"
                 onMouseEnter={() => setAboutDropdownOpen(true)}
                 onMouseLeave={() => setAboutDropdownOpen(false)}
               >
                 <Link to="/about" className={`nav-link ${isActive('/about') || isActive('/teachers') || isActive('/for-parents') ? 'active' : ''}`}>
-                  <span>Institute</span>
+                  <span>About Us</span>
                   <IconChevronDown size={11} color="currentColor" style={{ transition: 'transform 0.2s ease', transform: aboutDropdownOpen ? 'rotate(180deg)' : 'none', marginLeft: '2px' }} />
                 </Link>
 
@@ -87,11 +87,11 @@ export default function Navbar() {
                   <div className="dropdown-panel animate-fade-in">
                     <Link to="/about" className="dropdown-panel-item">
                       <div className="dropdown-item-title">About Al-Irshaad</div>
-                      <div className="dropdown-item-desc">Vision, mission, and international leadership</div>
+                      <div className="dropdown-item-desc">Founder, vision, and Connecticut USA base</div>
                     </Link>
                     <Link to="/teachers" className="dropdown-panel-item">
-                      <div className="dropdown-item-title">Meet Our Teachers</div>
-                      <div className="dropdown-item-desc">Certified Huffaz & Scholarly faculty</div>
+                      <div className="dropdown-item-title">Meet Our Faculty</div>
+                      <div className="dropdown-item-desc">Certified Huffaz, scholars & Ustadhat</div>
                     </Link>
                     <Link to="/for-parents" className="dropdown-panel-item">
                       <div className="dropdown-item-title">For Parents & Families</div>
@@ -215,7 +215,7 @@ export default function Navbar() {
                 className={`mobile-nav-link ${isActive('/about') ? 'active' : ''}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <span>About Al-Irshaad</span>
+                <span>About Us</span>
               </Link>
 
               {/* Expandable Programs */}
@@ -276,7 +276,7 @@ export default function Navbar() {
                 className={`mobile-nav-link ${isActive('/teachers') ? 'active' : ''}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <span>Meet Our Teachers</span>
+                <span>Meet Our Faculty</span>
               </Link>
 
               <Link 

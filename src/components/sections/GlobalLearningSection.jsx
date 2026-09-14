@@ -24,10 +24,10 @@ export default function GlobalLearningSection() {
   ];
 
   const mapPins = [
-    { name: "Nigeria (Base)", x: "51%", y: "58%" },
+    { name: "United States (Connecticut Base)", x: "28%", y: "38%" },
+    { name: "Nigeria & West Africa", x: "51%", y: "58%" },
     { name: "United Kingdom", x: "48%", y: "30%" },
-    { name: "United States (East)", x: "28%", y: "38%" },
-    { name: "United States (West)", x: "18%", y: "36%" },
+    { name: "United States (West / Central)", x: "18%", y: "36%" },
     { name: "Canada", x: "24%", y: "26%" },
     { name: "South Africa", x: "55%", y: "78%" },
     { name: "United Arab Emirates", x: "62%", y: "45%" },
