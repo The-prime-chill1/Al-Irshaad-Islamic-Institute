@@ -76,7 +76,7 @@ export default function TeachersPage() {
             Meet Our Distinguished Faculty
           </h1>
           <p style={{ color: 'var(--text-on-dark-muted)', maxWidth: '820px', margin: '0 auto', fontSize: '1.15rem', lineHeight: 1.6 }}>
-            Guided by Founder & Director Ustaadh Naasir Akinbolanle Jamiu from Connecticut, USA, our faculty of certified Huffaz, Islamic Law scholars, and experienced educators provides authentic 1-on-1 Qur'anic and Islamic education worldwide.
+            Guided by Founder Ustaadh Naasir Akinbolanle Jamiu from Connecticut, USA, our faculty of certified Huffaz, Islamic Law scholars, and experienced educators provides authentic 1-on-1 Qur'anic and Islamic education worldwide.
           </p>
         </div>
       </section>

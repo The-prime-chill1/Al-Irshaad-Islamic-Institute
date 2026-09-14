@@ -184,13 +184,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 3. Founder, Director & CEO Spotlight */}
+      {/* 3. Founder Spotlight */}
       <section className="section-padding" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid var(--border-medium)', borderBottom: '1px solid var(--border-medium)' }}>
         <div className="container">
           <SectionHeader 
             badge="Scholarly Leadership"
-            arabicTitle="مُؤَسِّسُ الْمَعْهَدِ وَمُدِيرُهُ"
-            title="Founder, Director & CEO"
+            arabicTitle="مُؤَسِّسُ الْمَعْهَدِ"
+            title="Founder"
             description="Dedicated Islamic scholar, Haafidh of the Holy Qur'an, and visionary educator leading Al-Irshaad from Connecticut, USA."
           />
 
@@ -222,7 +222,7 @@ export default function AboutPage() {
                 </h3>
 
                 <p style={{ color: 'var(--accent-gold-dark)', fontWeight: 700, fontSize: '0.98rem', marginBottom: '1.35rem', letterSpacing: '0.02em' }}>
-                  Founder, Director & CEO, Al-Irshaad Islamic Institute
+                  Founder, Al-Irshaad Islamic Institute
                 </p>
 
                 <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: '1.25rem' }}>
@@ -257,9 +257,9 @@ export default function AboutPage() {
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                     {[
                       "Haafidh of the Holy Qur'an",
-                      "Founder, Director & CEO, Al-Irshaad Islamic Institute (Connecticut, USA)",
+                      "Founder, Al-Irshaad Islamic Institute (Connecticut, USA)",
                       "Specialist in Qur'an Memorization (Hifz) & Tajweed",
-                      "Director of Academic Curriculum & Faculty Mentorship",
+                      "Academic Curriculum & Faculty Mentorship Leadership",
                       "Experienced in 1-on-1 Virtual Islamic Tarbiyah Globally"
                     ].map((q, idx) => (
                       <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', fontSize: '0.92rem', color: 'var(--text-primary)', lineHeight: 1.5 }}>
@@ -275,7 +275,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-    {/* Full Official Message from the Director Box */}
+    {/* Full Official Message from the Founder Box */}
     <div 
       className="director-message-box card-dark"
       style={{ 
@@ -308,7 +308,7 @@ export default function AboutPage() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1.75rem' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.65rem', background: 'rgba(197, 168, 105, 0.2)', border: '1px solid rgba(197, 168, 105, 0.6)', padding: '0.45rem 1.15rem', borderRadius: '9999px', color: '#E5C988', fontSize: '0.88rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             <IconQuote size={18} color="#E5C988" />
-            <span>A Message from the Director</span>
+            <span>A Message from the Founder</span>
           </div>
 
           <span style={{ fontSize: '0.85rem', color: '#CBD5E1', fontWeight: 600, background: 'rgba(255,255,255,0.08)', padding: '0.35rem 0.85rem', borderRadius: '8px' }}>
@@ -374,7 +374,7 @@ export default function AboutPage() {
               Ustaadh Naasir Akinbolanle Jamiu
             </strong>
             <span style={{ fontSize: '0.9rem', color: '#CBD5E1', fontWeight: 500 }}>
-              Founder, Director & CEO, Al-Irshaad Islamic Institute (Connecticut, USA)
+              Founder, Al-Irshaad Islamic Institute (Connecticut, USA)
             </span>
           </div>
 
