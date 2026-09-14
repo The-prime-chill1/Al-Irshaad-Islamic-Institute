@@ -93,7 +93,10 @@ export default function AboutPage() {
       {/* Sacred Hadith Ribbon */}
       <HadithRibbon variant="compact" />
 
-      {/* 2. Main Narrative & Founding Vision */}
+      {/* 2. Vision & Mission Section (Elevated to the top) */}
+      <VisionMissionSection />
+
+      {/* 3. Main Narrative & Founding Vision */}
       <section className="section-padding" style={{ backgroundColor: 'var(--bg-ivory)' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: 'clamp(2rem, 4vw, 3.5rem)', alignItems: 'center' }}>
@@ -184,7 +187,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 3. Leadership Spotlight */}
+      {/* 4. Leadership Spotlight */}
       <section className="section-padding" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid var(--border-medium)', borderBottom: '1px solid var(--border-medium)' }}>
         <div className="container">
           <SectionHeader 
@@ -502,13 +505,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 6. Vision & Mission Section */}
-      <VisionMissionSection />
-
-      {/* 7. Global Learning & Diaspora Reach */}
+      {/* 6. Global Learning & Diaspora Reach */}
       <GlobalLearningSection />
 
-      {/* 8. Final CTA Banner */}
+      {/* 7. Final CTA Banner */}
       <CtaBannerSection 
         badge="Join Al-Irshaad Today"
         title="Experience Authentic Islamic Education from Home"
