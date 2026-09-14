@@ -16,7 +16,8 @@ import {
   IconBookOpen,
   IconCheckCircle,
   IconSparkle,
-  IconAward
+  IconAward,
+  IconQuote
 } from '../components/common/Icons';
 
 export default function AboutPage() {
@@ -128,7 +129,129 @@ export default function AboutPage() {
       {/* 2. Vision & Mission Section */}
       <VisionMissionSection />
 
-      {/* 3. Dedicated Full-Width Section: Our 5-Stage Educational Paradigm */}
+      {/* 3. A Message from the Founder & Director */}
+      <section className="section-padding" style={{ backgroundColor: '#FAF8F5', borderTop: '1px solid var(--border-medium)', borderBottom: '1px solid var(--border-medium)', position: 'relative' }}>
+        <div className="container">
+          <SectionHeader 
+            badge="Leadership Address"
+            arabicTitle="كَلِمَةُ مُؤَسِّسِ الْمَعْهَدِ"
+            title="A Message from the Founder & Director"
+            description="A personal address from Ustaadh Naasir Akinbolanle Jamiu on the founding vision, scholarly dedication, and pastoral mission of Al-Irshaad."
+          />
+
+          {/* Centered Parchment Letter Document */}
+          <div 
+            style={{
+              maxWidth: '860px',
+              margin: '0 auto',
+              background: '#FFFFFF',
+              borderRadius: '24px',
+              padding: 'clamp(2.25rem, 5vw, 3.75rem)',
+              border: '1.5px solid rgba(197, 168, 105, 0.4)',
+              boxShadow: '0 12px 40px rgba(0, 93, 184, 0.06)',
+              position: 'relative'
+            }}
+          >
+            {/* Header Quote Icon & Official Address Badge */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1.75rem', borderBottom: '1.5px solid var(--border-light)', paddingBottom: '1.25rem' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', color: 'var(--primary-dark)', fontWeight: 700, fontSize: '1.15rem', fontFamily: 'var(--font-serif)' }}>
+                <IconQuote size={24} color="var(--accent-gold-dark)" />
+                <span>A Message from the Director</span>
+              </div>
+
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', background: 'var(--bg-light)', padding: '0.3rem 0.85rem', borderRadius: '6px', fontWeight: 600 }}>
+                Al-Irshaad Islamic Institute • Connecticut, USA
+              </span>
+            </div>
+
+            {/* Arabic Calligraphy Basmalah */}
+            <div style={{ fontFamily: 'var(--font-arabic)', fontSize: 'clamp(2rem, 3.8vw, 2.5rem)', color: 'var(--accent-gold-dark)', marginBottom: '1.25rem', direction: 'rtl', textAlign: 'center' }}>
+              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+            </div>
+
+            {/* Greeting */}
+            <div style={{ fontSize: '1.12rem', color: 'var(--primary-dark)', fontWeight: 700, fontStyle: 'italic', marginBottom: '1.5rem', textAlign: 'center', fontFamily: 'var(--font-serif)' }}>
+              Assalamu Alaikum wa Rahmatullahi wa Barakatuh,
+            </div>
+
+            {/* Letter Paragraphs */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', color: 'var(--text-secondary)', fontSize: '1.02rem', lineHeight: '1.9' }}>
+              <p style={{ margin: 0, color: 'var(--text-primary)', fontStyle: 'italic' }}>
+                All praise is due to Allah, Lord of the worlds, and may peace and blessings be upon our Prophet Muhammad ﷺ.
+              </p>
+
+              <p style={{ margin: 0, color: 'var(--primary-dark)', fontWeight: 700, fontSize: '1.2rem', fontFamily: 'var(--font-serif)' }}>
+                Welcome to Al-Irshaad Islamic Institute.
+              </p>
+
+              <p style={{ margin: 0 }}>
+                Al-Irshaad Islamic institute was founded with sincere intention to make the light of the Qur'an reach every Muslim home, no matter where they live. As a Haafidh of the Qur'an and a student of Shariah, I have seen firsthand how transformative authentic Islamic knowledge can be not just for recitation, but for our Iman, our character, and our families.
+              </p>
+
+              <p style={{ margin: 0 }}>
+                Today, many of our children are growing up far from traditional centers of learning. Many adults and new Muslims long to connect with the Qur'an but don't know where to start. This is why we exist.
+              </p>
+
+              <p style={{ margin: 0 }}>
+                At Al-Irshaad, we don't just teach letters and rules. We nurture love for Allah and His Book. Through our Nuurul Bayaan foundation, Tajweed, Hifz, and Islamic Studies programs, we combine traditional scholarship with caring, personalized online teaching, so every student, young or old, can learn with excellence and confidence.
+              </p>
+
+              {/* Highlighted Values Quote Box */}
+              <div 
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(3, 17, 34, 0.03) 0%, rgba(197, 168, 105, 0.12) 100%)', 
+                  borderLeft: '4px solid var(--accent-gold)', 
+                  borderRadius: '12px', 
+                  padding: '1.25rem 1.65rem', 
+                  margin: '0.5rem 0',
+                  border: '1px solid rgba(197, 168, 105, 0.35)',
+                  borderLeftWidth: '4px'
+                }}
+              >
+                <p style={{ margin: 0, color: 'var(--primary-dark)', fontWeight: 700, fontSize: '1.05rem', lineHeight: '1.75' }}>
+                  "I personally oversee our curriculum and teachers to ensure we uphold <span style={{ color: 'var(--accent-gold-dark)' }}>Ikhlas (sincerity)</span>, <span style={{ color: 'var(--accent-gold-dark)' }}>Itqan (excellence)</span>, and <span style={{ color: 'var(--accent-gold-dark)' }}>Amanah (trust)</span> in everything we do."
+                </p>
+              </div>
+
+              <p style={{ margin: 0 }}>
+                I invite you to join our family and take the first step. Book a free trial class, meet our teachers, and experience the difference.
+              </p>
+
+              <p style={{ margin: 0, fontStyle: 'italic', color: 'var(--accent-gold-dark)', fontWeight: 600, fontSize: '1.05rem' }}>
+                May Allah bless your journey to the Qur'an and make it a light for you in this life and the next.
+              </p>
+            </div>
+
+            {/* Signature Block */}
+            <div style={{ marginTop: '2.25rem', paddingTop: '1.75rem', borderTop: '1.5px solid var(--border-light)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.25rem' }}>
+              <div>
+                <div style={{ fontFamily: 'var(--font-arabic)', fontSize: '1.45rem', color: 'var(--primary-dark)', marginBottom: '0.25rem', direction: 'rtl' }}>
+                  الأستاذ ناصر أكنبولنلي جامع
+                </div>
+                <strong style={{ display: 'block', color: 'var(--primary-dark)', fontSize: '1.18rem', fontFamily: 'var(--font-serif)' }}>
+                  Ustaadh Naasir Akinbolanle Jamiu
+                </strong>
+                <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+                  Founder & Director, Al-Irshaad Islamic Institute
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <Link to="/enroll" className="btn btn-gold btn-sm">
+                  <span>Book a Free Trial Session</span>
+                  <IconArrowRight size={14} color="#031122" />
+                </Link>
+                <Link to="/teachers" className="btn btn-outline btn-sm">
+                  <span>Meet Our Faculty</span>
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Dedicated Full-Width Section: Our 5-Stage Educational Paradigm */}
       <section className="section-padding" style={{ backgroundColor: '#F8FAFC', borderTop: '1px solid var(--border-medium)', borderBottom: '1px solid var(--border-medium)' }}>
         <div className="container">
           <SectionHeader 
