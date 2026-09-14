@@ -585,7 +585,7 @@ Please review this application and schedule the placement assessment. Jazakumull
                         style={{ width: '100%', padding: '0.85rem 1rem', borderRadius: '10px', border: '1.5px solid var(--border-medium)', fontSize: '0.95rem', background: '#fff' }}
                       >
                         <option value="Any Qualified Faculty (Fastest Placement)">Any Qualified Faculty (Fastest Placement)</option>
-                        <option value="Ustaadh Naasir Akinbolanle Jamiu (Founder)">Ustaadh Naasir Akinbolanle Jamiu (Founder)</option>
+                        <option value="Ustaadh Naasir Akinbolanle Jamiu (Director & Founder)">Ustaadh Naasir Akinbolanle Jamiu (Director & Founder)</option>
                         <option value="Ustaadh Tijani Jamiu Ayinde (Senior Islamic Studies & Shariah)">Ustaadh Tijani Jamiu Ayinde (Senior Islamic Studies & Shariah)</option>
                         <option value="Ustaadha Yaseeroh G. Gozali (Dedicated Sisters & Kids)">Ustaadha Yaseeroh G. Gozali (Dedicated Sisters & Kids)</option>
                         <option value="Ustaadh Muhammad Ballo Jamiu (Madeenah Scholar & Tajweed)">Ustaadh Muhammad Ballo Jamiu (Madeenah Scholar & Tajweed)</option>

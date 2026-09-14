@@ -185,6 +185,8 @@ export function IconSparkle({ size = 16, color = "currentColor", ...props }) {
   );
 }
 
+export const IconSparkles = IconSparkle;
+
 export function IconHome({ size = 20, color = "currentColor", ...props }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" {...props}>

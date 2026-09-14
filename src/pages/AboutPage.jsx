@@ -184,13 +184,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 3. Founder Spotlight */}
+      {/* 3. Leadership Spotlight */}
       <section className="section-padding" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid var(--border-medium)', borderBottom: '1px solid var(--border-medium)' }}>
         <div className="container">
           <SectionHeader 
             badge="Scholarly Leadership"
-            arabicTitle="مُؤَسِّسُ الْمَعْهَدِ"
-            title="Founder"
+            arabicTitle="مُؤَسِّسُ وَمُدِيرُ الْمَعْهَدِ"
+            title="Director & Founder"
             description="Dedicated Islamic scholar, Haafidh of the Holy Qur'an, and visionary educator leading Al-Irshaad from Connecticut, USA."
           />
 
@@ -222,15 +222,23 @@ export default function AboutPage() {
                 </h3>
 
                 <p style={{ color: 'var(--accent-gold-dark)', fontWeight: 700, fontSize: '0.98rem', marginBottom: '1.35rem', letterSpacing: '0.02em' }}>
-                  Founder, Al-Irshaad Islamic Institute
+                  Director, Al-Irshaad Islamic Institute
                 </p>
 
-                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: '1.25rem' }}>
-                  <strong>Ustaadh Naasir Akinbolanle Jamiu</strong> is a Haafidh of the Holy Qur'an, Islamic scholar, and educator dedicated to spreading authentic Qur'anic and Islamic knowledge worldwide.
+                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: '1.15rem' }}>
+                  <strong>Ustaadh Naasir Akinbolanle Jamiu</strong> is a Haafidh of the Qur'an, Islamic scholar, and educator dedicated to spreading authentic Qur'anic and Islamic knowledge worldwide.
+                </p>
+
+                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: '1.15rem' }}>
+                  He is a graduate of the <strong>Arabic Institute of Nigeria (المعهد العربي النيجيري)</strong> and studied at <strong>Imam Malik College of Shariah</strong>. He holds a Bachelor's degree in <strong>Islamic Law (Shariah)</strong> and a Master's degree in <strong>Islamic Studies (Comparative Jurisprudence)</strong> from <strong>King Faisal University of Chad</strong>.
+                </p>
+
+                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: '1.15rem' }}>
+                  With years of teaching experience, Ustaadh Naasir founded Al-Irshaad Islamic Institute with a vision to make quality Qur'an memorization, Tajweed, and Islamic Studies accessible to every Muslim home through personalized online learning.
                 </p>
 
                 <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: '1.75rem' }}>
-                  With years of specialized teaching experience, Ustaadh Naasir founded Al-Irshaad Islamic Institute with a vision to make quality Qur'an memorization, Tajweed, and authentic Islamic Studies accessible to every Muslim home through personalized online learning. He currently lives and teaches in <strong>Connecticut, USA</strong>, where he leads an elite team of qualified male and female teachers serving students globally.
+                  He currently lives and teaches in <strong>Connecticut, USA</strong>, where he leads a team of qualified male and female teachers serving students globally.
                 </p>
 
                 <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
@@ -257,10 +265,10 @@ export default function AboutPage() {
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                     {[
                       "Haafidh of the Holy Qur'an",
-                      "Founder, Al-Irshaad Islamic Institute (Connecticut, USA)",
-                      "Specialist in Qur'an Memorization (Hifz) & Tajweed",
-                      "Academic Curriculum & Faculty Mentorship Leadership",
-                      "Experienced in 1-on-1 Virtual Islamic Tarbiyah Globally"
+                      "Graduate, Arabic Institute of Nigeria (المعهد العربي النيجيري)",
+                      "Studied at Imam Malik College of Shariah",
+                      "B.A. in Islamic Law (Shariah) – King Faisal University, Chad",
+                      "M.A. in Islamic Studies (Comparative Jurisprudence) – King Faisal University, Chad."
                     ].map((q, idx) => (
                       <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', fontSize: '0.92rem', color: 'var(--text-primary)', lineHeight: 1.5 }}>
                         <IconCheckCircle size={16} color="var(--accent-gold-dark)" style={{ marginTop: '3px', flexShrink: 0 }} />
@@ -308,7 +316,7 @@ export default function AboutPage() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1.75rem' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.65rem', background: 'rgba(197, 168, 105, 0.2)', border: '1px solid rgba(197, 168, 105, 0.6)', padding: '0.45rem 1.15rem', borderRadius: '9999px', color: '#E5C988', fontSize: '0.88rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             <IconQuote size={18} color="#E5C988" />
-            <span>A Message from the Founder</span>
+            <span>A Message from the Director</span>
           </div>
 
           <span style={{ fontSize: '0.85rem', color: '#CBD5E1', fontWeight: 600, background: 'rgba(255,255,255,0.08)', padding: '0.35rem 0.85rem', borderRadius: '8px' }}>
@@ -374,7 +382,7 @@ export default function AboutPage() {
               Ustaadh Naasir Akinbolanle Jamiu
             </strong>
             <span style={{ fontSize: '0.9rem', color: '#CBD5E1', fontWeight: 500 }}>
-              Founder, Al-Irshaad Islamic Institute (Connecticut, USA)
+              Director & Founder, Al-Irshaad Islamic Institute (Connecticut, USA)
             </span>
           </div>
 

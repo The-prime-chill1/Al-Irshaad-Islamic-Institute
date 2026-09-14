@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import SectionHeader from '../common/SectionHeader';
 import ProgramCard from '../cards/ProgramCard';
 import { programsData } from '../../data/programsData';
+import { IconArrowRight, IconSparkles } from '../common/Icons';
 
-export default function ProgramsGridSection() {
+export default function ProgramsGridSection({ initialCategoryCount = 2 }) {
   const [selectedFilter, setSelectedFilter] = useState('all');
+  const [showAllCategories, setShowAllCategories] = useState(false);
 
   const filterTabs = [
     { id: 'all', label: 'All Curricula' },
@@ -16,9 +18,25 @@ export default function ProgramsGridSection() {
     { id: 'arabic-language', label: "Arabic for English Speakers" }
   ];
 
-  const filteredCategories = selectedFilter === 'all'
-    ? programsData.categories
-    : programsData.categories.filter(c => c.id === selectedFilter);
+  // If a specific filter is clicked, show that category directly.
+  // If 'all', show the first 2-3 categories initially, or all 5 when expanded.
+  const allCategories = programsData.categories;
+  const isFiltered = selectedFilter !== 'all';
+  
+  const displayedCategories = isFiltered
+    ? allCategories.filter(c => c.id === selectedFilter)
+    : showAllCategories
+      ? allCategories
+      : allCategories.slice(0, initialCategoryCount);
+
+  const remainingCategoryCount = allCategories.length - initialCategoryCount;
+
+  const handleTabClick = (tabId) => {
+    setSelectedFilter(tabId);
+    if (tabId !== 'all') {
+      setShowAllCategories(true);
+    }
+  };
 
   return (
     <section className="section-padding" style={{ backgroundColor: 'var(--bg-ivory)', position: 'relative' }}>
@@ -31,7 +49,7 @@ export default function ProgramsGridSection() {
           description="Structured learning for every stage of your Islamic journey — from foundational Arabic letters to fluent recitation, complete memorization, and classical Islamic sciences."
         />
 
-        {/* Maryam Institute Style Category Tabs Filter */}
+        {/* Category Tabs Filter */}
         <div 
           style={{
             display: 'flex',
@@ -47,7 +65,7 @@ export default function ProgramsGridSection() {
             return (
               <button
                 key={tab.id}
-                onClick={() => setSelectedFilter(tab.id)}
+                onClick={() => handleTabClick(tab.id)}
                 style={{
                   padding: '0.65rem 1.35rem',
                   borderRadius: '9999px',
@@ -67,9 +85,9 @@ export default function ProgramsGridSection() {
           })}
         </div>
 
-        {/* Categories Loop */}
+        {/* Categories Loop (Showing 2-3 Categories initially or all when expanded) */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '3.5rem' }}>
-          {filteredCategories.map((cat) => (
+          {displayedCategories.map((cat) => (
             <div 
               key={cat.id} 
               className="fade-in-up"
@@ -118,10 +136,7 @@ export default function ProgramsGridSection() {
                     className="btn btn-outline btn-sm"
                   >
                     <span>{cat.ctaText}</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
+                    <IconArrowRight size={14} color="var(--primary)" />
                   </Link>
                 </div>
               </div>
@@ -143,40 +158,83 @@ export default function ProgramsGridSection() {
           ))}
         </div>
 
-        {/* Global Programs Directory CTA */}
-        <div style={{ marginTop: '4rem', textAlign: 'center' }}>
-          <div 
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              gap: '1.25rem',
-              padding: '1.5rem 2.5rem',
-              background: 'linear-gradient(135deg, #031122 0%, #071C34 100%)',
-              color: '#FFFFFF',
-              borderRadius: '20px',
-              border: '1px solid rgba(197, 168, 105, 0.4)',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
-            }}
-          >
-            <span style={{ fontSize: '1.05rem', fontWeight: 600 }}>
-              Ready to calculate tuition for your selected course?
-            </span>
-            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-              <a 
-                href="#course-pricing-calculator" 
-                className="btn btn-gold btn-sm" 
-                style={{ padding: '0.75rem 1.5rem', fontWeight: 700 }}
-              >
-                Calculate Course Tuition ↓
-              </a>
-              <Link to="/contact" className="btn btn-outline btn-sm" style={{ padding: '0.75rem 1.5rem', color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.35)' }}>
-                Speak with Admissions
-              </Link>
+        {/* Discover More Remaining Categories CTA Box */}
+        {!isFiltered && !showAllCategories && remainingCategoryCount > 0 && (
+          <div style={{ marginTop: '3.5rem', textAlign: 'center' }}>
+            <div 
+              style={{
+                display: 'inline-flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '1rem',
+                background: '#FFFFFF',
+                padding: 'clamp(1.75rem, 3.5vw, 2.5rem) clamp(1.5rem, 4vw, 3rem)',
+                borderRadius: '24px',
+                border: '1.5px solid var(--border-gold)',
+                boxShadow: 'var(--shadow-md)',
+                maxWidth: '680px',
+                width: '100%'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-gold-dark)', fontWeight: 700, fontSize: '0.9rem' }}>
+                <IconSparkles size={18} color="var(--accent-gold)" />
+                <span>{remainingCategoryCount} MORE LEARNING CATEGORIES AVAILABLE</span>
+              </div>
+
+              <h4 style={{ fontSize: '1.35rem', color: 'var(--primary-dark)', fontWeight: 700, margin: 0 }}>
+                Looking for Advance Islamic Studies, Adhkaar or Arabic?
+              </h4>
+
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', margin: 0, lineHeight: 1.6 }}>
+                Discover our specialized tracks in <strong>Higher Classical Islamic Sciences</strong>, <strong>Daily Adhkaar Memorization</strong>, and <strong>Arabic for English Speakers</strong>.
+              </p>
+
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', marginTop: '0.5rem' }}>
+                <button 
+                  onClick={() => setShowAllCategories(true)}
+                  className="btn btn-gold btn-md"
+                  style={{
+                    padding: '0.85rem 2.25rem',
+                    fontSize: '0.98rem',
+                    fontWeight: 700,
+                    boxShadow: '0 6px 20px rgba(197, 168, 105, 0.4)',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <span>Discover More Categories ({remainingCategoryCount})</span>
+                  <IconArrowRight size={16} color="#031122" />
+                </button>
+
+                <Link 
+                  to="/enroll" 
+                  className="btn btn-outline btn-md"
+                  style={{
+                    padding: '0.85rem 1.75rem',
+                    fontSize: '0.98rem'
+                  }}
+                >
+                  <span>Book Free Trial Session</span>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        )}
+
+        {/* If all categories are currently expanded, provide a collapse button */}
+        {!isFiltered && showAllCategories && (
+          <div style={{ marginTop: '3.5rem', textAlign: 'center' }}>
+            <button 
+              onClick={() => {
+                setShowAllCategories(false);
+                setSelectedFilter('all');
+              }}
+              className="btn btn-outline btn-sm"
+              style={{ padding: '0.75rem 1.5rem', cursor: 'pointer' }}
+            >
+              <span>Show Fewer Categories ↑</span>
+            </button>
+          </div>
+        )}
 
       </div>
     </section>

@@ -1,16 +1,9 @@
 import React from 'react';
 import HeroSection from '../components/sections/HeroSection';
 import HadithRibbon from '../components/common/HadithRibbon';
-import TrustIntroSection from '../components/sections/TrustIntroSection';
-import WhatWeDoSection from '../components/sections/WhatWeDoSection';
-import WhyUsSection from '../components/sections/WhyUsSection';
-import StudySetupSection from '../components/sections/StudySetupSection';
 import ProgramsGridSection from '../components/sections/ProgramsGridSection';
-import QuranJourneySection from '../components/sections/QuranJourneySection';
-import WhoWeServeSection from '../components/sections/WhoWeServeSection';
+import WhyUsSection from '../components/sections/WhyUsSection';
 import HowItWorksSection from '../components/sections/HowItWorksSection';
-import VisionMissionSection from '../components/sections/VisionMissionSection';
-import GlobalLearningSection from '../components/sections/GlobalLearningSection';
 import TestimonialsSection from '../components/sections/TestimonialsSection';
 import FaqAccordionSection from '../components/sections/FaqAccordionSection';
 import CtaBannerSection from '../components/sections/CtaBannerSection';
@@ -24,43 +17,22 @@ export default function HomePage() {
       {/* 2. Sacred Hadith Ribbon */}
       <HadithRibbon />
 
-      {/* 3. Introduction & Trust Pillars */}
-      <TrustIntroSection />
+      {/* 3. Structured Learning Programs (2 Categories + Discover More Categories CTA) */}
+      <ProgramsGridSection initialCategoryCount={2} />
 
-      {/* 4. What We Do (3 Core Educational Pathways) */}
-      <WhatWeDoSection />
-
-      {/* 5. Reasons To Join Us (6 Cards with React SVG Icons) */}
+      {/* 4. Key Advantages & Live Online Experience */}
       <WhyUsSection />
 
-      {/* 6. Study With Al-Irshaad (Live Online Setup Showcase) */}
-      <StudySetupSection />
-
-      {/* 7. Detailed Learning Programs Grid with Filter Tabs */}
-      <ProgramsGridSection />
-
-      {/* 8. Your Qur'anic Journey Pathway */}
-      <QuranJourneySection />
-
-      {/* 9. Who We Serve (Children, Teens, Adults, Diaspora) */}
-      <WhoWeServeSection />
-
-      {/* 10. How Online Learning Works (6 Steps) */}
+      {/* 5. How Online Learning Works (Simple 3-Step Process) */}
       <HowItWorksSection />
 
-      {/* 11. Vision & Mission */}
-      <VisionMissionSection />
-
-      {/* 12. Global Learning & Diaspora */}
-      <GlobalLearningSection />
-
-      {/* 13. What Our Students & Parents Say (Testimonials) */}
+      {/* 6. What Our Students & Parents Say (Testimonials) */}
       <TestimonialsSection />
 
-      {/* 14. Frequently Asked Questions */}
-      <FaqAccordionSection limit={6} />
+      {/* 7. Frequently Asked Questions */}
+      <FaqAccordionSection limit={4} />
 
-      {/* 15. Final CTA Banner */}
+      {/* 8. Final Call to Action Banner */}
       <CtaBannerSection />
     </div>
   );
