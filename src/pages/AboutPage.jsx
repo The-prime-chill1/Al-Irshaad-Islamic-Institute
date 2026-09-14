@@ -4,7 +4,6 @@ import VisionMissionSection from '../components/sections/VisionMissionSection';
 import GlobalLearningSection from '../components/sections/GlobalLearningSection';
 import CtaBannerSection from '../components/sections/CtaBannerSection';
 import HadithRibbon from '../components/common/HadithRibbon';
-import { images } from '../data/imageAssets';
 import { teachersData } from '../data/teachersData';
 import TeacherCard from '../components/cards/TeacherCard';
 import { Link } from 'react-router-dom';
@@ -12,16 +11,56 @@ import {
   IconGraduationCap, 
   IconMapPin, 
   IconArrowRight,
-  IconShield
+  IconShield,
+  IconHeart,
+  IconBookOpen,
+  IconCheckCircle,
+  IconSparkle,
+  IconAward
 } from '../components/common/Icons';
 
 export default function AboutPage() {
-  const steps = [
-    { title: "Believe (Iman)", desc: "Planting pure conviction and love for Allah and His Messenger ﷺ." },
-    { title: "Learn ('Ilm)", desc: "Acquiring structured, authentic knowledge with proper Makharij and understanding." },
-    { title: "Practice ('Amal)", desc: "Translating knowledge into daily Salah, Adhkaar, and prophetic character." },
-    { title: "Grow (Tazkiyah)", desc: "Purifying intentions, strengthening moral resilience, and elevating manners." },
-    { title: "Live by the Qur'an", desc: "Embodying the Qur'an as a comprehensive guide in family, school, and society." }
+  const paradigmSteps = [
+    { 
+      number: "01",
+      title: "Believe (Iman)", 
+      arabic: "الإِيمَان",
+      desc: "Planting pure conviction, sincere intention (Ikhlaas), and deep love for Allah and His Messenger ﷺ in the heart of every learner.",
+      icon: IconHeart,
+      badge: "Foundation"
+    },
+    { 
+      number: "02",
+      title: "Learn ('Ilm)", 
+      arabic: "العِلْم",
+      desc: "Acquiring structured, authentic knowledge with correct Makharij, foundational Tajweed rules, and accurate understanding.",
+      icon: IconBookOpen,
+      badge: "Instruction"
+    },
+    { 
+      number: "03",
+      title: "Practice ('Amal)", 
+      arabic: "العَمَل",
+      desc: "Translating sacred knowledge into daily prayer (Salah), authentic Adhkaar, ethical conduct, and prophetic character.",
+      icon: IconCheckCircle,
+      badge: "Application"
+    },
+    { 
+      number: "04",
+      title: "Grow (Tazkiyah)", 
+      arabic: "التَّزْكِيَة",
+      desc: "Purifying intentions, cultivating moral resilience, elevating Adab (manners), and strengthening spiritual discipline.",
+      icon: IconSparkle,
+      badge: "Purification"
+    },
+    { 
+      number: "05",
+      title: "Live by the Qur'an", 
+      arabic: "الحَيَاةُ بِالقُرْآن",
+      desc: "Embodying the Qur'an as a complete life compass, standing as a confident Muslim ambassador in family and society.",
+      icon: IconAward,
+      badge: "Mastery"
+    }
   ];
 
   const coreValues = [
@@ -86,101 +125,144 @@ export default function AboutPage() {
       {/* Sacred Hadith Ribbon */}
       <HadithRibbon variant="compact" />
 
-      {/* 2. Vision & Mission Section (Elevated to the top) */}
+      {/* 2. Vision & Mission Section */}
       <VisionMissionSection />
 
-      {/* 3. Main Narrative & Founding Vision */}
-      <section className="section-padding" style={{ backgroundColor: 'var(--bg-ivory)' }}>
+      {/* 3. Dedicated Full-Width Section: Our 5-Stage Educational Paradigm */}
+      <section className="section-padding" style={{ backgroundColor: '#F8FAFC', borderTop: '1px solid var(--border-medium)', borderBottom: '1px solid var(--border-medium)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: 'clamp(2rem, 4vw, 3.5rem)', alignItems: 'center' }}>
-            
-            <div>
-              <span className="badge-emerald" style={{ marginBottom: '1rem' }}>Authentic Islamic Education</span>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', color: 'var(--primary-dark)', marginBottom: '1.25rem', lineHeight: 1.25, fontWeight: 700 }}>
-                A Sanctuary for Genuine Islamic Scholarship & Spiritual Tarbiyah
-              </h2>
-              
-              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '1.25rem' }}>
-                <strong>Al-Irshaad Islamic Institute</strong> is a premier <strong>international online Islamic educational academy</strong> established to bridge the gap between rigorous traditional scholarly education and the busy modern lives of Muslim families worldwide.
-              </p>
+          <SectionHeader 
+            badge="Our Educational Philosophy"
+            arabicTitle="مَنْهَجُنَا التَّرْبَوِيُّ فِي خَمْسِ مَرَاحِلَ"
+            title="Our 5-Stage Educational Paradigm"
+            description="A holistic, structured pathway guiding students from foundational faith (Iman) to complete embodiment of the Holy Qur'an."
+          />
 
-              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '1.25rem' }}>
-                For Muslim parents living in North America, the UK, Europe, and across the globe, finding authentic, vetted, and patient Islamic tutors who understand diaspora upbringing can be a formidable challenge. Al-Irshaad provides the solution: a structured, reliable, 1-on-1 virtual sanctuary where children, youth, and adults learn directly from credentialed Huffaz and scholars.
-              </p>
-
-              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '1.75rem' }}>
-                Headquartered in <strong>Connecticut, USA</strong>, our institute provides timezone-matched private instruction in Nuurul Bayaan (Arabic Reading Foundations), Qur'an Recitation with Tajweed, Hifdh (Memorization), Classical Arabic, and Islamic Studies (Aqeedah, Fiqh, Seerah, Hadith, and Akhlaaq).
-              </p>
-
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <Link to="/programs" className="btn btn-primary btn-sm">
-                  Explore Learning Tracks
-                </Link>
-                <Link to="/teachers" className="btn btn-outline btn-sm">
-                  Meet Our Faculty
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Card Highlight: 5-Stage Paradigm */}
-            <div 
-              style={{
-                background: 'var(--bg-card)',
-                borderRadius: '24px',
-                border: '1px solid var(--border-medium)',
-                boxShadow: 'var(--shadow-md)',
-                overflow: 'hidden'
-              }}
-            >
-              <div style={{ height: '180px', position: 'relative', overflow: 'hidden' }}>
-                <img 
-                  src={images.mosqueInterior} 
-                  alt="Islamic Sanctuary and Learning"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(3,17,34,0.3) 0%, rgba(3,17,34,0.85) 100%)' }} />
-                <div style={{ position: 'absolute', bottom: '16px', left: '20px', color: 'var(--accent-gold-light)', fontWeight: 700, fontSize: '0.88rem', letterSpacing: '0.05em' }}>
-                  OUR 5-STAGE EDUCATIONAL PARADIGM
-                </div>
-              </div>
-
-              <div style={{ padding: '2rem' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.15rem' }}>
-                  {steps.map((s, idx) => (
-                    <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-                      <span 
-                        style={{
-                          width: '28px',
-                          height: '28px',
-                          borderRadius: '50%',
-                          background: 'var(--primary-dark)',
-                          color: 'var(--accent-gold-light)',
-                          border: '1px solid var(--accent-gold)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: '0.8rem',
-                          fontWeight: 700,
-                          flexShrink: 0
-                        }}
-                      >
-                        {idx + 1}
-                      </span>
-                      <div>
-                        <strong style={{ display: 'block', color: 'var(--primary-dark)', fontSize: '0.94rem' }}>{s.title}</strong>
-                        <span style={{ color: 'var(--text-secondary)', fontSize: '0.86rem', lineHeight: 1.45 }}>{s.desc}</span>
-                      </div>
+          {/* 5 Milestone Cards Grid */}
+          <div 
+            style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', 
+              gap: '1.25rem',
+              alignItems: 'stretch'
+            }}
+          >
+            {paradigmSteps.map((step, idx) => {
+              const IconComp = step.icon;
+              return (
+                <div 
+                  key={idx}
+                  className="card-premium"
+                  style={{
+                    padding: '1.75rem 1.35rem',
+                    borderRadius: '20px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    position: 'relative',
+                    borderTop: '4px solid var(--accent-gold)',
+                    background: '#FFFFFF',
+                    boxShadow: '0 8px 24px rgba(0, 93, 184, 0.05)',
+                    transition: 'all 0.3s ease'
+                  }}
+                >
+                  {/* Top Step Pill & Badge */}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.15rem' }}>
+                    <div 
+                      style={{
+                        width: '36px',
+                        height: '36px',
+                        borderRadius: '50%',
+                        background: 'linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%)',
+                        color: 'var(--accent-gold-light)',
+                        border: '1.5px solid var(--accent-gold)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '0.9rem',
+                        fontWeight: 800,
+                        boxShadow: '0 4px 12px rgba(0, 93, 184, 0.18)'
+                      }}
+                    >
+                      {step.number}
                     </div>
-                  ))}
+
+                    <span 
+                      style={{ 
+                        fontSize: '0.72rem', 
+                        fontWeight: 700, 
+                        color: 'var(--primary)', 
+                        background: 'rgba(0, 93, 184, 0.08)', 
+                        padding: '0.2rem 0.65rem', 
+                        borderRadius: '9999px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.04em'
+                      }}
+                    >
+                      {step.badge}
+                    </span>
+                  </div>
+
+                  {/* Arabic Calligraphy Title */}
+                  <div style={{ fontFamily: 'var(--font-arabic)', fontSize: '1.5rem', color: 'var(--accent-gold-dark)', marginBottom: '0.35rem', direction: 'rtl' }}>
+                    {step.arabic}
+                  </div>
+
+                  {/* Step Title */}
+                  <h3 style={{ fontSize: '1.15rem', color: 'var(--primary-dark)', fontWeight: 700, marginBottom: '0.65rem', fontFamily: 'var(--font-serif)' }}>
+                    {step.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: 1.6, margin: '0 0 1.25rem 0', flexGrow: 1 }}>
+                    {step.desc}
+                  </p>
+
+                  {/* Bottom Phase Indicator */}
+                  <div style={{ paddingTop: '0.85rem', borderTop: '1px solid rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--primary)', fontSize: '0.82rem', fontWeight: 600 }}>
+                    <IconComp size={16} color="var(--accent-gold-dark)" />
+                    <span style={{ color: 'var(--text-muted)' }}>Stage {idx + 1} of 5</span>
+                  </div>
                 </div>
-              </div>
+              );
+            })}
+          </div>
+
+          {/* Bottom Philosophy Callout Banner */}
+          <div 
+            style={{ 
+              marginTop: '2.5rem', 
+              background: 'linear-gradient(135deg, #031122 0%, #071C34 100%)', 
+              borderRadius: '18px', 
+              padding: '1.75rem 2.25rem', 
+              color: '#FFFFFF',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '1.25rem',
+              border: '1px solid rgba(197, 168, 105, 0.4)',
+              boxShadow: '0 12px 35px rgba(3, 17, 34, 0.25)'
+            }}
+          >
+            <div style={{ maxWidth: '720px' }}>
+              <strong style={{ color: '#E5C988', fontSize: '1.1rem', display: 'block', marginBottom: '0.35rem', fontFamily: 'var(--font-serif)' }}>
+                Pedagogy Rooted in Prophetic Wisdom & Sunnah
+              </strong>
+              <p style={{ color: '#CBD5E1', fontSize: '0.94rem', margin: 0, lineHeight: 1.6 }}>
+                Every lesson plan across all curriculum tracks is calibrated against this 5-stage paradigm to ensure holistic character growth beyond mere rote recitation.
+              </p>
             </div>
 
+            <Link to="/enroll" className="btn btn-gold btn-sm">
+              <span>Start Your Journey</span>
+              <IconArrowRight size={14} color="#031122" />
+            </Link>
           </div>
+
         </div>
       </section>
 
-      {/* 4. Meet Our Distinguished Faculty & Scholarly Team */}
+      {/* 5. Meet Our Distinguished Faculty & Scholarly Team */}
       <section className="section-padding" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid var(--border-medium)' }}>
         <div className="container">
           <SectionHeader 
@@ -240,7 +322,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 5. Our Core Values */}
+      {/* 6. Our Core Values */}
       <section className="section-padding" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid var(--border-medium)' }}>
         <div className="container">
           <SectionHeader 
@@ -277,10 +359,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 6. Global Learning & Diaspora Reach */}
+      {/* 7. Global Learning & Diaspora Reach */}
       <GlobalLearningSection />
 
-      {/* 7. Final CTA Banner */}
+      {/* 8. Final CTA Banner */}
       <CtaBannerSection 
         badge="Join Al-Irshaad Today"
         title="Experience Authentic Islamic Education from Home"
