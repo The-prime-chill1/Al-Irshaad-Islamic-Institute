@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { firebaseAuthService, AUTHORIZED_ADMIN_EMAILS } from '../services/firebaseAuthService';
+import { firebaseAuthService } from '../services/firebaseAuthService';
 import HadithRibbon from '../components/common/HadithRibbon';
 import { 
   IconShield, 
@@ -16,18 +16,18 @@ import {
 export default function AdminAuthPage() {
   const navigate = useNavigate();
   
-  // Remembered email from previous session
-  const initialRememberedEmail = localStorage.getItem('alirshaad_remembered_admin_email') || 'instituteofislamicguidance@gmail.com';
+  // Remembered email preference if admin enabled "Remember me"
+  const rememberedEmail = localStorage.getItem('alirshaad_remembered_admin_email') || '';
   
-  // Login State
-  const [loginIdentifier, setLoginIdentifier] = useState(initialRememberedEmail);
+  // Login State - User types email & password
+  const [loginIdentifier, setLoginIdentifier] = useState(rememberedEmail);
   const [loginPassword, setLoginPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
+  const [rememberMe, setRememberMe] = useState(!!rememberedEmail);
 
   // Password Reset State
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
-  const [resetEmail, setResetEmail] = useState('instituteofislamicguidance@gmail.com');
+  const [resetEmail, setResetEmail] = useState('');
   const [resetStatus, setResetStatus] = useState({ loading: false, message: '', error: '' });
 
   const emailInputRef = useRef(null);
@@ -43,7 +43,7 @@ export default function AdminAuthPage() {
       return;
     }
 
-    if (initialRememberedEmail) {
+    if (rememberedEmail) {
       setTimeout(() => {
         passwordInputRef.current?.focus();
       }, 100);
@@ -52,7 +52,7 @@ export default function AdminAuthPage() {
         emailInputRef.current?.focus();
       }, 100);
     }
-  }, [navigate, initialRememberedEmail]);
+  }, [navigate, rememberedEmail]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -80,11 +80,16 @@ export default function AdminAuthPage() {
     e.preventDefault();
     setResetStatus({ loading: true, message: '', error: '' });
 
+    if (!resetEmail.trim()) {
+      setResetStatus({ loading: false, message: '', error: 'Please enter your admin email address.' });
+      return;
+    }
+
     try {
-      const res = await firebaseAuthService.sendAdminPasswordReset(resetEmail);
+      const res = await firebaseAuthService.sendAdminPasswordReset(resetEmail.trim());
       setResetStatus({
         loading: false,
-        message: res.message || `Password reset instructions sent to ${resetEmail}.`,
+        message: res.message || `Password reset instructions have been sent to ${resetEmail}.`,
         error: ''
       });
     } catch (err) {
@@ -108,18 +113,18 @@ export default function AdminAuthPage() {
             Administrator Control Panel
           </h1>
           <p style={{ color: '#CBD5E1', maxWidth: '620px', margin: '0 auto', fontSize: '0.98rem', lineHeight: 1.6 }}>
-            Firebase-authenticated portal for Al-Irshaad admissions coordination and student database management.
+            Secure portal for Al-Irshaad admissions coordination and student database management.
           </p>
         </div>
       </section>
 
       <HadithRibbon variant="compact" />
 
-      <div className="container" style={{ maxWidth: '500px', marginTop: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
+      <div className="container" style={{ maxWidth: '480px', marginTop: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
         <div style={{
           background: '#FFFFFF',
           borderRadius: '20px',
-          padding: 'clamp(1.5rem, 4vw, 2.5rem) clamp(1.15rem, 3.5vw, 2.25rem)',
+          padding: 'clamp(1.75rem, 4vw, 2.5rem) clamp(1.25rem, 3.5vw, 2.25rem)',
           boxShadow: '0 12px 35px rgba(3, 17, 34, 0.09)',
           border: '1px solid rgba(197, 168, 105, 0.35)',
           boxSizing: 'border-box'
@@ -145,53 +150,8 @@ export default function AdminAuthPage() {
               Administrator Sign In
             </h2>
             <p style={{ color: '#64748B', fontSize: '0.84rem', marginTop: '0.35rem' }}>
-              Restricted to Authorized Al-Irshaad Staff Only
+              Authorized Staff Only • Al-Irshaad Islamic Institute
             </p>
-          </div>
-
-          {/* Authorized Admin Quick-Pick Buttons */}
-          <div style={{
-            background: '#F8FAFC',
-            border: '1px solid #E2E8F0',
-            borderRadius: '12px',
-            padding: '0.85rem',
-            marginBottom: '1.5rem'
-          }}>
-            <span style={{ fontSize: '0.78rem', fontWeight: '700', color: '#475569', textTransform: 'uppercase', letterSpacing: '0.04em', display: 'block', marginBottom: '0.5rem' }}>
-              Authorized Admin Accounts:
-            </span>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              {AUTHORIZED_ADMIN_EMAILS.map((adminEmail, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => {
-                    setLoginIdentifier(adminEmail);
-                    setError('');
-                    setTimeout(() => passwordInputRef.current?.focus(), 50);
-                  }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '0.45rem 0.65rem',
-                    borderRadius: '8px',
-                    border: loginIdentifier.toLowerCase() === adminEmail.toLowerCase() ? '1.5px solid #005DB8' : '1px solid #CBD5E1',
-                    background: loginIdentifier.toLowerCase() === adminEmail.toLowerCase() ? 'rgba(0, 93, 184, 0.08)' : '#FFFFFF',
-                    cursor: 'pointer',
-                    fontSize: '0.82rem',
-                    textAlign: 'left',
-                    color: loginIdentifier.toLowerCase() === adminEmail.toLowerCase() ? '#005DB8' : '#334155',
-                    fontWeight: loginIdentifier.toLowerCase() === adminEmail.toLowerCase() ? '700' : '500'
-                  }}
-                >
-                  <span>{adminEmail}</span>
-                  <span style={{ fontSize: '0.74rem', color: '#64748B' }}>
-                    {i === 0 ? 'Dean' : 'Registry'}
-                  </span>
-                </button>
-              ))}
-            </div>
           </div>
 
           {error && (
@@ -214,21 +174,21 @@ export default function AdminAuthPage() {
 
           {/* ADMIN LOGIN FORM */}
           <form onSubmit={handleLogin}>
-            <div style={{ marginBottom: '1.15rem' }}>
-              <label style={{ display: 'block', fontWeight: '600', color: '#1E293B', marginBottom: '0.4rem', fontSize: '0.88rem' }}>
-                Admin Email *
+            <div style={{ marginBottom: '1.25rem' }}>
+              <label style={{ display: 'block', fontWeight: '600', color: '#1E293B', marginBottom: '0.45rem', fontSize: '0.88rem' }}>
+                Admin Email Address *
               </label>
               <div style={{ position: 'relative' }}>
                 <input
                   ref={emailInputRef}
-                  type="text"
-                  placeholder="Enter official admin email"
+                  type="email"
+                  placeholder="e.g. admin@example.com"
                   value={loginIdentifier}
                   onChange={(e) => setLoginIdentifier(e.target.value)}
                   required
                   style={{
                     width: '100%',
-                    padding: '0.8rem 1rem',
+                    padding: '0.85rem 1rem',
                     borderRadius: '10px',
                     border: '1.5px solid #CBD5E1',
                     fontSize: '0.92rem',
@@ -238,15 +198,15 @@ export default function AdminAuthPage() {
               </div>
             </div>
 
-            <div style={{ marginBottom: '1.15rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+            <div style={{ marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
                 <label style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.88rem' }}>
                   Admin Password *
                 </label>
                 <button
                   type="button"
                   onClick={() => {
-                    setResetEmail(loginIdentifier && loginIdentifier.includes('@') ? loginIdentifier : 'instituteofislamicguidance@gmail.com');
+                    setResetEmail(loginIdentifier && loginIdentifier.includes('@') ? loginIdentifier : '');
                     setResetStatus({ loading: false, message: '', error: '' });
                     setIsResetModalOpen(true);
                   }}
@@ -260,7 +220,7 @@ export default function AdminAuthPage() {
                     textDecoration: 'underline'
                   }}
                 >
-                  Forgot / Reset Password?
+                  Forgot Password?
                 </button>
               </div>
 
@@ -274,7 +234,7 @@ export default function AdminAuthPage() {
                   required
                   style={{
                     width: '100%',
-                    padding: '0.8rem 2.75rem 0.8rem 1rem',
+                    padding: '0.85rem 2.75rem 0.85rem 1rem',
                     borderRadius: '10px',
                     border: '1.5px solid #CBD5E1',
                     fontSize: '0.92rem',
@@ -307,7 +267,7 @@ export default function AdminAuthPage() {
             </div>
 
             {/* Remember Login Checkbox */}
-            <div style={{ marginBottom: '1.4rem' }}>
+            <div style={{ marginBottom: '1.5rem' }}>
               <label style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -330,7 +290,7 @@ export default function AdminAuthPage() {
                     borderRadius: '4px'
                   }}
                 />
-                <span>Remember my admin credentials on this device</span>
+                <span>Remember my login on this device</span>
               </label>
             </div>
 
@@ -355,7 +315,7 @@ export default function AdminAuthPage() {
                 transition: 'all 0.2s ease'
               }}
             >
-              <span>{isLoading ? 'Verifying Credentials...' : 'Sign In as Administrator'}</span>
+              <span>{isLoading ? 'Verifying Admin...' : 'Sign In as Administrator'}</span>
               <IconArrowRight size={16} color="#FFFFFF" />
             </button>
           </form>
@@ -406,7 +366,7 @@ export default function AdminAuthPage() {
             </div>
 
             <p style={{ color: '#475569', fontSize: '0.88rem', lineHeight: 1.5, marginBottom: '1.25rem' }}>
-              Select the authorized administrator email to receive secure password reset instructions:
+              Enter your authorized administrator email address to receive secure password reset instructions:
             </p>
 
             {resetStatus.message && (
@@ -424,27 +384,23 @@ export default function AdminAuthPage() {
             <form onSubmit={handlePasswordReset}>
               <div style={{ marginBottom: '1.25rem' }}>
                 <label style={{ display: 'block', fontWeight: '600', color: '#1E293B', fontSize: '0.86rem', marginBottom: '0.4rem' }}>
-                  Authorized Admin Email:
+                  Admin Email Address:
                 </label>
-                <select
+                <input
+                  type="email"
+                  placeholder="Enter your registered admin email"
                   value={resetEmail}
                   onChange={(e) => setResetEmail(e.target.value)}
+                  required
                   style={{
                     width: '100%',
-                    padding: '0.75rem 1rem',
+                    padding: '0.8rem 1rem',
                     borderRadius: '10px',
                     border: '1.5px solid #CBD5E1',
                     fontSize: '0.9rem',
                     boxSizing: 'border-box'
                   }}
-                >
-                  <option value="instituteofislamicguidance@gmail.com">
-                    instituteofislamicguidance@gmail.com (Super Admin)
-                  </option>
-                  <option value="lamidiabdulhameedolawale@gmail.com">
-                    lamidiabdulhameedolawale@gmail.com (Executive Admin)
-                  </option>
-                </select>
+                />
               </div>
 
               <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
