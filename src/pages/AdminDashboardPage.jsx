@@ -67,6 +67,10 @@ export default function AdminDashboardPage() {
     adminNotes: 'Direct administrative admission.'
   });
 
+  // Notifications State
+  const [notifications, setNotifications] = useState([]);
+  const [isNotifDropdownOpen, setIsNotifDropdownOpen] = useState(false);
+
   // Toast message
   const [toastMessage, setToastMessage] = useState('');
 
@@ -84,12 +88,18 @@ export default function AdminDashboardPage() {
     setAdminSession(session);
 
     // Subscribe to real-time Firestore database with local fallback
-    const unsubscribe = firebaseDbService.subscribeStudents((updatedList) => {
+    const unsubscribeStudents = firebaseDbService.subscribeStudents((updatedList) => {
       setStudents([...updatedList]);
     });
 
+    // Subscribe to real-time Admin Notifications
+    const unsubscribeNotifs = firebaseDbService.subscribeNotifications((notifList) => {
+      setNotifications([...notifList]);
+    });
+
     return () => {
-      if (typeof unsubscribe === 'function') unsubscribe();
+      if (typeof unsubscribeStudents === 'function') unsubscribeStudents();
+      if (typeof unsubscribeNotifs === 'function') unsubscribeNotifs();
     };
   }, [navigate]);
 
@@ -274,7 +284,141 @@ export default function AdminDashboardPage() {
                 </p>
               </div>
 
-              <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', alignItems: 'center', position: 'relative' }}>
+                
+                {/* Real-time Notification Bell */}
+                <div style={{ position: 'relative' }}>
+                  <button
+                    type="button"
+                    onClick={() => setIsNotifDropdownOpen(!isNotifDropdownOpen)}
+                    style={{
+                      padding: '0.65rem 0.95rem',
+                      borderRadius: '10px',
+                      background: notifications.some(n => !n.read) ? 'rgba(197, 168, 105, 0.25)' : 'rgba(255, 255, 255, 0.12)',
+                      border: notifications.some(n => !n.read) ? '1.5px solid #C5A869' : '1px solid rgba(255, 255, 255, 0.25)',
+                      color: '#FFFFFF',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      fontSize: '0.88rem',
+                      fontWeight: '600'
+                    }}
+                    title="Student Enrollment Notifications"
+                  >
+                    <span>🔔</span>
+                    <span>Alerts</span>
+                    {notifications.filter(n => !n.read).length > 0 && (
+                      <span style={{
+                        background: '#EF4444',
+                        color: '#FFFFFF',
+                        borderRadius: '9999px',
+                        padding: '0.15rem 0.45rem',
+                        fontSize: '0.72rem',
+                        fontWeight: '800',
+                        lineHeight: 1
+                      }}>
+                        {notifications.filter(n => !n.read).length}
+                      </span>
+                    )}
+                  </button>
+
+                  {/* Notification Dropdown Panel */}
+                  {isNotifDropdownOpen && (
+                    <div style={{
+                      position: 'absolute',
+                      top: '115%',
+                      right: 0,
+                      width: 'clamp(290px, 85vw, 360px)',
+                      background: '#FFFFFF',
+                      borderRadius: '16px',
+                      boxShadow: '0 15px 35px rgba(3, 17, 34, 0.25)',
+                      border: '1.5px solid rgba(197, 168, 105, 0.4)',
+                      zIndex: 100,
+                      overflow: 'hidden',
+                      color: '#1E293B'
+                    }}>
+                      <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        padding: '0.85rem 1rem',
+                        background: '#031122',
+                        color: '#FFFFFF',
+                        borderBottom: '1px solid rgba(197, 168, 105, 0.3)'
+                      }}>
+                        <span style={{ fontWeight: '700', fontSize: '0.86rem', color: '#E6CA85' }}>
+                          ⚡ Enrollment Alerts ({notifications.length})
+                        </span>
+                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                          {notifications.length > 0 && (
+                            <button
+                              type="button"
+                              onClick={() => firebaseDbService.markAllNotificationsAsRead()}
+                              style={{ background: 'none', border: 'none', color: '#CBD5E1', fontSize: '0.75rem', cursor: 'pointer', textDecoration: 'underline' }}
+                            >
+                              Mark Read
+                            </button>
+                          )}
+                          {notifications.length > 0 && (
+                            <button
+                              type="button"
+                              onClick={() => firebaseDbService.clearAllNotifications()}
+                              style={{ background: 'none', border: 'none', color: '#FCA5A5', fontSize: '0.75rem', cursor: 'pointer' }}
+                            >
+                              Clear
+                            </button>
+                          )}
+                        </div>
+                      </div>
+
+                      <div style={{ maxHeight: '320px', overflowY: 'auto', padding: '0.5rem' }}>
+                        {notifications.length === 0 ? (
+                          <div style={{ padding: '1.5rem 1rem', textAlign: 'center', color: '#64748B', fontSize: '0.84rem' }}>
+                            No new enrollment alerts yet.
+                          </div>
+                        ) : (
+                          notifications.map((n) => (
+                            <div
+                              key={n.id}
+                              onClick={() => {
+                                firebaseDbService.markNotificationAsRead(n.id);
+                                const found = students.find(s => s.id === n.studentId);
+                                if (found) setSelectedStudent(found);
+                                setIsNotifDropdownOpen(false);
+                              }}
+                              style={{
+                                padding: '0.75rem',
+                                borderRadius: '10px',
+                                background: n.read ? '#F8FAFC' : 'rgba(0, 93, 184, 0.07)',
+                                borderLeft: n.read ? '3px solid #CBD5E1' : '3px solid #005DB8',
+                                marginBottom: '0.4rem',
+                                cursor: 'pointer',
+                                transition: 'background 0.15s ease'
+                              }}
+                            >
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.2rem' }}>
+                                <strong style={{ fontSize: '0.85rem', color: '#031122' }}>
+                                  {n.title || `New Student: ${n.studentName}`}
+                                </strong>
+                                {!n.read && (
+                                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#005DB8', display: 'inline-block' }} />
+                                )}
+                              </div>
+                              <p style={{ margin: 0, fontSize: '0.78rem', color: '#475569', lineHeight: 1.4 }}>
+                                {n.message}
+                              </p>
+                              <span style={{ display: 'block', fontSize: '0.72rem', color: '#94A3B8', marginTop: '0.3rem' }}>
+                                {new Date(n.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} • {new Date(n.timestamp).toLocaleDateString()}
+                              </span>
+                            </div>
+                          ))
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
                 <button
                   type="button"
                   onClick={() => setIsAddModalOpen(true)}

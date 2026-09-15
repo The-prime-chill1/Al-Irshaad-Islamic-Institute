@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { studentDatabase } from '../services/studentDatabase';
+import { firebaseAuthService, AUTHORIZED_ADMIN_EMAILS } from '../services/firebaseAuthService';
 import HadithRibbon from '../components/common/HadithRibbon';
 import { 
   IconShield, 
@@ -9,7 +9,7 @@ import {
   IconAlertCircle,
   IconCheckCircle,
   IconMail,
-  IconEye,
+  IconEye, 
   IconEyeOff
 } from '../components/common/Icons';
 
@@ -17,13 +17,18 @@ export default function AdminAuthPage() {
   const navigate = useNavigate();
   
   // Remembered email from previous session
-  const initialRememberedEmail = localStorage.getItem('alirshaad_remembered_admin_email') || '';
+  const initialRememberedEmail = localStorage.getItem('alirshaad_remembered_admin_email') || 'instituteofislamicguidance@gmail.com';
   
   // Login State
   const [loginIdentifier, setLoginIdentifier] = useState(initialRememberedEmail);
   const [loginPassword, setLoginPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(!!initialRememberedEmail);
+  const [rememberMe, setRememberMe] = useState(true);
+
+  // Password Reset State
+  const [isResetModalOpen, setIsResetModalOpen] = useState(false);
+  const [resetEmail, setResetEmail] = useState('instituteofislamicguidance@gmail.com');
+  const [resetStatus, setResetStatus] = useState({ loading: false, message: '', error: '' });
 
   const emailInputRef = useRef(null);
   const passwordInputRef = useRef(null);
@@ -32,13 +37,12 @@ export default function AdminAuthPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const session = studentDatabase.getAdminSession();
+    const session = firebaseAuthService.getAdminSession();
     if (session) {
       navigate('/admin/dashboard');
       return;
     }
 
-    // If email is remembered, directly focus on password input
     if (initialRememberedEmail) {
       setTimeout(() => {
         passwordInputRef.current?.focus();
@@ -50,15 +54,14 @@ export default function AdminAuthPage() {
     }
   }, [navigate, initialRememberedEmail]);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
 
     try {
-      studentDatabase.adminLogin(loginIdentifier, loginPassword);
+      await firebaseAuthService.adminLogin(loginIdentifier, loginPassword);
 
-      // Handle Remember Login preference
       if (rememberMe && loginIdentifier.trim()) {
         localStorage.setItem('alirshaad_remembered_admin_email', loginIdentifier.trim());
       } else {
@@ -73,6 +76,26 @@ export default function AdminAuthPage() {
     }
   };
 
+  const handlePasswordReset = async (e) => {
+    e.preventDefault();
+    setResetStatus({ loading: true, message: '', error: '' });
+
+    try {
+      const res = await firebaseAuthService.sendAdminPasswordReset(resetEmail);
+      setResetStatus({
+        loading: false,
+        message: res.message || `Password reset instructions sent to ${resetEmail}.`,
+        error: ''
+      });
+    } catch (err) {
+      setResetStatus({
+        loading: false,
+        message: '',
+        error: err.message || 'Failed to send password reset.'
+      });
+    }
+  };
+
   return (
     <div style={{ backgroundColor: '#F8FAFC', minHeight: '88vh', paddingBottom: '4rem' }}>
       {/* Header Banner */}
@@ -82,17 +105,17 @@ export default function AdminAuthPage() {
             Official Administration Gateway
           </span>
           <h1 style={{ color: '#FFFFFF', fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.75rem, 3.5vw, 2.8rem)', marginBottom: '0.75rem' }}>
-            Administrative Control Panel
+            Administrator Control Panel
           </h1>
           <p style={{ color: '#CBD5E1', maxWidth: '620px', margin: '0 auto', fontSize: '0.98rem', lineHeight: 1.6 }}>
-            Secure portal for Al-Irshaad admissions coordination and student database management.
+            Firebase-authenticated portal for Al-Irshaad admissions coordination and student database management.
           </p>
         </div>
       </section>
 
       <HadithRibbon variant="compact" />
 
-      <div className="container" style={{ maxWidth: '480px', marginTop: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
+      <div className="container" style={{ maxWidth: '500px', marginTop: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
         <div style={{
           background: '#FFFFFF',
           borderRadius: '20px',
@@ -121,9 +144,54 @@ export default function AdminAuthPage() {
             <h2 style={{ fontSize: '1.4rem', color: '#031122', fontWeight: '700', margin: 0 }}>
               Administrator Sign In
             </h2>
-            <p style={{ color: '#64748B', fontSize: '0.86rem', marginTop: '0.35rem' }}>
-              Authorized Staff Only • Al-Irshaad Islamic Institute
+            <p style={{ color: '#64748B', fontSize: '0.84rem', marginTop: '0.35rem' }}>
+              Restricted to Authorized Al-Irshaad Staff Only
             </p>
+          </div>
+
+          {/* Authorized Admin Quick-Pick Buttons */}
+          <div style={{
+            background: '#F8FAFC',
+            border: '1px solid #E2E8F0',
+            borderRadius: '12px',
+            padding: '0.85rem',
+            marginBottom: '1.5rem'
+          }}>
+            <span style={{ fontSize: '0.78rem', fontWeight: '700', color: '#475569', textTransform: 'uppercase', letterSpacing: '0.04em', display: 'block', marginBottom: '0.5rem' }}>
+              Authorized Admin Accounts:
+            </span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              {AUTHORIZED_ADMIN_EMAILS.map((adminEmail, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => {
+                    setLoginIdentifier(adminEmail);
+                    setError('');
+                    setTimeout(() => passwordInputRef.current?.focus(), 50);
+                  }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '0.45rem 0.65rem',
+                    borderRadius: '8px',
+                    border: loginIdentifier.toLowerCase() === adminEmail.toLowerCase() ? '1.5px solid #005DB8' : '1px solid #CBD5E1',
+                    background: loginIdentifier.toLowerCase() === adminEmail.toLowerCase() ? 'rgba(0, 93, 184, 0.08)' : '#FFFFFF',
+                    cursor: 'pointer',
+                    fontSize: '0.82rem',
+                    textAlign: 'left',
+                    color: loginIdentifier.toLowerCase() === adminEmail.toLowerCase() ? '#005DB8' : '#334155',
+                    fontWeight: loginIdentifier.toLowerCase() === adminEmail.toLowerCase() ? '700' : '500'
+                  }}
+                >
+                  <span>{adminEmail}</span>
+                  <span style={{ fontSize: '0.74rem', color: '#64748B' }}>
+                    {i === 0 ? 'Dean' : 'Registry'}
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
 
           {error && (
@@ -147,38 +215,14 @@ export default function AdminAuthPage() {
           {/* ADMIN LOGIN FORM */}
           <form onSubmit={handleLogin}>
             <div style={{ marginBottom: '1.15rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-                <label style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.88rem' }}>
-                  Admin Email / Username *
-                </label>
-                {loginIdentifier && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setLoginIdentifier('');
-                      setRememberMe(false);
-                      localStorage.removeItem('alirshaad_remembered_admin_email');
-                      setTimeout(() => emailInputRef.current?.focus(), 50);
-                    }}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      color: '#005DB8',
-                      fontSize: '0.78rem',
-                      cursor: 'pointer',
-                      fontWeight: '600',
-                      textDecoration: 'underline'
-                    }}
-                  >
-                    Clear / Switch Account
-                  </button>
-                )}
-              </div>
+              <label style={{ display: 'block', fontWeight: '600', color: '#1E293B', marginBottom: '0.4rem', fontSize: '0.88rem' }}>
+                Admin Email *
+              </label>
               <div style={{ position: 'relative' }}>
                 <input
                   ref={emailInputRef}
                   type="text"
-                  placeholder="Enter official admin email or username"
+                  placeholder="Enter official admin email"
                   value={loginIdentifier}
                   onChange={(e) => setLoginIdentifier(e.target.value)}
                   required
@@ -188,22 +232,38 @@ export default function AdminAuthPage() {
                     borderRadius: '10px',
                     border: '1.5px solid #CBD5E1',
                     fontSize: '0.92rem',
-                    boxSizing: 'border-box',
-                    backgroundColor: initialRememberedEmail && loginIdentifier === initialRememberedEmail ? '#F8FAFC' : '#FFFFFF'
+                    boxSizing: 'border-box'
                   }}
                 />
               </div>
-              {initialRememberedEmail && loginIdentifier === initialRememberedEmail && (
-                <span style={{ display: 'block', fontSize: '0.75rem', color: '#005DB8', marginTop: '0.3rem', fontWeight: '500' }}>
-                  ✓ Remembered Admin Account • Just enter password below
-                </span>
-              )}
             </div>
 
             <div style={{ marginBottom: '1.15rem' }}>
-              <label style={{ display: 'block', fontWeight: '600', color: '#1E293B', marginBottom: '0.4rem', fontSize: '0.88rem' }}>
-                Admin Password *
-              </label>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                <label style={{ fontWeight: '600', color: '#1E293B', fontSize: '0.88rem' }}>
+                  Admin Password *
+                </label>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setResetEmail(loginIdentifier && loginIdentifier.includes('@') ? loginIdentifier : 'instituteofislamicguidance@gmail.com');
+                    setResetStatus({ loading: false, message: '', error: '' });
+                    setIsResetModalOpen(true);
+                  }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#005DB8',
+                    fontSize: '0.82rem',
+                    cursor: 'pointer',
+                    fontWeight: '600',
+                    textDecoration: 'underline'
+                  }}
+                >
+                  Forgot / Reset Password?
+                </button>
+              </div>
+
               <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                 <input
                   ref={passwordInputRef}
@@ -238,8 +298,7 @@ export default function AdminAuthPage() {
                     color: showPassword ? '#005DB8' : '#64748B',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    transition: 'color 0.15s ease'
+                    justifyContent: 'center'
                   }}
                 >
                   {showPassword ? <IconEyeOff size={18} /> : <IconEye size={18} />}
@@ -271,7 +330,7 @@ export default function AdminAuthPage() {
                     borderRadius: '4px'
                   }}
                 />
-                <span>Remember my login email (only enter password next time)</span>
+                <span>Remember my admin credentials on this device</span>
               </label>
             </div>
 
@@ -296,13 +355,135 @@ export default function AdminAuthPage() {
                 transition: 'all 0.2s ease'
               }}
             >
-              <span>{isLoading ? 'Verifying Admin...' : 'Sign In as Administrator'}</span>
+              <span>{isLoading ? 'Verifying Credentials...' : 'Sign In as Administrator'}</span>
               <IconArrowRight size={16} color="#FFFFFF" />
             </button>
           </form>
 
         </div>
       </div>
+
+      {/* PASSWORD RESET MODAL */}
+      {isResetModalOpen && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          backgroundColor: 'rgba(3, 17, 34, 0.75)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+          padding: '1rem',
+          backdropFilter: 'blur(4px)'
+        }}>
+          <div style={{
+            background: '#FFFFFF',
+            borderRadius: '20px',
+            padding: '2rem',
+            maxWidth: '460px',
+            width: '100%',
+            boxShadow: '0 20px 45px rgba(0,0,0,0.2)',
+            border: '1px solid rgba(197, 168, 105, 0.35)',
+            boxSizing: 'border-box'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <IconMail size={22} color="#005DB8" />
+                <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#031122', fontWeight: '800' }}>
+                  Admin Password Reset
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsResetModalOpen(false)}
+                style={{ background: 'none', border: 'none', fontSize: '1.4rem', cursor: 'pointer', color: '#64748B' }}
+              >
+                ×
+              </button>
+            </div>
+
+            <p style={{ color: '#475569', fontSize: '0.88rem', lineHeight: 1.5, marginBottom: '1.25rem' }}>
+              Select the authorized administrator email to receive secure password reset instructions:
+            </p>
+
+            {resetStatus.message && (
+              <div style={{ background: '#DCFCE7', border: '1px solid #86EFAC', color: '#166534', padding: '0.75rem', borderRadius: '10px', fontSize: '0.86rem', marginBottom: '1rem' }}>
+                ✓ {resetStatus.message}
+              </div>
+            )}
+
+            {resetStatus.error && (
+              <div style={{ background: '#FEF2F2', border: '1px solid #F87171', color: '#991B1B', padding: '0.75rem', borderRadius: '10px', fontSize: '0.86rem', marginBottom: '1rem' }}>
+                ⚠ {resetStatus.error}
+              </div>
+            )}
+
+            <form onSubmit={handlePasswordReset}>
+              <div style={{ marginBottom: '1.25rem' }}>
+                <label style={{ display: 'block', fontWeight: '600', color: '#1E293B', fontSize: '0.86rem', marginBottom: '0.4rem' }}>
+                  Authorized Admin Email:
+                </label>
+                <select
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem 1rem',
+                    borderRadius: '10px',
+                    border: '1.5px solid #CBD5E1',
+                    fontSize: '0.9rem',
+                    boxSizing: 'border-box'
+                  }}
+                >
+                  <option value="instituteofislamicguidance@gmail.com">
+                    instituteofislamicguidance@gmail.com (Super Admin)
+                  </option>
+                  <option value="lamidiabdulhameedolawale@gmail.com">
+                    lamidiabdulhameedolawale@gmail.com (Executive Admin)
+                  </option>
+                </select>
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+                <button
+                  type="button"
+                  onClick={() => setIsResetModalOpen(false)}
+                  style={{
+                    padding: '0.65rem 1.1rem',
+                    borderRadius: '8px',
+                    border: '1px solid #CBD5E1',
+                    background: '#F1F5F9',
+                    color: '#475569',
+                    fontWeight: '600',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={resetStatus.loading}
+                  style={{
+                    padding: '0.65rem 1.3rem',
+                    borderRadius: '8px',
+                    border: 'none',
+                    background: 'linear-gradient(135deg, #005DB8 0%, #071C34 100%)',
+                    color: '#FFFFFF',
+                    fontWeight: '700',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {resetStatus.loading ? 'Dispatching...' : 'Send Reset Link'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

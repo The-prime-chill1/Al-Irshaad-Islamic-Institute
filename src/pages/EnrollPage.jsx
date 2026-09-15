@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import HadithRibbon from '../components/common/HadithRibbon';
 import { contactData } from '../data/contactData';
 import { studentDatabase } from '../services/studentDatabase';
+import { firebaseDbService } from '../services/firebaseDbService';
 import { getCountryByName, countriesData, getFlagEmoji } from '../data/countriesData';
 import SearchableCountrySelect from '../components/common/SearchableCountrySelect';
 import SearchableCitySelect from '../components/common/SearchableCitySelect';
@@ -139,7 +140,7 @@ Date Submitted: ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month
 Please review this application and schedule the placement assessment. Jazakumullahu Khayran.`;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -149,16 +150,16 @@ Please review this application and schedule the placement assessment. Jazakumull
     const fullPhoneNumber = getFullPhone();
 
     try {
-      // 1. Save directly into Admin Database with all required dossier fields
-      studentDatabase.saveEnrollment({
+      // 1. Save directly into Cloud Firestore & Admin Database with real-time Admin Notification
+      await firebaseDbService.saveEnrollment({
         ...formData,
         whatsappNumber: fullPhoneNumber,
         id: generatedId,
         enrolledDate: new Date().toISOString(),
-        status: 'Pending Admission'
+        status: 'Pending Review'
       });
     } catch (err) {
-      console.error('Local save error:', err);
+      console.error('Firestore save error:', err);
     }
 
     const messageText = formatDossierText(generatedId);

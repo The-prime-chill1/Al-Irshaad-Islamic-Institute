@@ -12,27 +12,28 @@ const STORAGE_KEY_ADMIN_USERS = 'alirshaad_admin_accounts_v5';
 // Default Clean State: 0 initial dummy student accounts
 const INITIAL_STUDENTS = [];
 
-// Official Administrator Accounts
+// Official Administrator Accounts (Authorized by Al-Irshaad Islamic Institute)
 const INITIAL_ADMINS = [
   {
     id: 'ADMIN-001',
     name: 'Al-Irshaad Admissions Dean',
     email: 'instituteofislamicguidance@gmail.com',
-    username: 'admin',
+    username: 'instituteofislamicguidance',
     password: 'Alhamdulillah@94',
     role: 'Super Administrator',
-    createdAt: new Date().toISOString()
+    createdAt: '2026-09-01T00:00:00.000Z'
   },
   {
     id: 'ADMIN-002',
-    name: 'Academic Registry Office',
-    email: 'admin@alirshaad.edu',
-    username: 'registrar',
-    password: 'Alhamdulillah@94',
-    role: 'Admissions Registrar',
-    createdAt: new Date().toISOString()
+    name: 'Executive Registry Office',
+    email: 'lamidiabdulhameedolawale@gmail.com',
+    username: 'lamidiabdulhameedolawale',
+    password: 'Olawale!!!',
+    role: 'Executive Administrator',
+    createdAt: '2026-09-01T00:00:00.000Z'
   }
 ];
+
 
 
 // Helper to get raw students from localStorage
@@ -216,13 +217,55 @@ export const studentDatabase = {
     return getRawAdmins();
   },
 
-  // Admin Authentication: Login
+  // Admin Authentication: Login (Only authorized administrators)
   adminLogin(identifier, password) {
-    const admins = getRawAdmins();
-    const cleanId = identifier.trim().toLowerCase();
-    const cleanPass = password.trim();
+    const cleanId = (identifier || '').trim().toLowerCase();
+    const cleanPass = (password || '').trim();
 
-    // Match by email, username, or fallback master credentials
+    // Check specific authorized Admin 1
+    if (
+      (cleanId === 'instituteofislamicguidance@gmail.com' || cleanId === 'instituteofislamicguidance' || cleanId === 'admin') &&
+      cleanPass === 'Alhamdulillah@94'
+    ) {
+      const session = {
+        id: 'ADMIN-001',
+        name: 'Al-Irshaad Admissions Dean',
+        email: 'instituteofislamicguidance@gmail.com',
+        username: 'instituteofislamicguidance',
+        role: 'Super Administrator',
+        loginTime: new Date().toISOString()
+      };
+      localStorage.setItem(STORAGE_KEY_AUTH_ADMIN, JSON.stringify(session));
+      try {
+        window.dispatchEvent(new Event('storage'));
+        window.dispatchEvent(new CustomEvent('admin-auth-changed', { detail: session }));
+      } catch (e) {}
+      return session;
+    }
+
+    // Check specific authorized Admin 2
+    if (
+      (cleanId === 'lamidiabdulhameedolawale@gmail.com' || cleanId === 'lamidiabdulhameedolawale') &&
+      cleanPass === 'Olawale!!!'
+    ) {
+      const session = {
+        id: 'ADMIN-002',
+        name: 'Executive Registry Office',
+        email: 'lamidiabdulhameedolawale@gmail.com',
+        username: 'lamidiabdulhameedolawale',
+        role: 'Executive Administrator',
+        loginTime: new Date().toISOString()
+      };
+      localStorage.setItem(STORAGE_KEY_AUTH_ADMIN, JSON.stringify(session));
+      try {
+        window.dispatchEvent(new Event('storage'));
+        window.dispatchEvent(new CustomEvent('admin-auth-changed', { detail: session }));
+      } catch (e) {}
+      return session;
+    }
+
+    // Check against any updated stored admins in database
+    const admins = getRawAdmins();
     const admin = admins.find(a => 
       (a.email && a.email.toLowerCase() === cleanId) ||
       (a.username && a.username.toLowerCase() === cleanId)
@@ -245,30 +288,7 @@ export const studentDatabase = {
       return session;
     }
 
-    // Built-in master overrides for instant access
-    if (
-      (cleanId === 'instituteofislamicguidance@gmail.com' && cleanPass === 'Alhamdulillah@94') ||
-      (cleanId === 'admin@alirshaad.edu' && cleanPass === 'Alhamdulillah@94') ||
-      (cleanId === 'admin' && (cleanPass === 'Alhamdulillah@94' || cleanPass === 'AlIrshaad@2026' || cleanPass === '8899'))
-    ) {
-      const masterSession = {
-        id: 'ADMIN-MASTER',
-        name: 'Al-Irshaad Admissions Dean',
-        email: 'instituteofislamicguidance@gmail.com',
-        username: 'admin',
-        role: 'Super Administrator',
-        loginTime: new Date().toISOString()
-      };
-      localStorage.setItem(STORAGE_KEY_AUTH_ADMIN, JSON.stringify(masterSession));
-      try {
-        window.dispatchEvent(new Event('storage'));
-        window.dispatchEvent(new CustomEvent('admin-auth-changed', { detail: masterSession }));
-      } catch (e) {}
-      return masterSession;
-    }
-
-
-    throw new Error('Invalid Admin Credentials. Please check your username/email and password.');
+    throw new Error('Unauthorized Admin Access. Only verified Al-Irshaad administrators can log in.');
   },
 
   // Create a new Administrator Account
