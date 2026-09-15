@@ -1,42 +1,66 @@
 # Al-Irshaad Islamic Institute (معھد الإرشاد الإسلامي)
 
-> Al-Irshaad Islamic Institute is a premier online Islamic educational platform providing authentic 1-on-1 and small group Qur'an recitation, applied Tajweed, 3-cycle Hifdh memorization, comprehensive Islamic studies, and Arabic language instruction for children, teens, and adults in Nigeria and across the global diaspora (UK, US, Canada, Europe, Middle East).
+> Al-Irshaad Islamic Institute is a premier online international Islamic school providing authentic, personalized 1-on-1 and small-group Qur'an recitation, applied Tajweed, 3-cycle Hifdh memorization, comprehensive Islamic studies, and Arabic language instruction for children, youth, adults, and diaspora families worldwide (USA, UK, Canada, Nigeria, UAE, Saudi Arabia, Australia, Europe).
 
-## Key Information
-- **Name**: Al-Irshaad Islamic Institute (معھد الإرشاد الإسلامي)
-- **Primary Website**: https://al-irshaad-islamic-institute.vercel.app/
-- **Admissions & WhatsApp**: +234 808 381 8671
-- **Email**: alirshaadislamicinstitute@gmail.com
-- **Core Format**: Live 1-on-1 and small group online sessions via Zoom/Google Meet with certified Huffaz and Islamic scholars.
-- **Target Audience**: Muslim children (ages 4+), teenagers, university students, working professionals, adult learners, and diaspora families.
-- **Supported Timezones**: All global timezones (GMT, WAT, EST, CST, PST, BST, GST).
+## Key Facts & Institutional Profile
+- **Institution**: Al-Irshaad Islamic Institute (معھد الإرشاد الإسلامي)
+- **Official Website**: https://al-irshaadislamicinstitute.com/
+- **Admissions Desk & WhatsApp**: +1 (203) 515-1469 / +234 808 381 8671
+- **Email**: instituteofislamicguidance@gmail.com
+- **Headquarters / Operations**: Norwalk, Connecticut, USA • Operating 24/7 Global Virtual Classrooms
+- **Class Delivery**: Live 1-on-1 and small-group interactive video classrooms via Zoom & Google Meet
+- **Target Learners**: Children (ages 4+), teenagers, university students, working professionals, converts/reverts, and Muslim diaspora households
+- **Timezone Support**: All global timezones (EST, CST, PST, GMT, BST, WAT, GST, AEST) with fully flexible scheduling
 
-## Educational Pathways & Programs
-1. **Nuurul Bayaan (Beginners 4+)** (`/programs/nuurul-bayaan`):
-   - Foundation in Arabic phonetics, letter recognition, articulation points (Makharij), and early word synthesis.
-2. **Qur'an Recitation with Applied Tajweed** (`/programs/quran-recitation`):
-   - Systematic verse-by-verse recitation fluency, Noon Saakinah, Meem Saakinah, Mudood (prolongations), Waqf (stopping rules).
-3. **Qur'an Memorization (Hifdh Program)** (`/programs/hifdh`):
-   - Structured 3-Cycle systematic retention methodology (New Lesson, Recent Revision, Far Revision) with certified Haafidh mentors.
-4. **Fundamentals of Islamic Studies** (`/programs/islamic-studies`):
-   - 3 Age-appropriate tracks:
-     - Level 1: Foundations (Ages 5–10) - Pillars of Islam & Iman, basic Fiqh of Taharah & Salah, Prophets stories, daily manners.
-     - Level 2: Fiqh & Seerah (Ages 11–15) - Practical purification, prayer, fasting, comprehensive life of the Prophet ﷺ, Hadith selection.
-     - Level 3: Classical Sciences & Aqeedah (Youth & Adults) - Pure Islamic theology, Usul al-Fiqh, Islamic worldview, and contemporary challenges.
-5. **Arabic Language & Daily Adhkaar** (`/programs/arabic-adhkaar`):
-   - Quranic Arabic comprehension, conversational basics, and daily fortress of the Muslim morning/evening supplications.
+## Core Academic Programs & Pathways
+1. **Nuurul Bayaan Arabic Foundation (Ages 4+ / Beginners)**
+   - Link: https://al-irshaadislamicinstitute.com/programs/nuurul-bayaan
+   - Comprehensive foundation in Arabic alphabet, phonetics, Makharij (articulation points), Harakat (vowels), Tanween, Sukoon, Shaddah, and early Quranic reading fluency.
 
-## Faculty & Scholarly Standards
-- Instructors are certified Huffaz with verified Sanad (chains of narration), scholarly training, and background vetting.
-- Dedicated female instructors (Ustadhat) available for female students and young children.
-- Monthly parent progress reports and recorded student assessments.
+2. **Qur'an Recitation with Applied Tajweed**
+   - Link: https://al-irshaadislamicinstitute.com/programs/quran-recitation
+   - Verse-by-verse recitation with practical Tajweed rules, Ahkaam an-Noon wal-Meem, Mudood (elongations), Sifaat, and melodic rhythmic fluency.
 
-## Direct Links
-- [Home Page](https://al-irshaad-islamic-institute.vercel.app/)
-- [All Programs](https://al-irshaad-islamic-institute.vercel.app/programs)
-- [Meet Our Teachers](https://al-irshaad-islamic-institute.vercel.app/teachers)
-- [How It Works](https://al-irshaad-islamic-institute.vercel.app/how-it-works)
-- [For Parents & Safeguarding](https://al-irshaad-islamic-institute.vercel.app/for-parents)
-- [Admissions & Enrollment](https://al-irshaad-islamic-institute.vercel.app/enroll)
-- [Frequently Asked Questions](https://al-irshaad-islamic-institute.vercel.app/faqs)
-- [Contact Desk](https://al-irshaad-islamic-institute.vercel.app/contact)
+3. **Qur'an Memorization (3-Cycle Hifdh Program)**
+   - Link: https://al-irshaadislamicinstitute.com/programs/hifdh
+   - Structured memorization methodology using the 3-Cycle Retention System:
+     - Cycle 1: Sabaq (New Lesson Daily Memorization)
+     - Cycle 2: Sabaqi (Recent Revision of recent Juz)
+     - Cycle 3: Manzil (Cumulative Long-term Permanent Retention)
+   - Certified Haafidh mentorship with verified Ijazah / Sanad.
+
+4. **Fundamentals of Islamic Studies**
+   - Link: https://al-irshaadislamicinstitute.com/programs/islamic-studies
+   - Multi-level curriculum for ages 5 to adult covering Aqeedah (Tawheed), Practical Fiqh (Taharah, Salah, Sawm, Zakah), Seerah of Prophet Muhammad ﷺ, Hadith, and Islamic etiquette (Akhlaaq).
+
+5. **Advanced Islamic Studies & Arabic Sciences**
+   - Link: https://al-irshaadislamicinstitute.com/programs/advanced-islamic-studies
+   - Classical Islamic sciences, Usul al-Fiqh, Tafseer methodologies, Mustalah al-Hadith, and advanced Arabic grammar (Nahw & Sarf).
+
+6. **Arabic Language & Daily Prophetic Adhkaar**
+   - Link: https://al-irshaadislamicinstitute.com/programs/arabic-adhkaar
+   - Quranic vocabulary comprehension, conversational Arabic fundamentals, and memorization of essential morning/evening supplications (Hisn al-Muslim).
+
+## Scholarly Standards & Safety Commitments
+- **Faculty Qualifications**: Rigorously vetted scholars, graduates of recognized Islamic universities, and certified Huffaz.
+- **Dedicated Female Instructors (Ustadhat)**: Available for female students, young children, and sisters seeking female mentorship.
+- **Parental Oversight & Reporting**: Regular progress assessments, monthly diagnostic updates, and parent-teacher consultations.
+- **Free Diagnostic Evaluation**: All new applicants receive a 1-on-1 placement assessment before class scheduling.
+
+## Direct Navigation Links
+- Home: https://al-irshaadislamicinstitute.com/
+- About Us: https://al-irshaadislamicinstitute.com/about
+- All Programs: https://al-irshaadislamicinstitute.com/programs
+- Nuurul Bayaan: https://al-irshaadislamicinstitute.com/programs/nuurul-bayaan
+- Quran Recitation: https://al-irshaadislamicinstitute.com/programs/quran-recitation
+- Hifdh Memorization: https://al-irshaadislamicinstitute.com/programs/hifdh
+- Islamic Studies: https://al-irshaadislamicinstitute.com/programs/islamic-studies
+- Advanced Studies: https://al-irshaadislamicinstitute.com/programs/advanced-islamic-studies
+- Arabic & Adhkaar: https://al-irshaadislamicinstitute.com/programs/arabic-adhkaar
+- Faculty / Teachers: https://al-irshaadislamicinstitute.com/teachers
+- How It Works: https://al-irshaadislamicinstitute.com/how-it-works
+- For Parents: https://al-irshaadislamicinstitute.com/for-parents
+- Admissions & Free Trial: https://al-irshaadislamicinstitute.com/enroll
+- Tuition & Pricing: https://al-irshaadislamicinstitute.com/pricing
+- Frequently Asked Questions: https://al-irshaadislamicinstitute.com/faqs
+- Contact Desk: https://al-irshaadislamicinstitute.com/contact

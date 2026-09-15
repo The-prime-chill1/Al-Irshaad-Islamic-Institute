@@ -1,25 +1,8 @@
 # Robots.txt for Al-Irshaad Islamic Institute
+# https://al-irshaadislamicinstitute.com/
 # Optimization for Global Search Engines & Generative AI Crawlers
 
 User-agent: *
-Allow: /
-
-# OpenAI / ChatGPT
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-# Anthropic / Claude
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-# Perplexity AI
-User-agent: PerplexityBot
 Allow: /
 
 # Google & Gemini AI
@@ -29,15 +12,43 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+# OpenAI / ChatGPT / SearchGPT
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic / Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity AI Search
+User-agent: PerplexityBot
+Allow: /
+
 # Microsoft Bing & Copilot
 User-agent: Bingbot
 Allow: /
 
-# Apple Intelligence
+# Apple Intelligence & Siri
 User-agent: Applebot
 Allow: /
 
 User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
 Allow: /
 
 # Common Crawl & Open LLM Indexers
@@ -50,8 +61,18 @@ Allow: /
 User-agent: Diffbot
 Allow: /
 
-User-agent: FacebookBot
+User-agent: ByteDance
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
 Allow: /
 
 # Sitemaps & AI Knowledge Manifest
-Sitemap: https://al-irshaad-islamic-institute.vercel.app/sitemap.xml
+Sitemap: https://al-irshaadislamicinstitute.com/sitemap.xml
+
